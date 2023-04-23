@@ -1,0 +1,57 @@
+Capturing coverage data from /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_
+Found gcov version: 11.3.0
+Using intermediate gcov format
+Scanning /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_ for .gcda files ...
+Found 4 data files in /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_
+Processing testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.gcda
+Processing testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.gcda
+Processing testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_new.c.gcda
+Processing testbinary.dir/portable.c.gcda
+Finished .info-file creation
+Reading tracefile /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Extracted 0 files
+Writing data to /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/ztest.info
+Summary coverage rate:
+  lines......: no data found
+  functions..: no data found
+  branches...: no data found
+Reading tracefile /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Deleted 0 files
+Writing data to /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Summary coverage rate:
+  lines......: 63.4% (424 of 669 lines)
+  functions..: 76.1% (70 of 92 functions)
+  branches...: 47.9% (303 of 633 branches)
+Reading tracefile /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Removing /home/aleksandar/2023_Analysis_zephyr/zephyr/tests/unit/math_extras/portable.c
+Removing /home/aleksandar/2023_Analysis_zephyr/zephyr/tests/unit/math_extras/tests.inc
+Deleted 2 files
+Writing data to /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Summary coverage rate:
+  lines......: 52.2% (268 of 513 lines)
+  functions..: 64.5% (40 of 62 functions)
+  branches...: 44.2% (103 of 233 branches)
+Reading tracefile /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Deleted 0 files
+Writing data to /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Summary coverage rate:
+  lines......: 52.2% (268 of 513 lines)
+  functions..: 64.5% (40 of 62 functions)
+  branches...: 44.2% (103 of 233 branches)
+Reading data file /home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/coverage.info
+Found 7 entries.
+Found common filename prefix "/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite"
+Writing .css and .png files.
+Generating output.
+Processing file /home/aleksandar/2023_Analysis_zephyr/zephyr/include/zephyr/sys/math_extras_impl.h
+Processing file include/zephyr/tc_util.h
+Processing file ztest/include/zephyr/ztest_test_new.h
+Processing file ztest/include/zephyr/ztest_assert.h
+Processing file ztest/src/ztest_defaults.c
+Processing file ztest/src/ztest_new.c
+Processing file ztest/src/ztest_mock.c
+Writing directory view page.
+Overall coverage rate:
+  lines......: 52.2% (268 of 513 lines)
+  functions..: 64.5% (40 of 62 functions)
+  branches...: 44.2% (103 of 233 branches)

@@ -1,0 +1,13 @@
+# ninja log v5
+0	121	1682199805732878634	zephyr/include/generated/kobj-types-enum.h	4d651d77cbc8a042
+0	121	1682199805732878634	zephyr/include/generated/otype-to-str.h	4d651d77cbc8a042
+0	121	1682199805732878634	zephyr/include/generated/otype-to-size.h	4d651d77cbc8a042
+0	121	1682199805732878634	/home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/unit_testing/tests/unit/math_extras/utilities.math/zephyr/include/generated/kobj-types-enum.h	4d651d77cbc8a042
+0	121	1682199805732878634	/home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/unit_testing/tests/unit/math_extras/utilities.math/zephyr/include/generated/otype-to-str.h	4d651d77cbc8a042
+0	121	1682199805732878634	/home/aleksandar/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_/unit_testing/tests/unit/math_extras/utilities.math/zephyr/include/generated/otype-to-size.h	4d651d77cbc8a042
+122	240	1682199805864882559	CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.o	3a06d2149c98c0c4
+122	282	1682199805904883749	CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_new.c.o	77f68466899a1b9a
+122	291	1682199805912883987	CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.o	b75c509e7e123403
+240	341	1682199805964885534	CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.o	9bbff5f6da0ece0e
+283	480	1682199806104889701	CMakeFiles/testbinary.dir/portable.c.o	b792c388a2d1fa2d
+480	515	1682199806136890653	testbinary	3d16f5a677d89a85

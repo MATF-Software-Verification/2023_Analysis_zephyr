@@ -1,0 +1,2 @@
+osource "/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/soc/$(ARCH)/Kconfig"
+osource "/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/soc/$(ARCH)/*/Kconfig"

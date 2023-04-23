@@ -1,0 +1,52 @@
+Running TESTSUITE math_extras_portable
+===================================================================
+START - test_portable_size_add
+ PASS - test_portable_size_add in 0.000 seconds
+===================================================================
+START - test_portable_size_mul
+ PASS - test_portable_size_mul in 0.000 seconds
+===================================================================
+START - test_portable_u32_add
+ PASS - test_portable_u32_add in 0.000 seconds
+===================================================================
+START - test_portable_u32_clz
+ PASS - test_portable_u32_clz in 0.000 seconds
+===================================================================
+START - test_portable_u32_ctz
+ PASS - test_portable_u32_ctz in 0.000 seconds
+===================================================================
+START - test_portable_u32_mul
+ PASS - test_portable_u32_mul in 0.000 seconds
+===================================================================
+START - test_portable_u64_add
+ PASS - test_portable_u64_add in 0.000 seconds
+===================================================================
+START - test_portable_u64_clz
+ PASS - test_portable_u64_clz in 0.000 seconds
+===================================================================
+START - test_portable_u64_ctz
+ PASS - test_portable_u64_ctz in 0.000 seconds
+===================================================================
+START - test_portable_u64_mul
+ PASS - test_portable_u64_mul in 0.000 seconds
+===================================================================
+TESTSUITE math_extras_portable succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [math_extras_portable]: pass = 10, fail = 0, skip = 0, total = 10 duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_size_add] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_size_mul] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u32_add] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u32_clz] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u32_ctz] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u32_mul] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u64_add] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u64_clz] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u64_ctz] duration = 0.000 seconds
+ - PASS - [math_extras_portable.test_portable_u64_mul] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
