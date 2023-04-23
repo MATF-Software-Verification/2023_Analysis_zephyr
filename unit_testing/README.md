@@ -33,7 +33,9 @@ ZTEST(math_extras_portable, test_portable_u32_add) {
 
 Twister command for running the tests:
 
-`west twister --coverage -p unit_testing -T tests/unit/math_extras/ -v --report-dir ~/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_math_extras --outdir ~/2023_Analysis_zephyr/twister_reports/test_coverage/math_extras/unit_run_math_extras`
+```
+west twister --coverage -p unit_testing -T tests/unit/math_extras/ -v --report-dir ~/2023_Analysis_zephyr/twister_reports/test_coverage/unit_run_math_extras --outdir ~/2023_Analysis_zephyr/twister_reports/test_coverage/math_extras/unit_run_math_extras
+```
 
 *NOTE*: As mentioned, `CMakeLists.txt` was modified between two runs. This was done to test math_extras functions with and without builtin support. 
 
@@ -84,7 +86,7 @@ means that Twister will call `math_extras.test_u32_add` test case during executi
 
 lcov is a tool that creates graphical representation of the code coverage in .html format. Reports for math_extras functions are given below:
 
-![code coverage report](./test_coverage/mat_extras/lcov_math_extras_report.png "lcov report").
+![code coverage report](./test_coverage/math_extras/lcov_math_extras_report.png "lcov report").
 
 
 As the reports show, there is a 100% coverage of the `math_extras` functions both with builtin functions and with portable implementation.
