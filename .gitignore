@@ -1,0 +1,12 @@
+**/build/
+twister-out*
+
+*.o
+*.obj
+*.a
+*.elf
+*.map
+*.d
+*.gcda
+*.gcno
+*.gcov
