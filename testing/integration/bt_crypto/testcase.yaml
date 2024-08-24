@@ -1,0 +1,7 @@
+tests:
+  integration.bt_crypto:
+    platform_allow: native_posix_64 native_posix
+    tags: bluetooth crypto
+    integration_platforms: 
+      - native_posix_64
+      - native_posix
