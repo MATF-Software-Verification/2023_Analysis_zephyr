@@ -42,7 +42,19 @@ cp -r twister-out $TEST_DIR
 cd $ZEPHYR_DIR/tests/bluetooth/host/crypto/
 git apply -R $PATCH_FILE
 
+# Filter unwanted folders
+cd $TEST_DIR/twister-out/
+lcov --directory . --capture --output-file coverage.info
+lcov --remove coverage.info '*/subsys/testsuite/*' --output-file coverage_filtered.info
+lcov --remove coverage_filtered.info '*/bt_encrypt_decrypt/src/*' --output-file coverage_filtered.info
+lcov --remove coverage_filtered.info '*/mocks/*' --output-file coverage_filtered.info
+lcov --remove coverage_filtered.info '*/prng_init/src/*' --output-file coverage_filtered.info
+lcov --remove coverage_filtered.info '*/zephyr/tests/*' --output-file coverage_filtered.info
+lcov --remove coverage_filtered.info '*/zephyr/include/*' --output-file coverage_filtered.info
+
+# Generate filtered HTML report
+genhtml coverage_filtered.info --output-directory coverage_filtered
+
 # Open Firefox with coverage report
-cd $TEST_DIR
-firefox ./twister-out/coverage/index.html &
+firefox ./coverage_filtered/index.html &
 
