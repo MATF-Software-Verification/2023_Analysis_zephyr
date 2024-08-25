@@ -11,13 +11,87 @@ Techniques and tools used:
 Repo organization:
 
 ```
-├── unit_testing
-│   ├── code_coverage
-│   └── test_coverage_reports
-└── zephyr
+.
+├── README.md
+├── patches
+│   └── bt_crypto.patch
+├── testing
+│   ├── integration
+│   │   └── bt_crypto
+│   └── unit
+│       ├── bt_encrypt_decrypt
+│       └── run_unit_tests.sh
+└── zephyr @ 419dda3ed72
+    .
+    .
+    .
+    ├── samples
+    │   ├── application_development
+    │   ├── arch
+    │   ├── basic
+    │   ├── bluetooth
+    │   ├── boards
+    │   ├── classic.rst
+    │   ├── compression
+    │   ├── cpp
+    │   ├── drivers
+    │   ├── hello_world
+    │   ├── index.rst
+    │   ├── kernel
+    │   ├── modules
+    │   ├── net
+    │   ├── philosophers
+    │   ├── posix
+    │   ├── sample_definition_and_criteria.rst
+    │   ├── sensor
+    │   ├── shields
+    │   ├── subsys
+    │   ├── synchronization
+    │   ├── tfm_integration
+    │   └── userspace
+    .
+    .
+    .
+    ├── subsys
+    │   ├── CMakeLists.txt
+    │   ├── Kconfig
+    │   ├── bluetooth
+    │   .
+    │   .
+    │   .
+    │   └── usb
+    ├── tests
+    │   ├── application_development
+    │   ├── arch
+    │   ├── benchmarks
+    │   ├── bluetooth
+    │   ├── boards
+    │   ├── boot
+    │   ├── cmake
+    │   ├── crypto
+    │   ├── drivers
+    │   ├── kernel
+    │   ├── lib
+    │   ├── misc
+    │   ├── net
+    │   ├── posix
+    │   ├── subsys
+    │   ├── unit
+    │   └── ztest
+    ├── version.h.in
+    ├── west.yml
+    ├── zephyr-env.cmd
+    └── zephyr-env.sh
 ```
 
 ### Initializing zephyr submodule
+
+From the root directory of the project run the following:
+
+```
+git submodule init
+git submodule update
+```
 
 #### Install zephyr tools
 
@@ -63,3 +137,29 @@ tar xvf zephyr-sdk-0.16.0_linux-x86_64.tar.xz
 cd zephyr-sdk-0.16.0
 ./setup.sh
 ```
+
+### Initialize zephyr
+
+From the root project directory run the following in order to initialize zephyr build system
+
+`west init -l ./zephyr`
+
+`west update`
+
+### System configuration
+
+Since some of the targets require 32bit libraries, there are some additional system setup needed.
+
+#### Install 32 bit libraries for building on 64bit system
+
+`sudo apt-get install gcc-multilib g++-multilib`
+
+#### Install 32 bit libraries for Valgrind
+
+`sudo apt-get install libc6-dbg libc6-dbg:i386`
+
+#### Install ASAN
+
+`sudo apt-get install libasan6`
+
+Compiler used for the project is `gcc-9` on `wsl` version of `Ubuntu22.04`.
