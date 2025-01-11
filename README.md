@@ -21,6 +21,12 @@ Repo organization:
 │   └── unit
 │       ├── bt_encrypt_decrypt
 │       └── run_unit_tests.sh
+├── valgrind
+|       ├── memcheck
+|       ├── callgrind
+|       ├── helgrind
+├── address_sanitizer
+├── code_style
 └── zephyr @ 419dda3ed72
     .
     .
@@ -163,3 +169,19 @@ Since some of the targets require 32bit libraries, there are some additional sys
 `sudo apt-get install libasan6`
 
 Compiler used for the project is `gcc-9` on `wsl` version of `Ubuntu22.04`.
+
+
+--- 
+
+### Running Valgrind tools
+
+Since most of the bluetooth examples in the code base are targeting embedded devices, there are two possibilities to invoke these tests on the native POSIX-like environment.
+First one is to have a BT hardware on the host machine that supports BLE (bluetoot standard 4.0 and above), and another one is to use Zephyr's BabbleSim tool that emulates 
+physical link enabling the compiled sources to be run 'natively' on Linux (POSIX) machine.
+
+#### Setting up Valgrind
+
+Make sure that valgrind is installed on the system:
+
+
+`sudo apt-get install valgrind`
