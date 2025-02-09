@@ -50,12 +50,16 @@ export BSIM_COMPONENTS_PATH=${BSIM_OUT_PATH}/components/
 
 #### Running the sample utilizing BabbleSim
 
-The process for running the sample with BabbleSim is similar to running it as a native app. In order to do so, you can transfer (and rename) the built `zephyr.exe` to the location where you installed BabbleSim (using the instructions above). Now you need to run a simulated physical link (for example `bs_2G4_phy_v1`), supply the custom test name, the number of devices PHY link should expect and chain executables, connecting them to the same name of test, while also providing the unique device numbers. It's easier to explain with an example:
+The process for running the sample with BabbleSim is similar to running it as a native app. The main difference is that the app should be build with the bsim board. Supported boards are listed [here](https://docs.zephyrproject.org/latest/boards/native/doc/bsim_boards_design.html). In order to build the sample targeting the bsim board, following command can be used:
+
+`west build -p always -b nrf52_bsim`
+
+After you build the app, you can transfer (and rename) the built `zephyr.exe` to the location where you installed BabbleSim (using the instructions above). Now you need to run a simulated physical link (for example `bs_2G4_phy_v1`), supply the custom test name, the number of devices PHY link should expect and chain executables, connecting them to the same name of test, while also providing the unique device numbers. It's easier to explain with an example:
 
 ```
 cd <path_to_bablesim>/bin
 
-/bs_2G4_phy_v1 -s=sample_test -D=1 & ./zephyr.exe -s=sample_test -d=0
+/bs_2G4_phy_v1 -s=sample_test -D=1 & ./<zephyr_executable> -s=sample_test -d=0
 ```
 
 Where `-s=sample_test` uniquely names the test, `-D=1` indicates that there will be a single device connected to the PHY, and `-d=0` uniquely identifies a device that'll connect to the physical layer.
