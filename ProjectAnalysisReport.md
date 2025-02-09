@@ -28,6 +28,13 @@ Valgrind setup and dir structure
 
 ##### valgrind memcheck
 
+Alat memcheck pruza mogucnost analize koda u kontekstu bezbednog upravljanja memorijom. Postoji nekoliko kategorija potencijalnih problema sa memorijom. Najbitniji tipovi memorijskih gresaka opisani su ispod:
+
+1) definitely lost - Memorija je alocirana i nikada nije oslobodjena, a pokazivac na tu memoriju je definitivno izgubljen i ne postoji nacin da mu program pristupi.
+2) indirectly lost - Memorijski blok nije direktno izgubljen, ali zavisi od bloka memorije koji jeste izgubljen.
+3) possibly lost - Memorijski blok je alociran, ali Valgrind ne moze da zakljuci da li je izgubljen.
+4) still reachable - Memorjski blok je alociran i neoslobodjen, ali i dalje postoji pokazivac na njega.
+
 Nakon pokretanja memcheck alata nad jednostavnim primerom (`samples/bluetooth/beacon` pokrenut uz pomoc skripte `run_beacon_valgrind.sh`), vidimo da se greske vecinski ticu POSIX podsistema i funkcija koje nisu nuzno deo Zephyr OS-a. Naime, sve funkcije se zavrsavaju pozivom deljene biblioteke kojoj nemamo pristup u izvornom obliku.
 
 ```bash
@@ -180,6 +187,7 @@ Nakon pokretanja memcheck alata nad jednostavnim primerom (`samples/bluetooth/be
 
 ```
 
+Najveci broj bajtova koji su problematicni je `still reachable`. Ovo nije nuzno problem kao sto cemo videti ispod.
 
 U svakom slucaju, probacemo da ispratimo call trace za neke od pronadjenih gresaka u okviru samog Zephyr OS sistema.
 Jos jedno zapazanje je da se `main` funkcija ne smatra kao ulazna tacka za aplikaciju iskompajliranu za izvrsavanje na POSIX platformi. Naime, u fajlu `posix_cheats.h` vidimo da se main funkcija preimenuje u `_posix_zephyr_main` koja odgovara main funkciji u nasem primeru.
@@ -252,6 +260,8 @@ Takodje vidimo da je izbor napravljen zarad osiguravanja pravilnog izvrsavanja n
 ```
 
 Poslusacemo savet u vezi koriscenja fajla za ignorisanje valgrind gresaka i pokrenuti analizu ispocetka. Dodajemo opciju `-s` za ukljucivanje supression fajla u `run_beacon_valgrind.sh` skriptu. _Za postizanje prvobitnog izlaza, pokrenuti skriptu bez ove opcije._
+
+Sam suppression fajl navodi pravila za ignorisanje `reachable` i `possible` tipova gresaka koje smo videli u prvobitnom izlazu. Konkretno ignorisu se alokacije koje su nastale pozivima `posix_nex_thread` funkcija izmedju ostalih.
 
 Izlaz iz ovako konfigurisane analize nam govori da su sve prijavljene greske u vezi alokacije bile izazvane konfiguracijom sistema za emulaciju. Pokusacemo i pokretanje aplikacije za babblesim platformu kasnije. Za sad, dobijamo prijavljene greske o koriscenju neinicijalizovane memorije. Nadalje cemo uvek uvlaciti fajl za suppression kako bismo se fokusirali samo na greske koje sama aplikacija moze izazvati.
 
@@ -392,6 +402,38 @@ Izmene u izvornom kodu `userchan.c` date su u patchu `userchan_fix_uninit_access
 ==104210== For lists of detected and suppressed errors, rerun with: -s
 ==104210== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 4 from 4)
  ```
+
+ Kao dodatak, napravicemo i primere za ostale tipove gresaka sa memorijom uvodjenjem sledecih funkcija:
+
+ ```c
+ typedef struct {
+    char *data;
+} Node;
+
+void leak_indirectly() {
+    Node *node = malloc(sizeof(Node)); // Allocated struct
+    node->data = malloc(50);           // Allocated internal pointer
+
+    // If `node` is lost, `node->data` is also lost (indirectly)
+}
+ ```
+
+
+ ```c
+void possibly_lost() {
+    void *ptr = malloc(100);
+    ptr = ptr - 5;  // Pointer is now shifted
+}
+ ```
+
+ ```c
+ void still_reachable() {
+    static char *global_ptr;
+    global_ptr = malloc(100);
+}
+ ```
+
+Izmena se nalazi u fajlu `memleak_demo_all_leaks.patch`, a rezultati analize su u `valgrind_20250209_195054_all.log`. U rezultujucem fajlu vidimo da se prijavljuju ostali tipovi gresaka TODO(avra): opisati dalje...
 
 ##### valgrind tool2
 

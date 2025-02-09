@@ -1,0 +1,121 @@
+diff --git a/drivers/bluetooth/hci/userchan.c b/drivers/bluetooth/hci/userchan.c
+index 50c3165809d..0c9553b655b 100644
+--- a/drivers/bluetooth/hci/userchan.c
++++ b/drivers/bluetooth/hci/userchan.c
+@@ -58,7 +58,7 @@ static K_KERNEL_STACK_DEFINE(rx_thread_stack,
+ 			     CONFIG_ARCH_POSIX_RECOMMENDED_STACK_SIZE);
+ static struct k_thread rx_thread_data;
+ 
+-static unsigned short bt_dev_index;
++static unsigned short bt_dev_index = 0;
+ 
+ #define TCP_ADDR_BUFF_SIZE 16
+ static bool hci_socket;
+@@ -328,7 +328,8 @@ static int user_chan_open(void)
+ 	int fd;
+ 
+ 	if (hci_socket) {
+-		struct sockaddr_hci addr;
++		struct sockaddr addr;
++		struct sockaddr_hci *hci_addr = (struct sockaddr_hci *)&addr;
+ 
+ 		fd = socket(PF_BLUETOOTH, SOCK_RAW | SOCK_CLOEXEC | SOCK_NONBLOCK,
+ 			    BTPROTO_HCI);
+@@ -337,9 +338,12 @@ static int user_chan_open(void)
+ 		}
+ 
+ 		(void)memset(&addr, 0, sizeof(addr));
+-		addr.hci_family = AF_BLUETOOTH;
+-		addr.hci_dev = bt_dev_index;
+-		addr.hci_channel = HCI_CHANNEL_USER;
++		hci_addr->hci_family = AF_BLUETOOTH;
++		hci_addr->hci_dev = bt_dev_index;
++		hci_addr->hci_channel = HCI_CHANNEL_USER;
++
++		// LOG_ERR("sizeof(sockaddr_hci) = %zu\n", sizeof(struct sockaddr_hci));
++		// LOG_ERR("sizeof(sockaddr_rc) = %zu\n", sizeof(struct sockaddr));
+ 
+ 		if (bind(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+ 			int err = -errno;
+diff --git a/samples/bluetooth/beacon/prj.conf b/samples/bluetooth/beacon/prj.conf
+index 045c5c5f61d..dad48c73103 100644
+--- a/samples/bluetooth/beacon/prj.conf
++++ b/samples/bluetooth/beacon/prj.conf
+@@ -1,3 +1,5 @@
+ CONFIG_BT=y
+ CONFIG_LOG=y
+ CONFIG_BT_DEVICE_NAME="Test beacon"
++CONFIG_DEBUG=y
++CONFIG_NO_OPTIMIZATIONS=y
+\ No newline at end of file
+diff --git a/samples/bluetooth/beacon/src/main.c b/samples/bluetooth/beacon/src/main.c
+index 484b6e94c8f..cc9a6033f23 100644
+--- a/samples/bluetooth/beacon/src/main.c
++++ b/samples/bluetooth/beacon/src/main.c
+@@ -10,6 +10,8 @@
+ #include <stddef.h>
+ #include <zephyr/sys/printk.h>
+ #include <zephyr/sys/util.h>
++#include <stdlib.h>
++#include <string.h>
+ 
+ #include <zephyr/bluetooth/bluetooth.h>
+ #include <zephyr/bluetooth/hci.h>
+@@ -40,6 +42,43 @@ static const struct bt_data sd[] = {
+ 	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
+ };
+ 
++void mem_leak(){
++	printk("mem_leak()\n");
++	void *ptr = malloc(100);
++}
++
++void use_uninitialized_mem(){
++	printk("use_uninitialized_mem()\n");
++	int *ptr = malloc(sizeof(int));
++	int value = *ptr;
++	free(ptr);
++}
++
++typedef struct {
++    char *data;
++} Node;
++
++void leak_indirectly() {
++    Node *node = malloc(sizeof(Node)); // Allocated struct
++    node->data = malloc(50);           // Allocated internal pointer
++
++    // If `node` is lost, `node->data` is also lost (indirectly)
++}
++
++void possibly_lost() {
++    int *ptr1 = malloc(100); // Allocate memory
++
++    ptr1 += 10; // Overwrite ptr1 with ptr2, losing the original ptr1
++
++    // At this point, the memory allocated for ptr1 is "possibly lost"
++    // because ptr1 no longer points to it
++}
++
++void still_reachable() {
++    static char *global_ptr;
++    global_ptr = malloc(100);
++}
++
+ static void bt_ready(int err)
+ {
+ 	char addr_s[BT_ADDR_LE_STR_LEN];
+@@ -80,6 +119,13 @@ int main(void)
+ 
+ 	printk("Starting Beacon Demo\n");
+ 
++	printk("Calling memleak functions\n");
++	mem_leak();
++	use_uninitialized_mem();
++	leak_indirectly();
++	possibly_lost();
++	still_reachable();
++
+ 	/* Initialize the Bluetooth Subsystem */
+ 	err = bt_enable(bt_ready);
+ 	if (err) {

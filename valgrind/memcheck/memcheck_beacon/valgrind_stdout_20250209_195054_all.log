@@ -1,0 +1,13 @@
+WARNING: Using a test - not safe - entropy source
+*** Booting Zephyr OS build v4.0.0-2878-g6f240ef18c11 ***
+Starting Beacon Demo
+Calling memleak functions
+mem_leak()
+use_uninitialized_mem()
+[00:00:00.400,000] [0m<inf> bt_hci_core: Identity: 8C:88:0B:0A:55:94 (public)[0m
+[00:00:00.400,000] [0m<inf> bt_hci_core: HCI: version 5.1 (0x0a) revision 0xdfc6, manufacturer 0x005d[0m
+[00:00:00.400,000] [0m<inf> bt_hci_core: LMP: version 5.1 (0x0a) subver 0xd922[0m
+Bluetooth initialized
+Beacon started, advertising as 8C:88:0B:0A:55:94 (public)
+
+Stopped at 8.920s

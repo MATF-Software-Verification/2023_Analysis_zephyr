@@ -1,0 +1,75 @@
+==108541== Memcheck, a memory error detector
+==108541== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==108541== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==108541== Command: ./build/zephyr/zephyr.exe --bt-dev=hci1
+==108541== Parent PID: 108540
+==108541== 
+==108541== 
+==108541== HEAP SUMMARY:
+==108541==     in use at exit: 3,122 bytes in 12 blocks
+==108541==   total heap usage: 24 allocs, 12 frees, 14,636 bytes allocated
+==108541== 
+==108541== 50 bytes in 1 blocks are indirectly lost in loss record 1 of 12
+==108541==    at 0x40436A0: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-x86-linux.so)
+==108541==    by 0x8049988: leak_indirectly (main.c:63)
+==108541==    by 0x8049B0B: _posix_zephyr_main (main.c:125)
+==108541==    by 0x8059292: bg_thread_main (init.c:564)
+==108541==    by 0x804B32F: z_thread_entry (thread_entry.c:48)
+==108541==    by 0x804E560: posix_arch_thread_entry (thread.c:96)
+==108541==    by 0x804EA85: nct_thread_starter (nct.c:366)
+==108541==    by 0x41F4C00: start_thread (pthread_create.c:442)
+==108541==    by 0x428F309: clone (clone.S:107)
+==108541== 
+==108541== 54 (4 direct, 50 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 12
+==108541==    at 0x40436A0: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-x86-linux.so)
+==108541==    by 0x8049978: leak_indirectly (main.c:62)
+==108541==    by 0x8049B0B: _posix_zephyr_main (main.c:125)
+==108541==    by 0x8059292: bg_thread_main (init.c:564)
+==108541==    by 0x804B32F: z_thread_entry (thread_entry.c:48)
+==108541==    by 0x804E560: posix_arch_thread_entry (thread.c:96)
+==108541==    by 0x804EA85: nct_thread_starter (nct.c:366)
+==108541==    by 0x41F4C00: start_thread (pthread_create.c:442)
+==108541==    by 0x428F309: clone (clone.S:107)
+==108541== 
+==108541== 100 bytes in 1 blocks are still reachable in loss record 5 of 12
+==108541==    at 0x40436A0: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-x86-linux.so)
+==108541==    by 0x80499C2: still_reachable (main.c:79)
+==108541==    by 0x8049B15: _posix_zephyr_main (main.c:127)
+==108541==    by 0x8059292: bg_thread_main (init.c:564)
+==108541==    by 0x804B32F: z_thread_entry (thread_entry.c:48)
+==108541==    by 0x804E560: posix_arch_thread_entry (thread.c:96)
+==108541==    by 0x804EA85: nct_thread_starter (nct.c:366)
+==108541==    by 0x41F4C00: start_thread (pthread_create.c:442)
+==108541==    by 0x428F309: clone (clone.S:107)
+==108541== 
+==108541== 100 bytes in 1 blocks are definitely lost in loss record 6 of 12
+==108541==    at 0x40436A0: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-x86-linux.so)
+==108541==    by 0x8049920: mem_leak (main.c:47)
+==108541==    by 0x8049B01: _posix_zephyr_main (main.c:123)
+==108541==    by 0x8059292: bg_thread_main (init.c:564)
+==108541==    by 0x804B32F: z_thread_entry (thread_entry.c:48)
+==108541==    by 0x804E560: posix_arch_thread_entry (thread.c:96)
+==108541==    by 0x804EA85: nct_thread_starter (nct.c:366)
+==108541==    by 0x41F4C00: start_thread (pthread_create.c:442)
+==108541==    by 0x428F309: clone (clone.S:107)
+==108541== 
+==108541== 100 bytes in 1 blocks are definitely lost in loss record 7 of 12
+==108541==    at 0x40436A0: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-x86-linux.so)
+==108541==    by 0x80499A5: possibly_lost (main.c:69)
+==108541==    by 0x8049B10: _posix_zephyr_main (main.c:126)
+==108541==    by 0x8059292: bg_thread_main (init.c:564)
+==108541==    by 0x804B32F: z_thread_entry (thread_entry.c:48)
+==108541==    by 0x804E560: posix_arch_thread_entry (thread.c:96)
+==108541==    by 0x804EA85: nct_thread_starter (nct.c:366)
+==108541==    by 0x41F4C00: start_thread (pthread_create.c:442)
+==108541==    by 0x428F309: clone (clone.S:107)
+==108541== 
+==108541== LEAK SUMMARY:
+==108541==    definitely lost: 204 bytes in 3 blocks
+==108541==    indirectly lost: 50 bytes in 1 blocks
+==108541==      possibly lost: 0 bytes in 0 blocks
+==108541==    still reachable: 100 bytes in 1 blocks
+==108541==         suppressed: 2,768 bytes in 7 blocks
+==108541== 
+==108541== For lists of detected and suppressed errors, rerun with: -s
+==108541== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 4 from 4)
