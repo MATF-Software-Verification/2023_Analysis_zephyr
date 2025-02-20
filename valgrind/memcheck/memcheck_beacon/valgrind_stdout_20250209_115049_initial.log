@@ -1,6 +1,0 @@
-WARNING: Using a test - not safe - entropy source
-*** Booting Zephyr OS build v4.0.0-2878-g6f240ef18c11 ***
-Starting Beacon Demo
-
-Stopped at 8.920s
-Calling memleak functionsCleanup - disabling bt
