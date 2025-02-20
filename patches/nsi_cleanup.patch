@@ -1,0 +1,55 @@
+diff --git a/samples/bluetooth/extended_adv/advertiser/prj.conf b/samples/bluetooth/extended_adv/advertiser/prj.conf
+index 0c352e3950f..2dda13d5541 100644
+--- a/samples/bluetooth/extended_adv/advertiser/prj.conf
++++ b/samples/bluetooth/extended_adv/advertiser/prj.conf
+@@ -2,5 +2,6 @@ CONFIG_BT=y
+ CONFIG_BT_DEVICE_NAME="test_ext_adv"
+ CONFIG_BT_PERIPHERAL=y
+ CONFIG_BT_EXT_ADV=y
++# CONFIG_ARCH_POSIX=y
+ 
+ CONFIG_ASSERT=y
+diff --git a/samples/bluetooth/extended_adv/advertiser/src/main.c b/samples/bluetooth/extended_adv/advertiser/src/main.c
+index 66cdb6cee8f..accc93a19a5 100644
+--- a/samples/bluetooth/extended_adv/advertiser/src/main.c
++++ b/samples/bluetooth/extended_adv/advertiser/src/main.c
+@@ -8,6 +8,7 @@
+ #include <zephyr/bluetooth/conn.h>
+ #include <zephyr/bluetooth/gap.h>
+ #include <zephyr/bluetooth/hci.h>
++#include "nsi_main.h"
+ 
+ static struct bt_conn *default_conn;
+ 
+@@ -122,7 +123,9 @@ int main(void)
+ 		return err;
+ 	}
+ 
+-	while (true) {
++	// Try to terminate gracefully after 100 disconnects
++	int max_disconnects = 10;
++	while (max_disconnects > 0) {
+ 		k_poll(&poll_evt, 1, K_FOREVER);
+ 
+ 		k_poll_signal_reset(poll_evt.signal);
+@@ -145,7 +148,7 @@ int main(void)
+ 			}
+ 		} else if (atomic_test_and_clear_bit(evt_bitmask, BT_SAMPLE_EVT_DISCONNECTED) &&
+ 			   app_st == BT_SAMPLE_ST_CONNECTED) {
+-
++			max_disconnects--;
+ 			printk("Disconnected state! Restarting advertising\n");
+ 			app_st = BT_SAMPLE_ST_ADV;
+ 			err = start_advertising(adv);
+@@ -155,5 +158,11 @@ int main(void)
+ 		}
+ 	}
+ 
++	#ifdef CONFIG_ARCH_POSIX
++	// Exit gracefully - call cleanup NSI tasks
++	printk("Calling nsi_exit\n");
++	nsi_exit(0);
++	#endif
++
+ 	return err;
+ }
