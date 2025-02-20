@@ -1,0 +1,20 @@
+==10249== Memcheck, a memory error detector
+==10249== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==10249== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==10249== Command: ./build/zephyr/zephyr.exe --bt-dev=hci0
+==10249== Parent PID: 10248
+==10249== 
+==10249== 
+==10249== HEAP SUMMARY:
+==10249==     in use at exit: 3,040 bytes in 9 blocks
+==10249==   total heap usage: 21 allocs, 12 frees, 8,586 bytes allocated
+==10249== 
+==10249== LEAK SUMMARY:
+==10249==    definitely lost: 0 bytes in 0 blocks
+==10249==    indirectly lost: 0 bytes in 0 blocks
+==10249==      possibly lost: 0 bytes in 0 blocks
+==10249==    still reachable: 0 bytes in 0 blocks
+==10249==         suppressed: 3,040 bytes in 9 blocks
+==10249== 
+==10249== For lists of detected and suppressed errors, rerun with: -s
+==10249== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
