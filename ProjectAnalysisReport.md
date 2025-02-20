@@ -14,6 +14,8 @@ Patches
 
 Gcovr
 
+
+
 #### Integration tests
 
 Limitations
@@ -435,7 +437,76 @@ void possibly_lost() {
 
 Izmena se nalazi u fajlu `memleak_demo_all_leaks.patch`, a rezultati analize su u `valgrind_20250209_195054_all.log`. U rezultujucem fajlu vidimo da se prijavljuju ostali tipovi gresaka TODO(avra): opisati dalje...
 
-##### valgrind tool2
+
+--- ;
+
+Kao sto je vec receno, probacemo i da iskompajliramo aplikaciju za `nrf52_bsim:` platformu. Za ovo je potrebno podesiti babblesim okruzenje (poblize opisano u README fajlu u valgrind folderu). Dakle, imamo simuliran fizicki sloj veze na koji se aplikacije mogu nakaciti. Skripta `run_ext_adv_valgrind.sh` najpre kompajlira scanner i advertiser aplikacije za nrf platformu, pokrece simulator fizickog sloja i nakon toga pokrece aplikacije pod valgrind alatom u zasebnim terminalima. Ponasanje aplikacija je sledece:
+
+- advertiser pokrece servis za oglasavanje uz dozvoljeno konektovanje
+- scanner trazi advertisement pakete i pokusava da se konektuje
+
+U beskonacnoj petlji, advertiser ceka konekciju od strane scannera, i ukoliko se konekcija prekine, ponovo zapocinje oglasavanje. S druge strane, scanner trazi advertisera, ostvaruje konekciju i nakon TODO sekundi je resetuje. Ovo dobacivanje bi trajalo beskonacno dok eksterno ne prekinemo petlju, pa je stoga u skripte za pokretanje dodat `sleep` nakon koga se ubija trenutni proces (u svakoj skripti zasebno).
+
+Nakon sto ubijemo aplikacije, i uz navedeni suppression fajl, vidimo da valgrind prijavljuje zanimljivije greske u odnosu na prethodne primere. Sazetak prijavljenih gresaka (advertiser) je dat ispod (puno ime fajla koriscenog u ovoj analizi je: `adv_scan/memcheck_advertiser/valgrind_20250219_233821.log`):
+
+```bash
+==28632== LEAK SUMMARY:
+==28632==    definitely lost: 0 bytes in 0 blocks
+==28632==    indirectly lost: 0 bytes in 0 blocks
+==28632==      possibly lost: 1,532 bytes in 1 blocks
+==28632==    still reachable: 536,058 bytes in 49 blocks
+==28632==         suppressed: 2,784 bytes in 9 blocks
+==28632== 
+==28632== For lists of detected and suppressed errors, rerun with: -s
+==28632== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 6 from 6)
+```
+
+Dakle, osim potisnutih gresaka, imamo `possibly lost` i `still reachable` bajtove memorije. Sledeci isecak iz izvestaja nas upucuje na `nsi_run_tasks` funkciju i `nsi_tasks.c` fajl:
+
+```bash
+==28632== 776 bytes in 1 blocks are still reachable in loss record 27 of 36
+==28632==    at 0x40436A0: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-x86-linux.so)
+==28632==    by 0x80AAA19: bs_malloc (bs_oswrap.c:92)
+==28632==    by 0x8096308: nhw_nvm_initialize_data_storage (NHW_NVM_backend.c:38)
+==28632==    by 0x8096577: nhw_nvm_init_storage (NHW_NVM_backend.c:83)
+==28632==    by 0x8095DE7: nhw_nvmc_uicr_init (NHW_NVMC.c:161)
+==28632==    by 0x8092D77: nsi_run_tasks (nsi_tasks.c:39)
+==28632==    by 0x80919C7: nsi_init (main.c:82)
+==28632==    by 0x8091A11: main (main.c:119)
+```
+
+Primecujemo da u `NHW_NVM_backend.c` alociramo memoriju putem `bs_malloc` funkcije, ali deluje da se oslobadjanje memorije vrsi u drugoj funkciji, odnosno u `nhw_nvm_clear_storage`. U okviru `NHW_NVMC.c` fajla definisana je i funkcija za ciscenje memorije `nhw_nvmc_uicr_clean_up` i registrovana je putem `NSI_TASK` makroa: `NSI_TASK(nhw_nvmc_uicr_clean_up, ON_EXIT_PRE, 100);`. Ovo nam govori da bi funkcija za dealokaciju trebalo da se pozove prilikom kraja izvrsavanja, ali pre nego sto program return-uje (pogledati `native_simulator/common/src/nsi_tasks.h` za referencu). Dalje, pronalazimo `main` funkciju za native simulator, u okviru koje se definise funkcija `nsi_exit`, koja poziva `nsi_run_tasks`; odnosno izvrsava taskove koji su oznaceni sa `ON_EXIT_PRE` flag-om. U okviru dokumentacije za `native_sim` (dovoljno blisko nrf_bsim) navedeno je da se Zephyr jezgro ne zavrsava na kraju aplikacije, vec da se zapocinje beskonacna besposlena petlja. Dodaje se da se moze pozvati `nsi_exit` funkcija ukoliko zelimo da se aplikacija elegantno zavrsi. Dakle, ukoliko dodamo pomenutu funkciju, verujemo da ce i valgrind greske vezane za nsi taskove nestati. Izmene su date u `nsi_cleanup.patch`. Zaista, kada ponovo pokrenemo valgrind, vidimo da gotovo sve greske nestanu (osim onih suppressed). Izlaz je sacuvan u `valgrind_20250220_205835_patched.log`.
+
+Analizirajmo izvorni kod ove dve aplikacije da se uverimo da dinamicko baratanje memorijom zaista radi na ispravan nacin. _Jos jedna napomena je da je ostavljena izmena u `userchan.c` prilikom izvrsenja ovog eksperimenta._ Dakle, u kodu vidimo da zaista nema dinamickog alociranja memorije, odnosno da nema mesta na kojima bi valgrind mogao naci gresku. Naime, jedino koriscenje pokazivaca je u `main.c` u kodu za `advertiser` i ta memorija se ...
+
+Isto ponasanje je primeceno i kod heartrate aplikacije:
+
+```bash
+==40968== Memcheck, a memory error detector
+==40968== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==40968== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==40968== Command: ./build/zephyr/zephyr.exe --bt-dev=hci2
+==40968== Parent PID: 40967
+==40968== 
+==40968== 
+==40968== HEAP SUMMARY:
+==40968==     in use at exit: 3,040 bytes in 9 blocks
+==40968==   total heap usage: 19 allocs, 10 frees, 8,270 bytes allocated
+==40968== 
+==40968== LEAK SUMMARY:
+==40968==    definitely lost: 0 bytes in 0 blocks
+==40968==    indirectly lost: 0 bytes in 0 blocks
+==40968==      possibly lost: 0 bytes in 0 blocks
+==40968==    still reachable: 0 bytes in 0 blocks
+==40968==         suppressed: 3,040 bytes in 9 blocks
+==40968== 
+==40968== For lists of detected and suppressed errors, rerun with: -s
+==40968== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+```
+
+Nisu pronadjene greske u okviru samog primera nad kojim smo vrsili testiranje, vec samo ocekivane greske koje su suppressed. U heartrate aplikaciji, rucnom analizom vidimo da nema puno mesta na kojima se koristi dinamicka alokacija memorije. Jedan pokazivac koji se koristi jeste pokazivac na strukturu `bt_le_ext_adv` koja se pri podrazumevanoj konfiguraciji ni ne koristi. Da bismo pokrili i slucaj prosirenog oglasavanja (`BT_EXT_ADV`), ukljucicemo `CONFIG_BT_EXT_ADV` flag tako sto cemo `west build` komandi proslediti overlay fajl koji prosiruje konfiguraciju pomenutim flag-om (`-- -DOVERLAY_CONFIG=$ZEPHYR_BASE/samples/bluetooth/peripheral_hr/overlay-extended.conf`). Krajnji izvestaj je identican prethodnom, tako da zakljucujemo da je primer bezbedno implementiran.
+
+##### valgrind helgrind
 
 --- ;
 
