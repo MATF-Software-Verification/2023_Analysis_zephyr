@@ -8,13 +8,179 @@
 
 #### Unit tests
 
-Twister
+Jedinicno testiranje je jedan od nacina dinamickog testiranja koji se fokusira na ispitivanje ispravnosti najjednostavnijih celina koda. Kad govorimo o testiranju ispravnosti, bitno je napomenuti da se testiranjem mogu pronaci greske u implementaciji, ali uspesno izvrsavanje testova ne garantuje ispravnost jedinice u celini. Naravno, cilj je da imamo sto vecu moc otkrivanja gresaka, i jedan od alata koji nam u tome moze pomoci jeste i pracenje pokrivenosti koda testovima. Alat za pokrivenost koda bice podrobnije opisan u narednim odeljcima. Jedna od razlika u odnosu na integracione testove u kontekstu ZephyrOS projekta je cinjenica da se za testiranje jedne funkcije ne ukljucuje citav projekat, odnosno samo jedan modul se kompajlira sto znacajno ubrzava proces testiranja.
 
-Patches
+##### Twister
 
-Gcovr
+ZephyrOS pruza sopsveni alat za pokretanje jedinicnih testova - [twister](https://docs.zephyrproject.org/latest/develop/test/twister.html). Kako bi twister prepoznao testove, potrebno je organizovati kod testa na sledeci nacin:
 
 
+```shell
+.
+├── CMakeLists.txt
+├── prj.conf
+├── src
+│   ├── test_scenario_1.c
+|   .
+|   .
+|   .
+│   └── test_scenario_n.c
+└── testcase.yaml
+```
+
+`testcase.yaml` je zapravo fajl koji govori alatu `twister` da se u okviru tog foldera nalaze testovi. U okviru tog fajla navodi se tip testa, platforma na kojoj treba da se izvrsava, i mnoge dodatne opcije za konfiguraciju testova o kojima nece biti reci ovde, vec su podrobno opisane u dokumentaciji. 
+
+`CMakeLists.txt` 
+
+`prj.conf` ukljucuje potrebne flag-ove (posebno kod integracionih testova) koji su potrebni za ukljucivanje raznih elemenata ZephyrOS operativnog sistema.
+
+`src` folder sadrzi jedan ili vise fajlova u kojima su implementirani testovi.
+
+
+![twister test architecture diagram](images/twister_tests.png)
+
+##### Gcov
+
+Jedna tehnika bez koje nema puno smisla pisanje jedinicnih testova jeste pracenje pokrivenosti koda testovima. U ovu svrhu koristi se alat gcovr koji generise graficki prikaz pokrivenosti izvornog koda, i to procentualno pokrivenost linija, funkcija i grananja. Pri odlucivanju da li je pokrivenost dovoljna, ne postoje jasno definisana pravila, s time sto je, naravno, veca pokrivenost pozeljnija. Jos jednom valja napomenuti da cak ni savrsena pokrivenost ne garantuje ispravnost programa, vec samo daje vecu pouzdanost (cak i ovde treba biti oprezan jer se velika pokrivenost moze postici i lose napisanim testovima) da se program ponasa ispravno u onim scenarijima za koje smo se setili napisati testove.
+
+--- ;
+
+#### Povecanje pokrivenosti - analiza
+
+Kako bismo pristupili prosirenju implementiranih testova, ima smisla pokrenuti inicijalnu analizu pokrivenosti koda. Na osnovu tih rezultata, moze se odabrati modul koji ima (subjektivno odabranu) nezadovoljivu pokrivenost. Takodje, s obzirom na velicinu projekta koji se testira, ne bi bilo lose fokusirati sa na neki njegov podsistem. U nasem slucaju, odabracemo `bluetooth` podsistem.
+
+
+Kako bismo imali pristup `twister` alatu, potrebno je da definisemo promenljive i podesimo putanje ka odgovarajucim zavisnostima. Ovo mozemo lako uraditi pozivom `source zephyr-env.sh` komande iz korenog direktorijuma ZephyrOS projekta. Dalje, kako bismo dobili inicijalnu pokrivenost pomenutog `bluetooth` podsistema, pokrecemo sledecu komandu:
+
+`twister --coverage -p unit_testing -T tests/bluetooth/`
+
+Dobijamo sledeci izlaz:
+
+```shell
+INFO    - Using Ninja..
+INFO    - Zephyr version: v4.0.0-2878-g6f240ef18c11
+INFO    - Using 'zephyr' toolchain.
+INFO    - Building initial testsuite list...
+INFO    - Writing JSON report /root_proj_path/zephyr/twister-out/testplan.json
+INFO    - JOBS: 4
+INFO    - Adding tasks to the queue...
+INFO    - Added initial list of jobs to queue
+INFO    - Total complete:  137/ 137  100%  built (not run):    0, filtered:    0, failed:    0, error:    0
+INFO    - 305 test scenarios (137 configurations) selected, 0 configurations filtered (0 by static filter, 0 at runtime).
+INFO    - 137 of 137 executed test configurations passed (100.00%), 0 built (not run), 0 failed, 0 errored, with no warnings in 799.44 seconds.
+INFO    - 1777 of 1777 executed test cases passed (100.00%) on 1 out of total 901 platforms (0.11%).
+INFO    - 340 selected test cases not executed: 340 skipped.
+INFO    - 137 test configurations executed on platforms, 0 test configurations were only built.
+INFO    - Generating coverage files...
+INFO    - Using gcov tool: gcov
+INFO    - HTML report generated: /root_proj_path/zephyr/twister-out/coverage/index.html
+INFO    - Saving reports...
+INFO    - Writing JSON report /root_proj_path/zephyr/twister-out/twister.json
+INFO    - Writing xunit report /root_proj_path/zephyr/twister-out/twister.xml...
+INFO    - Writing xunit report /root_proj_path/zephyr/twister-out/twister_report.xml...
+INFO    - Run completed
+```
+
+Mozemo pogledati izvestaj otvaranjem generisane `index.html` stranice u bilo kom pretrazivacu.
+
+![Prvobitna pokrivenost](images/initial_bt_coverage_unit.png)
+
+Dakle, dobijamo sledece rezultate:
+
+* Pokrivenost linija koda iznosi 65.3%
+* Pokrivenost funkcija koda iznosi 74.7%
+* Pokrivenost grananja u kodu iznosi 53.5%
+
+Jos jedno zapazanje je da u izvestaju dobijamo i pokrivenost `subsys/testsuite` modula, sto nije nesto na sta zelimo da se fokusiramo. Da bismo ocistili izlaz od nezeljenih foldera, mozemo pokrenuti sledece komande:
+
+`lcov --directory . --capture --output-file coverage.info --rc lcov_branch_coverage=1`
+
+`lcov --remove coverage.info '*/subsys/testsuite/* --output-file coverage_filtered.info --rc lcov_branch_coverage=1`
+
+`genhtml coverage_filtered.info --output-directory coverage_filtered --branch-coverage`
+
+Nakon preciscavanja rezultata, dobijamo sledeci izvestaj:
+
+![Filtrirana pokrivenost](images/filtered_coverage.png)
+
+Sam procenat pokrivenosti se nije puno promenio, ali je izvestaj sada relevantniji i moze se lakse odabrati ciljni modul za povecanje pokrivenosti. Modul koji deluje pogodno za poboljsanje je npr. `host` s obzirom da je jedan od modula sa najmanjom pokrivenoscu (oko 30% za linije, funkcije i grananja). Pogledajmo detaljnije gde ima mesta za konkretna poboljsanja otvaranjem izvestaja za pomenut modul:
+
+![Filtrirana pokrivenost host modula](images/init_host_coverage.png)
+
+Primecujemo da `conn.c` i `cs.c` fajlovi imaju poprilicno nisku pokrivenost a da su ujedno i nezanemarljive velicine (za razliku od `keys.h` i `conn_internal.h` koji takodje imaju veoma malu pokrivenost). Pogledajmo najpre postojecu infrastrukturu za testiranje modula `cs`:
+
+```bash
+ree zephyr/tests/bluetooth/host/cs/
+zephyr/tests/bluetooth/host/cs/
+├── bt_le_cs_parse_pct
+│   ├── CMakeLists.txt
+│   ├── prj.conf
+│   ├── src
+│   │   └── main.c
+│   └── testcase.yaml
+├── bt_le_cs_set_valid_chmap_bits
+│   ├── CMakeLists.txt
+│   ├── prj.conf
+│   ├── src
+│   │   └── main.c
+│   └── testcase.yaml
+├── bt_le_cs_step_data_parse
+│   ├── CMakeLists.txt
+│   ├── prj.conf
+│   ├── src
+│   │   └── main.c
+│   └── testcase.yaml
+└── mocks
+    ├── CMakeLists.txt
+    ├── conn.c
+    ├── conn.h
+    ├── hci_core.c
+    ├── hci_core.h
+    ├── net_buf.c
+    └── net_buf.h
+
+7 directories, 19 files
+```
+
+Vidimo da su testovi organizovani u zasebne foldere u zavisnosti od toga koju funkciju testiraju. U samom izvestaju (pracenjem linka ka `cs.c`) takodje vidimo da su pokrivene jedino funkcije `bt_le_cs_parse_pct`, `bt_le_cs_set_valid_chmap_bits` i `bt_le_cs_step_data_parse` - sto odgovara postojanju tri foldera izlistana gore. Ovo deluje kao dobro mesto za prosirenje testova, te cemo se fokusirati na to.
+
+#### Povecanje pokrivenosti - implementacija
+
+Pogledajmo najpre javni interfejs (`include/zephyr/bluetooth/cs.h`) da bismo locirali zanimljive funkcije za testiranje. Staticke funkcije necemo testirati ... TODO(avra): zasto. Pokusajmo najpre da dodamo testove za funkciju `bt_le_cs_security_enable` koja nije pokrivena u osnovnom slucaju. Prateci strukturu vec implementiranih testova, dodajemo folder sa testom za pomenutu funkciju na sledeci nacin:
+
+```bash
+zephyr/tests/bluetooth/host/cs/bt_le_cs_security_enable/
+├── CMakeLists.txt      <-- Pravila za prevodjenje samog unit tests
+├── mocks_unit_tests    <-- Folder sa mock bibliotekom
+│   ├── CMakeLists.txt  <-- Pravila za prevodjenje mock biblioteke
+│   ├── conn.c          <-- Mock definicija conn.c modula
+│   ├── conn.h          <-- Mock deklaracija conn.h modula
+│   ├── hci_core.c      <-- Mock definicija hci_core.c modula
+│   ├── hci_core.h      <-- Mock deklaracija hci_core.h modula
+│   ├── net_buf.c       <-- Mock definicija net_buf.c modula
+│   └── net_buf.h       <-- Mock deklaracija net_buf.h modula
+├── prj.conf            <-- Konfiguracija 'kernela' ZephyrOS-a
+├── src
+│   └── main.c          <-- Izvorni kod unit testa
+└── testcase.yaml       <-- Definicija unit testa
+```
+
+
+Zarad lakseg pracenja koda, kopija ovog foldera ce se nalaziti na putanji `testing/unit/`, ali za samu integraciju u twister framework, neophodno je da folder bude prisutan u zephyr submodulu. Za ovo ce se pobrinuti skripta `run_tests.sh`, ali smatramo da je bitno napomenuti.
+
+Komanda koju cemo koristiti za pokretanje unit testova uz generisanja izvestaja pokrivenosti je sledeca:
+
+`twister --coverage -p unit_testing -T <putanja_do_testova_u_zephyr_submodulu> -v`
+
+Twister generalno svoje izvrsavanja cuva u okviru foldera `twister-out.<broj_prethodnih_izvrsavanja>` (gde se `.<broj_prethodnih_izvrsavanja>` dodaje prilikom visestrukog pokretanja alata, i najskorije izvrsavanje se nalazi u `twister-out` folderu, dok se ranija cuvaju u `.<broj_prethodnih_izvrsavanja>` sa odgovarajucim brojem).
+
+Nakon prevodjenja testa alatom `twister`, izvrsna datoteka se moze naci na putanji `/twister-out/unit_testing_unit_testing/tests/bluetooth/host/cs/bt_le_cs_security_enable/bluetooth.host.cs.bt_le_cs_security_enable/testbinary`.
+
+Nakon pokretanja skripte, dobijamo sledeci izvestaj:
+
+![Izvestaj pokrivenosti nakon prvog testa](images/image_host_coverage_first_test.png)
+
+Dakle, povecali smo pokrivenost za 1%. U nastavku necemo navoditi medjurezultate pokrivenosti, vec ce biti dat krajnji rezultat nakon implementacije testova. Takodje, umesto dodavanja zasebnog foldera za svaku funkciju, grupisacemo unit testove u jedan veci folder (odvojen od inicijalnog) u koji cemo dodati sve testove zarad konciznosti.
 
 #### Integration tests
 
@@ -28,6 +194,11 @@ Limitations in context of ZephyrOS and running natively on POSIX platform.
 
 Valgrind setup and dir structure
 
+U ovom projektu bice korisceni sledeci valgrind alati:
+
+* `memcheck`
+* `callgrind`
+
 ##### valgrind memcheck
 
 Alat memcheck pruza mogucnost analize koda u kontekstu bezbednog upravljanja memorijom. Postoji nekoliko kategorija potencijalnih problema sa memorijom. Najbitniji tipovi memorijskih gresaka opisani su ispod:
@@ -36,6 +207,8 @@ Alat memcheck pruza mogucnost analize koda u kontekstu bezbednog upravljanja mem
 2) indirectly lost - Memorijski blok nije direktno izgubljen, ali zavisi od bloka memorije koji jeste izgubljen.
 3) possibly lost - Memorijski blok je alociran, ali Valgrind ne moze da zakljuci da li je izgubljen.
 4) still reachable - Memorjski blok je alociran i neoslobodjen, ali i dalje postoji pokazivac na njega.
+
+TODO: opisati osnovne komande - odnosno skriptu
 
 Nakon pokretanja memcheck alata nad jednostavnim primerom (`samples/bluetooth/beacon` pokrenut uz pomoc skripte `run_beacon_valgrind.sh`), vidimo da se greske vecinski ticu POSIX podsistema i funkcija koje nisu nuzno deo Zephyr OS-a. Naime, sve funkcije se zavrsavaju pozivom deljene biblioteke kojoj nemamo pristup u izvornom obliku.
 
