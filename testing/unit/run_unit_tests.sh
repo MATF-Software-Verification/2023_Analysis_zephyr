@@ -44,6 +44,7 @@ git apply -R $PATCH_FILE
 
 # Filter unwanted folders
 cd $TEST_DIR/twister-out/
+echo "Filtering out the unwanted folders ..."
 lcov --directory . --capture --output-file coverage.info
 lcov --remove coverage.info '*/subsys/testsuite/*' --output-file coverage_filtered.info
 lcov --remove coverage_filtered.info '*/bt_encrypt_decrypt/src/*' --output-file coverage_filtered.info

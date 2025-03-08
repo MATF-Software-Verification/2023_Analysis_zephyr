@@ -679,7 +679,7 @@ Isto ponasanje je primeceno i kod heartrate aplikacije:
 
 Nisu pronadjene greske u okviru samog primera nad kojim smo vrsili testiranje, vec samo ocekivane greske koje su suppressed. U heartrate aplikaciji, rucnom analizom vidimo da nema puno mesta na kojima se koristi dinamicka alokacija memorije. Jedan pokazivac koji se koristi jeste pokazivac na strukturu `bt_le_ext_adv` koja se pri podrazumevanoj konfiguraciji ni ne koristi. Da bismo pokrili i slucaj prosirenog oglasavanja (`BT_EXT_ADV`), ukljucicemo `CONFIG_BT_EXT_ADV` flag tako sto cemo `west build` komandi proslediti overlay fajl koji prosiruje konfiguraciju pomenutim flag-om (`-- -DOVERLAY_CONFIG=$ZEPHYR_BASE/samples/bluetooth/peripheral_hr/overlay-extended.conf`). Krajnji izvestaj je identican prethodnom, tako da zakljucujemo da je primer bezbedno implementiran.
 
-##### valgrind helgrind
+##### valgrind callgrind
 
 --- ;
 
