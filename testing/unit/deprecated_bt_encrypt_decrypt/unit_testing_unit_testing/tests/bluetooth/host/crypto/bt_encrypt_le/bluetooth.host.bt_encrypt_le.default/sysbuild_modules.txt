@@ -1,1 +1,0 @@
-"mcuboot":"/home/aleksandar/2023_Analysis_zephyr/bootloader/mcuboot":"/home/aleksandar/2023_Analysis_zephyr/bootloader/mcuboot/boot/zephyr/sysbuild"

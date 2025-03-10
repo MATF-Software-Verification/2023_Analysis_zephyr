@@ -1,2 +1,0 @@
-# Load Zephyr board defconfig descriptions.
-osource "/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/Kconfig.defconfig"

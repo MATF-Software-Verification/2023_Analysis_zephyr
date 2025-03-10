@@ -1,2 +1,0 @@
-# Load board Kconfig descriptions.
-osource "/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/Kconfig.unit_testing"
