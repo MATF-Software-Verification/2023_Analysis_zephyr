@@ -24,7 +24,7 @@ static void fff_reset_rule_before(const struct ztest_unit_test *test, void *fixt
 
 ZTEST_RULE(fff_reset_rule, fff_reset_rule_before, NULL);
 
-ZTEST_SUITE(bt_le_cs_security_enable, NULL, NULL, NULL, NULL, NULL);
+ZTEST_SUITE(channel_sounding_tests, NULL, NULL, NULL, NULL, NULL);
 
 /**
  * Mock bt_conn structure used for unit tests
@@ -44,7 +44,7 @@ void *custom_net_buf_simple_add(struct net_buf_simple *buf, size_t len) {
     return ptr;
 }
 
-ZTEST(bt_le_cs_security_enable, test_sec_enable_success)
+ZTEST(channel_sounding_tests, test_sec_enable_success)
 {
 	// [Given]
 	// Assign the mock structure to test connection
@@ -82,7 +82,7 @@ ZTEST(bt_le_cs_security_enable, test_sec_enable_success)
 	zassert_equal_ptr(net_buf_simple_add_fake.arg0_val, simple_test_buf);
 }
 
-ZTEST(bt_le_cs_security_enable, test_sec_enable_hci_cmd_fail)
+ZTEST(channel_sounding_tests, test_sec_enable_hci_cmd_fail)
 {
 	struct bt_conn *test_conn = &test_conn_mock;
 
@@ -100,7 +100,7 @@ ZTEST(bt_le_cs_security_enable, test_sec_enable_hci_cmd_fail)
 	zassert_equal(net_buf_simple_add_fake.call_count, 0);
 }
 
-ZTEST(bt_le_cs_security_enable, test_bt_le_cs_read_remote_supported_capabilities)
+ZTEST(channel_sounding_tests, test_bt_le_cs_read_remote_supported_capabilities)
 {
 	// Setup the data buffer for net_buf_add
 	static uint8_t test_data[256];
@@ -134,7 +134,7 @@ ZTEST(bt_le_cs_security_enable, test_bt_le_cs_read_remote_supported_capabilities
 	zassert_equal_ptr(net_buf_simple_add_fake.arg0_val, simple_test_buf);
 }
 
-ZTEST(bt_le_cs_security_enable, test_read_remote_supported_capabilities_complete){
+ZTEST(channel_sounding_tests, test_read_remote_supported_capabilities_complete){
     // Setup
     struct net_buf buf;
     struct bt_hci_evt_le_cs_read_remote_supported_capabilities_complete evt = {
@@ -183,7 +183,7 @@ ZTEST(bt_le_cs_security_enable, test_read_remote_supported_capabilities_complete
     zassert_equal(bt_conn_unref_fake.call_count, 1, "bt_conn_unref not called");
 }
 
-ZTEST(bt_le_cs_security_enable, test_read_remote_fae_table)
+ZTEST(channel_sounding_tests, test_read_remote_fae_table)
 {
 	// Setup
     struct bt_conn *test_conn = &test_conn_mock;

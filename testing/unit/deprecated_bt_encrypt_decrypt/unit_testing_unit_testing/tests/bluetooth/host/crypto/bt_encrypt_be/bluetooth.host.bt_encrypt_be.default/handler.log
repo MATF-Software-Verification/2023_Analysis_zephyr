@@ -1,0 +1,49 @@
+Running TESTSUITE bt_encrypt_be
+===================================================================
+START - test_bt_encrypt_be_succeeds
+ PASS - test_bt_encrypt_be_succeeds in 0.000 seconds
+===================================================================
+TESTSUITE bt_encrypt_be succeeded
+Running TESTSUITE bt_encrypt_be_invalid_cases
+===================================================================
+START - test_null_enc_data_reference
+ASSERTION FAIL [!(key == ((void *)0) || plaintext == ((void *)0) || enc_data == ((void *)0))] @ /home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/host/crypto_psa.c:69
+Assertion expected as part of a test case.
+ PASS - test_null_enc_data_reference in 0.000 seconds
+===================================================================
+START - test_null_key_reference
+ASSERTION FAIL [!(key == ((void *)0) || plaintext == ((void *)0) || enc_data == ((void *)0))] @ /home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/host/crypto_psa.c:69
+Assertion expected as part of a test case.
+ PASS - test_null_key_reference in 0.000 seconds
+===================================================================
+START - test_null_plaintext_reference
+ASSERTION FAIL [!(key == ((void *)0) || plaintext == ((void *)0) || enc_data == ((void *)0))] @ /home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/host/crypto_psa.c:69
+Assertion expected as part of a test case.
+ PASS - test_null_plaintext_reference in 0.000 seconds
+===================================================================
+START - test_psa_cipher_encrypt_fails
+E: AES encryption failed
+ PASS - test_psa_cipher_encrypt_fails in 0.000 seconds
+===================================================================
+START - test_psa_import_key_fails
+E: Failed to import AES key
+ PASS - test_psa_import_key_fails in 0.000 seconds
+===================================================================
+TESTSUITE bt_encrypt_be_invalid_cases succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [bt_encrypt_be]: pass = 1, fail = 0, skip = 0, total = 1 duration = 0.000 seconds
+ - PASS - [bt_encrypt_be.test_bt_encrypt_be_succeeds] duration = 0.000 seconds
+
+SUITE PASS - 100.00% [bt_encrypt_be_invalid_cases]: pass = 5, fail = 0, skip = 0, total = 5 duration = 0.000 seconds
+ - PASS - [bt_encrypt_be_invalid_cases.test_null_enc_data_reference] duration = 0.000 seconds
+ - PASS - [bt_encrypt_be_invalid_cases.test_null_key_reference] duration = 0.000 seconds
+ - PASS - [bt_encrypt_be_invalid_cases.test_null_plaintext_reference] duration = 0.000 seconds
+ - PASS - [bt_encrypt_be_invalid_cases.test_psa_cipher_encrypt_fails] duration = 0.000 seconds
+ - PASS - [bt_encrypt_be_invalid_cases.test_psa_import_key_fails] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL

@@ -1,0 +1,64 @@
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_le/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_le/bluetooth.host.bt_encrypt_le.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_le/bluetooth.host.bt_encrypt_le.default/zephyr/misc/generated/extra_kconfig_options.conf'
+Configuration saved to '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_le/bluetooth.host.bt_encrypt_le.default/zephyr/.config'
+Kconfig header saved to '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_le/bluetooth.host.bt_encrypt_le.default/zephyr/include/generated/zephyr/autoconf.h'
+-- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
+-- Found host-tools: zephyr 0.16.8 (/home/aleksandar/zephyr-sdk-0.16.8)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.38") 
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    COVERAGE
+    EXTRA_GEN_EDT_ARGS
+    TC_NAME
+    TC_RUNID
+
+
+-- Build files have been written to: /home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_le/bluetooth.host.bt_encrypt_le.default
+[1/22] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/22] Building C object CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[3/22] Building C object CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[4/22] Building C object CMakeFiles/testbinary.dir/src/main.c.obj
+[5/22] Building C object CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[6/22] Building C object CMakeFiles/testbinary.dir/src/test_suite_invalid_inputs.c.obj
+[7/22] Building C object CMakeFiles/testbinary.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[8/22] Building C object host_mocks/CMakeFiles/host_mocks.dir/host_mocks/assert.c.obj
+[9/22] Linking C static library host_mocks/libhost_mocks.a
+[10/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/kernel.c.obj
+[11/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/hci_core.c.obj
+[12/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/hci_core_expects.c.obj
+[13/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/aes_expects.c.obj
+[14/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/prng_expects.c.obj
+[15/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/aes.c.obj
+[16/22] Building C object mocks/CMakeFiles/mocks.dir/mocks/prng.c.obj
+[17/22] Building C object mocks/CMakeFiles/mocks.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/common/bt_str.c.obj
+[18/22] Building C object mocks/CMakeFiles/mocks.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/logging/log_minimal.c.obj
+[19/22] Building C object mocks/CMakeFiles/mocks.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/host/uuid.c.obj
+[20/22] Building C object mocks/CMakeFiles/mocks.dir/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/host/crypto_psa.c.obj
+[21/22] Linking C static library mocks/libmocks.a
+[22/22] Linking C executable testbinary

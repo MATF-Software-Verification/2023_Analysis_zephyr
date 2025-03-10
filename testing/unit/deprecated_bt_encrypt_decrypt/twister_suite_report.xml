@@ -1,0 +1,1023 @@
+<testsuites>
+	<testsuite name="tests/bluetooth/host/crypto/bt_encrypt_be/bluetooth.host.bt_encrypt_be.default" time="0.02" timestamp="2025-02-22T21:23:14.458270" tests="6" failures="0" errors="0" skipped="0">
+		<properties>
+			<property name="version" value="v4.0.0-2878-g6f240ef18c11" />
+			<property name="platform" value="unit_testing/unit_testing" />
+			<property name="architecture" value="unit" />
+		</properties>
+		<testcase classname="bluetooth.host.bt_encrypt_be.default" name="bluetooth.host.bt_encrypt_be.default.bt_encrypt_be.bt_encrypt_be_succeeds" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_be.default" name="bluetooth.host.bt_encrypt_be.default.bt_encrypt_be_invalid_cases.null_key_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_be.default" name="bluetooth.host.bt_encrypt_be.default.bt_encrypt_be_invalid_cases.null_plaintext_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_be.default" name="bluetooth.host.bt_encrypt_be.default.bt_encrypt_be_invalid_cases.null_enc_data_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_be.default" name="bluetooth.host.bt_encrypt_be.default.bt_encrypt_be_invalid_cases.psa_import_key_fails" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_be.default" name="bluetooth.host.bt_encrypt_be.default.bt_encrypt_be_invalid_cases.psa_cipher_encrypt_fails" time="0.00" />
+	</testsuite>
+	<testsuite name="tests/bluetooth/host/crypto/bt_rand/bluetooth.host.bt_rand.default" time="0.02" timestamp="2025-02-22T21:23:14.458270" tests="6" failures="0" errors="0" skipped="2">
+		<properties>
+			<property name="version" value="v4.0.0-2878-g6f240ef18c11" />
+			<property name="platform" value="unit_testing/unit_testing" />
+			<property name="architecture" value="unit" />
+		</properties>
+		<testcase classname="bluetooth.host.bt_rand.default" name="bluetooth.host.bt_rand.default.bt_rand.bt_rand_succeeds_host_crypto_prng_disabled" time="0">
+			<skipped type="skipped" message="ztest skip" />
+		</testcase>
+		<testcase classname="bluetooth.host.bt_rand.default" name="bluetooth.host.bt_rand.default.bt_rand.psa_generate_random_succeeds_on_first_call" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.default" name="bluetooth.host.bt_rand.default.bt_rand_invalid_cases.null_dst_buf_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.default" name="bluetooth.host.bt_rand.default.bt_rand_invalid_cases.zero_dst_buf_size_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.default" name="bluetooth.host.bt_rand.default.bt_rand_invalid_cases.bt_hci_le_rand_fails" time="0">
+			<skipped type="skipped" message="ztest skip" />
+		</testcase>
+		<testcase classname="bluetooth.host.bt_rand.default" name="bluetooth.host.bt_rand.default.bt_rand_invalid_cases.tc_hmac_prng_generate_fails_on_first_call" time="0.00" />
+	</testsuite>
+	<testsuite name="tests/bluetooth/host/crypto/bt_rand/bluetooth.host.bt_rand.host_crypto_prng_disabled" time="0.03" timestamp="2025-02-22T21:23:14.458270" tests="6" failures="0" errors="0" skipped="2">
+		<properties>
+			<property name="version" value="v4.0.0-2878-g6f240ef18c11" />
+			<property name="platform" value="unit_testing/unit_testing" />
+			<property name="architecture" value="unit" />
+		</properties>
+		<testcase classname="bluetooth.host.bt_rand.host_crypto_prng_disabled" name="bluetooth.host.bt_rand.host_crypto_prng_disabled.bt_rand.bt_rand_succeeds_host_crypto_prng_disabled" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.host_crypto_prng_disabled" name="bluetooth.host.bt_rand.host_crypto_prng_disabled.bt_rand.psa_generate_random_succeeds_on_first_call" time="0">
+			<skipped type="skipped" message="ztest skip" />
+		</testcase>
+		<testcase classname="bluetooth.host.bt_rand.host_crypto_prng_disabled" name="bluetooth.host.bt_rand.host_crypto_prng_disabled.bt_rand_invalid_cases.null_dst_buf_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.host_crypto_prng_disabled" name="bluetooth.host.bt_rand.host_crypto_prng_disabled.bt_rand_invalid_cases.zero_dst_buf_size_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.host_crypto_prng_disabled" name="bluetooth.host.bt_rand.host_crypto_prng_disabled.bt_rand_invalid_cases.bt_hci_le_rand_fails" time="0.00" />
+		<testcase classname="bluetooth.host.bt_rand.host_crypto_prng_disabled" name="bluetooth.host.bt_rand.host_crypto_prng_disabled.bt_rand_invalid_cases.tc_hmac_prng_generate_fails_on_first_call" time="0">
+			<skipped type="skipped" message="ztest skip" />
+		</testcase>
+	</testsuite>
+	<testsuite name="tests/bluetooth/host/crypto/bt_encrypt_le/bluetooth.host.bt_encrypt_le.default" time="0.02" timestamp="2025-02-22T21:23:14.458270" tests="6" failures="0" errors="0" skipped="0">
+		<properties>
+			<property name="version" value="v4.0.0-2878-g6f240ef18c11" />
+			<property name="platform" value="unit_testing/unit_testing" />
+			<property name="architecture" value="unit" />
+		</properties>
+		<testcase classname="bluetooth.host.bt_encrypt_le.default" name="bluetooth.host.bt_encrypt_le.default.bt_encrypt_le.bt_encrypt_le_succeeds" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_le.default" name="bluetooth.host.bt_encrypt_le.default.bt_encrypt_le_invalid_cases.null_key_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_le.default" name="bluetooth.host.bt_encrypt_le.default.bt_encrypt_le_invalid_cases.null_plaintext_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_le.default" name="bluetooth.host.bt_encrypt_le.default.bt_encrypt_le_invalid_cases.null_enc_data_reference" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_le.default" name="bluetooth.host.bt_encrypt_le.default.bt_encrypt_le_invalid_cases.tc_aes128_set_encrypt_key_fails" time="0.00" />
+		<testcase classname="bluetooth.host.bt_encrypt_le.default" name="bluetooth.host.bt_encrypt_le.default.bt_encrypt_le_invalid_cases.tc_aes_encrypt_fails" time="0.00" />
+	</testsuite>
+	<testsuite name="tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default" time="0.0" timestamp="2025-02-22T21:23:14.458270" tests="18" failures="0" errors="18" skipped="0">
+		<properties>
+			<property name="version" value="v4.0.0-2878-g6f240ef18c11" />
+			<property name="platform" value="unit_testing/unit_testing" />
+			<property name="architecture" value="unit" />
+		</properties>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.null_ct_be" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt.bt_encrypt_decrypt_succeeds" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.set_key_fail_le" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt.bt_rand_succeeds" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt.bt_encrypt_be_succeeds" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.encrypt_le_fail" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.set_key_fail_be" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.encrypt_bt_rand_null_buf" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.null_pt_be" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt.bt_rand_succeeds_reseed" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.null_ct" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.encrypt_be_fail" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.null_pt" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.bt_rand_fail_reseed" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.null_key" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.encrypt_bt_rand_prng_generate_fail" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.null_key_be" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+		<testcase classname="bluetooth.host.bt_encrypt_decrypt.default" name="bluetooth.host.bt_encrypt_decrypt.default.bt_encrypt_decrypt_invalid_cases.encrypt_bt_rand_zero_size" time="0.00">
+			<error type="failure" message="CMake build failure">-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Loading Zephyr module(s) (Zephyr base): unittest
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+
+warning: COVERAGE_DUMP (defined at subsys/testsuite/Kconfig:85) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: COVERAGE_GCOV (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_COVERAGE_DUMP and/or look up COVERAGE_DUMP
+in the menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration
+Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+
+warning: Deprecated symbol NATIVE_APPLICATION is enabled.
+
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:2: warning: attempt to assign the value 'y' to the undefined symbol ZTEST_NEW_API
+
+/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf:12: warning: attempt to assign the value 'n' to the undefined symbol BT_DEBUG_LOG
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/crypto/bt_encrypt_decrypt/prj.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/twister/testsuite_extra.conf'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/zephyr/misc/generated/extra_kconfig_options.conf'
+
+error: Aborting due to Kconfig warnings
+
+CMake Error at /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/kconfig.cmake:396 (message):
+  command failed with return code: 1
+Call Stack (most recent call first):
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/cmake/modules/unittest.cmake:14 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:75 (include)
+  /home/aleksandar/2023_Analysis_zephyr/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+  CMakeLists.txt:10 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/aleksandar/2023_Analysis_zephyr/twister-out/unit_testing_unit_testing/tests/bluetooth/host/crypto/bt_encrypt_decrypt/bluetooth.host.bt_encrypt_decrypt.default/CMakeFiles/CMakeOutput.log".
+</error>
+		</testcase>
+	</testsuite>
+</testsuites>

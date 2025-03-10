@@ -182,6 +182,28 @@ Nakon pokretanja skripte, dobijamo sledeci izvestaj:
 
 Dakle, povecali smo pokrivenost za 1%. U nastavku necemo navoditi medjurezultate pokrivenosti, vec ce biti dat krajnji rezultat nakon implementacije testova. Takodje, umesto dodavanja zasebnog foldera za svaku funkciju, grupisacemo unit testove u jedan veci folder (odvojen od inicijalnog) u koji cemo dodati sve testove zarad konciznosti.
 
+Rezultati povecanja pokrivenosti koda nalaze se u folderu `tests/unit/channel_sounding`. Pokrili smo nekolicinu funkcija i povecali pokrivenost na 17% kao sto se vidi u izvestaju. Ovaj pristup, vodjen pokrivenoscu nije uvek najbolji alat za otkrivanje gresaka. Naime, u dosta funkcija je ocigledno na prvi pogled da nisu svi argumenti provereni odnosno da je moguce prosledjivanje NULL vrednosti. Ovo moze dovesti do nedefinisanog ponasanja i pucanja samog programa, i iako je pokrivenost za neku funkciju na primer potpuna, to ne znaci da smo ispravno koristili testove za validaciju programa. Iako pokrivenost koda jedinicnim testovima donosi vrednost u smislu provere za buduce modifikacije - jedinice bi trebalo da se ponasaju na isti nacin i u narednim iteracijama, testovi bi takodje trebalo da predstavljaju i vrstu dokumentacije, odnosno neki veid ugovora izmedju programera i korisnika sta se moze ocekivati prilikom koriscenja jedinice softvera.
+Dakle, ima smisla udubiti se u kod i razmisljati na drugi nacin, odnosno ne samo u smeru povecanja pokrivenosti vec i u smeru otkrivanja gresaka. Pogledajmo neke od funkcija koje smo vec pokrili i ispitajmo kako se ponasaju u slucaju nepredvidjenih vrednosti.
+
+![Izvestaj pokrivenosti nakon vise testova](images/image_host_coverage_increase.png)
+
+#### Pisanje testova - otkrivanje gresaka
+
+Kao sto smo vec spomenuli, mozemo se fokusirati na nekoliko funkcija za koje smo vec napisali testove. Za ovo cemo napraviti novi folder channel_sounding_behavior u koji cemo smestiti spomenuta prosirenja. Pogledajmo prvo `bt_le_cs_security_enable` funkciju i njeno ocekivano ponasanje. Funkcija pravi bafer HCI komande, popunjava ga sa pokazivacem na konekciju i salje komandu sinhrono. Vec smo pokrili tzv. happy path, odnosno slucaj u kome je sve kao sto ocekujemo. Uz to, testirali smo i slucaj u kome `bt_hci_cmd_create` funkcija vrati nepravilan bafer (NULL). Slucajevi koje bismo jos mogli pokriti jesu kada se kao pokazivac na konekciju prosledi NULL vrednost kao i slucaj kada `bt_hci_cmd_send_sync` funkcija pukne. Ova dva slucaja su pokrivena testovima `test_sec_enable_hci_cmd_fail_null_conn` i `test_sec_enable_cmd_send_fail`. Na slican nacun su dodati i sledeci testovi:
+
+TODO(avra): pobrojati testove i dodati kratak opis
+*
+*
+*
+
+Pokrenimo najpre skriptu sa opcijom no-coverage posto ocekujemo da ovog puta nece svi testovi proci.
+
+Kao sto je i bilo ocekivano vidimo da je dosta testova palo (izvestaj)
+
+Vidimo da nije svuda rigorozno proveravano da li se prosledjuju ispravne vrednosti, tako da cemo tu proveru dodati u izvorni kod i ponovo pokrenuti testove. Izmene koje su dodate ticu se uglavnom provere ulaznih argumenata funkcija (TODO dodati ako je jos nesto nadjeno) i mogu se pogledati u <patch_name.patch>. Nakon primene izmena, ponovo je pokrenuta skripta i vidimo da sada svi testovi prolaze. Mozemo nastaviti sa generisanjem izvestaja pokrivenosti za ispravljene testove. Krajnji rezultati su prikazani na slici ispod:
+
+TODO: slika
+
 #### Integration tests
 
 Limitations
