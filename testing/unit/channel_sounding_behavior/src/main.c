@@ -198,6 +198,14 @@ ZTEST(channel_sounding_tests, test_read_remote_fae_table)
 	zassert_equal_ptr(net_buf_simple_add_fake.arg0_val, simple_test_buf);
 }
 
+void *net_buf_simple_pull_mem_mock(struct net_buf_simple *buf, size_t len)
+{
+	void *data = buf->data; // Save the current data pointer
+	buf->data += len;       // Advance the data pointer
+	buf->len -= len;        // Reduce the remaining length
+	return data;            // Return the original data pointer
+}
+
 ZTEST(channel_sounding_tests, test_successful_read)
 {
 	struct bt_conn *test_conn = &test_conn_mock;
@@ -235,7 +243,7 @@ ZTEST(channel_sounding_tests, test_successful_read)
 
 	// Replace generic mock implementation with stubbed function
 	// net_buf_simple_add_fake.custom_fake = custom_net_buf_simple_add;
-	net_buf_simple_pull_mem_fake.return_val = &evt;
+	net_buf_simple_pull_mem_fake.custom_fake = net_buf_simple_pull_mem_mock;
 
 	/* Call the function */
 	bt_hci_le_cs_read_remote_fae_table_complete(&test_buf);

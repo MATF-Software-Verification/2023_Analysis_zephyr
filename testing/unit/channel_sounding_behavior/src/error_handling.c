@@ -348,7 +348,7 @@ static struct net_buf test_buf = {
 
 // static struct bt_conn test_conn;
 
-ZTEST(channel_sounding_tests_error_handling, test_buffer_too_short)
+ZTEST(channel_sounding_tests_error_handling, test_bt_hci_le_cs_read_remote_fae_table_complete_invalid_buf_size_fail)
 {
 	// Setup
 	test_buf.len = sizeof(struct bt_hci_evt_le_cs_read_remote_fae_table_complete) - 1;
@@ -360,7 +360,7 @@ ZTEST(channel_sounding_tests_error_handling, test_buffer_too_short)
 	zassert_equal(notify_remote_cs_fae_table_fake.call_count, 0, "Expected notify_remote_cs_fae_table not to be called");
 }
 
-ZTEST(channel_sounding_tests_error_handling, test_evt_status_failure)
+ZTEST(channel_sounding_tests_error_handling, test_bt_hci_le_cs_read_remote_fae_table_complete_evt_status_fail)
 {
 	struct bt_hci_evt_le_cs_read_remote_fae_table_complete *evt;
 
@@ -375,7 +375,7 @@ ZTEST(channel_sounding_tests_error_handling, test_evt_status_failure)
 	zassert_equal(notify_remote_cs_fae_table_fake.call_count, 0, "Expected notify_remote_cs_fae_table not to be called");
 }
 
-ZTEST(channel_sounding_tests_error_handling, test_conn_lookup_failure)
+ZTEST(channel_sounding_tests_error_handling, test_bt_hci_le_cs_read_remote_fae_table_complete_conn_lookup_fail)
 {
 	struct bt_hci_evt_le_cs_read_remote_fae_table_complete *evt;
 
