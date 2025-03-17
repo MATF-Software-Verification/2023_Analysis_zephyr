@@ -18,6 +18,7 @@ target_link_libraries(testbinary PRIVATE mocks host_mocks)
 target_sources(testbinary
     PRIVATE
     src/main.c
+    src/error_handling.c
 
     ${ZEPHYR_BASE}/subsys/bluetooth/host/cs.c
     ${ZEPHYR_BASE}/subsys/logging/log_minimal.c

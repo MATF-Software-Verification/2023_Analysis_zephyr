@@ -84,78 +84,6 @@ ZTEST(channel_sounding_tests, test_sec_enable_success)
 	zassert_equal(bt_hci_cmd_send_sync_fake.call_count, 1);
 }
 
-ZTEST(channel_sounding_tests, test_sec_enable_hci_cmd_fail)
-{
-	struct bt_conn *test_conn = &test_conn_mock;
-
-	// Trigger bt_hci_cmd_create null return
-	bt_hci_cmd_create_fake.return_val = NULL;
-
-	// Function under test
-	zassert_equal(bt_le_cs_security_enable(test_conn), -ENOBUFS);
-
-	// Confirm bt_hci_cmd_create expecations
-	zassert_equal(bt_hci_cmd_create_fake.arg0_val, BT_HCI_OP_LE_CS_SECURITY_ENABLE);
-	zassert_equal(bt_hci_cmd_create_fake.call_count, 1);
-
-	// Confirm net_buf_simple_add expecations - return before reaching this function
-	zassert_equal(net_buf_simple_add_fake.call_count, 0);
-}
-
-ZTEST(channel_sounding_tests, test_sec_enable_hci_cmd_fail_null_conn)
-{
-	// Function under test
-	zassert_equal(bt_le_cs_security_enable(NULL), -ENOBUFS);
-
-	// Confirm bt_hci_cmd_create expecations
-	zassert_equal(bt_hci_cmd_create_fake.call_count, 0);
-
-	// Confirm net_buf_simple_add expecations - return before reaching this function
-	zassert_equal(net_buf_simple_add_fake.call_count, 0);
-}
-
-ZTEST(channel_sounding_tests, test_sec_enable_cmd_send_fail)
-{
-	// [Given]
-	// Assign the mock structure to test connection
-	struct bt_conn *test_conn = &test_conn_mock;
-
-	// Setup the data buffer for net_buf_add
-	static uint8_t test_data[256];
-	static struct net_buf test_buf = {.b = {
-						  .data = test_data,
-						  .len = 0,
-						  .size = sizeof(test_data),
-					  }};
-	
-	// Since net_buf_add is static inline, setup a buffer for mocked net_buf_simple_add function
-	struct net_buf_simple *simple_test_buf = &test_buf.b;
-
-	// Replace generic mock implementation with stubbed function
-	net_buf_simple_add_fake.custom_fake = custom_net_buf_simple_add;
-
-	// Make sure bt_hci_cmd_create returns a non-null value
-	bt_hci_cmd_create_fake.return_val = &test_buf;
-	zassert_not_null(bt_hci_cmd_create_fake.return_val, "bt_hci_cmd_create returned NULL!");
-
-	bt_hci_cmd_send_sync_fake.return_val = -EACCES;
-
-	// [When]
-	// Function under test
-	zassert_equal(bt_le_cs_security_enable(test_conn), bt_hci_cmd_send_sync_fake.return_val);
-
-	// [Then]
-	// Confirm bt_hci_cmd_create expecations
-	zassert_equal(bt_hci_cmd_create_fake.arg0_val, BT_HCI_OP_LE_CS_SECURITY_ENABLE);
-	zassert_equal(bt_hci_cmd_create_fake.call_count, 1);
-
-	// Confirm net_buf_simple_add expecations
-	zassert_equal(net_buf_simple_add_fake.call_count, 1);
-	zassert_equal_ptr(net_buf_simple_add_fake.arg0_val, simple_test_buf);
-
-	zassert_equal(bt_hci_cmd_send_sync_fake.call_count, 1);
-}
-
 ZTEST(channel_sounding_tests, test_bt_le_cs_read_remote_supported_capabilities)
 {
 	// Setup the data buffer for net_buf_add
@@ -229,7 +157,7 @@ ZTEST(channel_sounding_tests, test_read_remote_supported_capabilities_complete){
 	struct bt_conn *test_conn = &test_conn_mock;
     bt_conn_lookup_handle_fake.return_val = test_conn;
 
-    // Test
+    // Function under test
     bt_hci_le_cs_read_remote_supported_capabilities_complete(&buf);
 
     // Assertions
@@ -268,4 +196,57 @@ ZTEST(channel_sounding_tests, test_read_remote_fae_table)
     zassert_equal(bt_hci_cmd_create_fake.call_count, 1, "bt_hci_cmd_create not called");
     zassert_equal(bt_hci_cmd_send_sync_fake.call_count, 1, "bt_hci_cmd_send_sync not called");
 	zassert_equal_ptr(net_buf_simple_add_fake.arg0_val, simple_test_buf);
+}
+
+ZTEST(channel_sounding_tests, test_successful_read)
+{
+	struct bt_conn *test_conn = &test_conn_mock;
+
+	int8_t test_fae_table[72] = { /* Example FAE table data */
+		0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+		0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10,
+		0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
+		0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20,
+		0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,
+		0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x30,
+		0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38,
+		0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F, 0x40,
+		0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48
+	};
+
+	/* Test buffer */
+	uint8_t test_buf_data[sizeof(struct bt_hci_evt_le_cs_read_remote_fae_table_complete)];
+	struct net_buf test_buf = {
+		.data = test_buf_data,
+		.len = sizeof(test_buf_data),
+	};
+
+	struct bt_hci_evt_le_cs_read_remote_fae_table_complete *evt;
+	struct bt_conn_le_cs_fae_table expected_fae_table;
+
+	/* Set the status field to zero */
+	evt = (struct bt_hci_evt_le_cs_read_remote_fae_table_complete *)test_buf.data;
+	evt->status = 0x00;
+	evt->conn_handle = sys_cpu_to_le16(0x1234); /* Example value */
+	memcpy(evt->remote_fae_table, test_fae_table, sizeof(test_fae_table));
+
+	/* Make bt_conn_lookup_handle return a valid connection */
+	bt_conn_lookup_handle_fake.return_val = test_conn;
+
+	// Replace generic mock implementation with stubbed function
+	// net_buf_simple_add_fake.custom_fake = custom_net_buf_simple_add;
+	net_buf_simple_pull_mem_fake.return_val = &evt;
+
+	/* Call the function */
+	bt_hci_le_cs_read_remote_fae_table_complete(&test_buf);
+
+	/* Verify that the function called notify_remote_cs_fae_table with the correct parameters */
+	expected_fae_table.remote_fae_table = evt->remote_fae_table;
+	zassert_equal(notify_remote_cs_fae_table_fake.call_count, 1, "Expected notify_remote_cs_fae_table to be called once");
+	zassert_equal_ptr(notify_remote_cs_fae_table_fake.arg0_val, test_conn, "Expected notify_remote_cs_fae_table to be called with the correct connection");
+	zassert_mem_equal(&notify_remote_cs_fae_table_fake.arg1_val, &expected_fae_table, sizeof(expected_fae_table), "Expected notify_remote_cs_fae_table to be called with the correct FAE table");
+
+	/* Verify that bt_conn_unref was called */
+	zassert_equal(bt_conn_unref_fake.call_count, 1, "Expected bt_conn_unref to be called once");
+	zassert_equal_ptr(bt_conn_unref_fake.arg0_val, test_conn, "Expected bt_conn_unref to be called with the correct connection");
 }

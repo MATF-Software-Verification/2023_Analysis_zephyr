@@ -191,14 +191,140 @@ Dakle, ima smisla udubiti se u kod i razmisljati na drugi nacin, odnosno ne samo
 
 Kao sto smo vec spomenuli, mozemo se fokusirati na nekoliko funkcija za koje smo vec napisali testove. Za ovo cemo napraviti novi folder channel_sounding_behavior u koji cemo smestiti spomenuta prosirenja. Pogledajmo prvo `bt_le_cs_security_enable` funkciju i njeno ocekivano ponasanje. Funkcija pravi bafer HCI komande, popunjava ga sa pokazivacem na konekciju i salje komandu sinhrono. Vec smo pokrili tzv. happy path, odnosno slucaj u kome je sve kao sto ocekujemo. Uz to, testirali smo i slucaj u kome `bt_hci_cmd_create` funkcija vrati nepravilan bafer (NULL). Slucajevi koje bismo jos mogli pokriti jesu kada se kao pokazivac na konekciju prosledi NULL vrednost kao i slucaj kada `bt_hci_cmd_send_sync` funkcija pukne. Ova dva slucaja su pokrivena testovima `test_sec_enable_hci_cmd_fail_null_conn` i `test_sec_enable_cmd_send_fail`. Na slican nacun su dodati i sledeci testovi:
 
-TODO(avra): pobrojati testove i dodati kratak opis
-*
-*
-*
+TODO(avra): pobrojati testove i dodati kratak opis (mozda tabela)
+* `test_read_remote_supported_capabilities_complete_null_buf` - Provera ponasanja funkcije sa prosledjenim nevalidnim baferom (Ocekivano ponasanje - vraca gresku)
+* `test_read_remote_supported_capabilities_complete_invalid_buf_len` - Provera ponasanja funkcije sa pogresnom velicinom ulaznog bafera (Ocekivano ponasanje - funkcija se zavrsava ranim izlaskom)
+* `test_read_remote_supported_capabilities_complete_evt_status_fail` - Provera ponasanja funkcije kada `bt_conn_lookup_handle` vrati dogadjaj sa statusom greske (Ocekivano ponasanje - funkcija se zavrsava ranim izlaskom)
+* `test_read_remote_supported_capabilities_complete_conn_lookup_handle_fail` - Provera ponasanja funkcije kada `bt_conn_lookup_handle` vrati NULL pokazivac (Ocekivano ponasanje - funkcija se zavrsava ranim izlaskom)
+* `test_read_remote_fae_table_hci_cmd_fail` - Provera ponasanja funkcije kada 
+* `test_read_remote_fae_table_send_sync_failed` - 
 
-Pokrenimo najpre skriptu sa opcijom no-coverage posto ocekujemo da ovog puta nece svi testovi proci.
 
-Kao sto je i bilo ocekivano vidimo da je dosta testova palo (izvestaj)
+_Napomena_: kod funkcija koje se zavrsavaju ranije ocekujemo da neke podfunkcije nikada nece biti pozvane. Ovaj uslov eksplicitno ukljucujemo u ocekivanja testa pomocu `zasser_` funkcija.
+
+Navedeni testovi su implementirani u novom izvornom fajlu `error_handling.c`.
+
+Pokrenimo najpre skriptu sa opcijom no-coverage posto ocekujemo da ovog puta nece svi testovi proci:
+
+```bash
+./run_tests.sh channel_sounding_behavior --no-coverage
+```
+
+Vec pri pokretanju skripte, vidimo da se javlja segmentation fault:
+
+```bash
+...
+INFO    - 1/1 unit_testing/unit_testing tests/bluetooth/host/cs/channel_sounding_behavior/bluetooth.host.cs.channel_sounding_behavior FAILED Failed (rc=-11) (unit 0.334s)
+ERROR   - see: path_to_test_results/build.log
+...
+INFO    - The following issues were found (showing the top 10 items):
+INFO    - 1) tests/bluetooth/host/cs/channel_sounding_behavior/bluetooth.host.cs.channel_sounding_behavior on unit_testing/unit_testing failed (Failed (rc=-11))
+...
+```
+
+Mozemo pokrenuti `gdb` debager sa putanjom `path_to_test_results` koju dobijemo pokretanjem skripte i potraziti razlog za ovo ponasanje:
+
+```bash
+gdb path_to_test_results/testbinary
+...
+(gdb) run
+Starting program: path_to_test_results/testbinary
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Running TESTSUITE channel_sounding_tests
+===================================================================
+START - test_bt_le_cs_read_remote_supported_capabilities
+Mock net_buf_simple_add called! len=2
+ PASS - test_bt_le_cs_read_remote_supported_capabilities in 0.000 seconds
+===================================================================
+START - test_read_remote_fae_table
+Mock net_buf_simple_add called! len=2
+ PASS - test_read_remote_fae_table in 0.000 seconds
+===================================================================
+START - test_read_remote_supported_capabilities_complete
+ PASS - test_read_remote_supported_capabilities_complete in 0.000 seconds
+===================================================================
+START - test_read_remote_supported_capabilities_complete_null_buf
+
+Program received signal SIGSEGV, Segmentation fault.
+0x56559e2e in bt_hci_le_cs_read_remote_supported_capabilities_complete (buf=0x0) at /home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/bluetooth/host/cs.c:300
+300             if (buf->len < sizeof(*evt)) {
+```
+
+Jasno je da se segmentation fault javlja zbog pristupa `NULL` memoriji u navedenom mestu u source kodu. Pre nego sto pristupimo popravci ovog propusta, napisacemo druge testove koji testiraju ponasanje funkcija u radu sa greskama, odnosno test `test_read_remote_supported_capabilities_complete_null_buf` cemo zakomentarisati i ponovo pokrenuti skriptu. Isto cemo uraditi i za test `test_read_remote_fae_table_null_conn`. Rezultat pokretanja dat je ispod:
+
+```bash
+Running TESTSUITE channel_sounding_tests
+===================================================================
+START - test_bt_le_cs_read_remote_supported_capabilities
+Mock net_buf_simple_add called! len=2
+ PASS - test_bt_le_cs_read_remote_supported_capabilities in 0.000 seconds
+===================================================================
+START - test_read_remote_fae_table
+Mock net_buf_simple_add called! len=2
+ PASS - test_read_remote_fae_table in 0.000 seconds
+===================================================================
+START - test_read_remote_supported_capabilities_complete
+ PASS - test_read_remote_supported_capabilities_complete in 0.000 seconds
+===================================================================
+START - test_sec_enable_cmd_send_fail
+Mock net_buf_simple_add called! len=2
+ PASS - test_sec_enable_cmd_send_fail in 0.000 seconds
+===================================================================
+START - test_sec_enable_success
+Mock net_buf_simple_add called! len=2
+ PASS - test_sec_enable_success in 0.000 seconds
+===================================================================
+TESTSUITE channel_sounding_tests succeeded
+Running TESTSUITE channel_sounding_tests_error_handling
+===================================================================
+START - test_read_remote_supported_capabilities_complete_conn_lookup_handle_fail
+E: Could not lookup connection handle when reading remote CS capabilities
+ PASS - test_read_remote_supported_capabilities_complete_conn_lookup_handle_fail in 0.000 seconds
+===================================================================
+START - test_read_remote_supported_capabilities_complete_evt_status_fail
+W: Read Remote Supported Capabilities failed (status 0x01)
+ PASS - test_read_remote_supported_capabilities_complete_evt_status_fail in 0.000 seconds
+===================================================================
+START - test_read_remote_supported_capabilities_complete_invalid_buf_len
+E: Unexpected end of buffer
+ PASS - test_read_remote_supported_capabilities_complete_invalid_buf_len in 0.000 seconds
+===================================================================
+START - test_sec_enable_hci_cmd_fail
+ PASS - test_sec_enable_hci_cmd_fail in 0.000 seconds
+===================================================================
+START - test_sec_enable_hci_cmd_fail_null_conn
+
+    Assertion failed at /home/aleksandar/2023_Analysis_zephyr/zephyr/tests/bluetooth/host/cs/channel_sounding_behavior/src/error_handling.c:60: channel_sounding_tests_error_handling_test_sec_enable_hci_cmd_fail_null_conn: bt_hci_cmd_create_fake.call_count not equal to 0
+
+ at test function
+ FAIL - test_sec_enable_hci_cmd_fail_null_conn in 0.000 seconds
+===================================================================
+TESTSUITE channel_sounding_tests_error_handling failed.
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [channel_sounding_tests]: pass = 5, fail = 0, skip = 0, total = 5 duration = 0.000 seconds
+ - PASS - [channel_sounding_tests.test_bt_le_cs_read_remote_supported_capabilities] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests.test_read_remote_fae_table] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests.test_read_remote_supported_capabilities_complete] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests.test_sec_enable_cmd_send_fail] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests.test_sec_enable_success] duration = 0.000 seconds
+
+SUITE FAIL -  80.00% [channel_sounding_tests_error_handling]: pass = 4, fail = 1, skip = 0, total = 5 duration = 0.000 seconds
+ - PASS - [channel_sounding_tests_error_handling.test_read_remote_supported_capabilities_complete_conn_lookup_handle_fail] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests_error_handling.test_read_remote_supported_capabilities_complete_evt_status_fail] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests_error_handling.test_read_remote_supported_capabilities_complete_invalid_buf_len] duration = 0.000 seconds
+ - PASS - [channel_sounding_tests_error_handling.test_sec_enable_hci_cmd_fail] duration = 0.000 seconds
+ - FAIL - [channel_sounding_tests_error_handling.test_sec_enable_hci_cmd_fail_null_conn] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION FAILED
+```
+
+Ovog puta nismo dobili veliki broj palih testova, ali dobijamo indikaciju da mozda treba obratiti paznju na baratanje neispravnim ulaznim vrednostima u funkcije.
 
 Vidimo da nije svuda rigorozno proveravano da li se prosledjuju ispravne vrednosti, tako da cemo tu proveru dodati u izvorni kod i ponovo pokrenuti testove. Izmene koje su dodate ticu se uglavnom provere ulaznih argumenata funkcija (TODO dodati ako je jos nesto nadjeno) i mogu se pogledati u <patch_name.patch>. Nakon primene izmena, ponovo je pokrenuta skripta i vidimo da sada svi testovi prolaze. Mozemo nastaviti sa generisanjem izvestaja pokrivenosti za ispravljene testove. Krajnji rezultati su prikazani na slici ispod:
 
