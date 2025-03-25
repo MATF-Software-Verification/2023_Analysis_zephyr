@@ -65,7 +65,7 @@ ZTEST(channel_sounding_tests_error_handling, test_sec_enable_hci_cmd_fail_null_c
 	zassert_equal(net_buf_simple_add_fake.call_count, 0);
 }
 
-ZTEST(channel_sounding_tests, test_sec_enable_cmd_send_fail)
+ZTEST(channel_sounding_tests_error_handling, test_sec_enable_cmd_send_fail)
 {
 	// [Given]
 	// Assign the mock structure to test connection
@@ -107,17 +107,17 @@ ZTEST(channel_sounding_tests, test_sec_enable_cmd_send_fail)
 	zassert_equal(bt_hci_cmd_send_sync_fake.call_count, 1);
 }
 
-// ZTEST(channel_sounding_tests_error_handling, test_read_remote_supported_capabilities_complete_null_buf)
-// {
-// 	// Function under test
-// 	bt_hci_le_cs_read_remote_supported_capabilities_complete(NULL);
+ZTEST(channel_sounding_tests_error_handling, test_read_remote_supported_capabilities_complete_null_buf)
+{
+	// Function under test
+	bt_hci_le_cs_read_remote_supported_capabilities_complete(NULL);
 
-// 	// Assertions
-// 	zassert_equal(net_buf_simple_pull_mem_fake.call_count, 0, "net_buf_simple_pull_mem unexpectedly called!");
-// 	zassert_equal(bt_conn_lookup_handle_fake.call_count, 0, "bt_conn_lookup_handle unexpectedly called!");
-// 	zassert_equal(notify_remote_cs_capabilities_fake.call_count, 0, "notify_remote_cs_capabilities unexpectedly called!");
-// 	zassert_equal(bt_conn_unref_fake.call_count, 0, "bt_conn_unref unexpectedly called!");
-// }
+	// Assertions
+	zassert_equal(net_buf_simple_pull_mem_fake.call_count, 0, "net_buf_simple_pull_mem unexpectedly called!");
+	zassert_equal(bt_conn_lookup_handle_fake.call_count, 0, "bt_conn_lookup_handle unexpectedly called!");
+	zassert_equal(notify_remote_cs_capabilities_fake.call_count, 0, "notify_remote_cs_capabilities unexpectedly called!");
+	zassert_equal(bt_conn_unref_fake.call_count, 0, "bt_conn_unref unexpectedly called!");
+}
 
 ZTEST(channel_sounding_tests_error_handling, test_read_remote_supported_capabilities_complete_invalid_buf_len){
     // Setup
@@ -279,32 +279,32 @@ ZTEST(channel_sounding_tests_error_handling, test_read_remote_fae_table_hci_cmd_
 	zassert_equal_ptr(net_buf_simple_add_fake.call_count, 0, "net_buf_simple_add called more times than expected!");
 }
 
-// ZTEST(channel_sounding_tests_error_handling, test_read_remote_fae_table_null_conn)
-// {
-// 	// Setup
-//     struct bt_conn *test_conn = &test_conn_mock;
-//     // struct net_buf buf;
+ZTEST(channel_sounding_tests_error_handling, test_read_remote_fae_table_null_conn)
+{
+	// Setup
+    struct bt_conn *test_conn = &test_conn_mock;
+    // struct net_buf buf;
 
-// 	static uint8_t test_data[256];
-// 	static struct net_buf test_buf = {.b = {
-// 						  .data = test_data,
-// 						  .len = 0,
-// 						  .size = sizeof(test_data),
-// 					  }};
+	static uint8_t test_data[256];
+	static struct net_buf test_buf = {.b = {
+						  .data = test_data,
+						  .len = 0,
+						  .size = sizeof(test_data),
+					  }};
 					  
-//     bt_hci_cmd_create_fake.return_val = &test_buf;
+    bt_hci_cmd_create_fake.return_val = &test_buf;
 
-// 	// Replace generic mock implementation with stubbed function
-// 	net_buf_simple_add_fake.return_val= NULL;
+	// Replace generic mock implementation with stubbed function
+	net_buf_simple_add_fake.return_val= NULL;
 
-//     // Test
-//     int ret = bt_le_cs_read_remote_fae_table(test_conn);
+    // Function under test
+    int ret = bt_le_cs_read_remote_fae_table(test_conn);
 
-//     // Assertions
-//     zassert_equal(ret, 0, "Function failed");
-//     zassert_equal(bt_hci_cmd_create_fake.call_count, 1, "bt_hci_cmd_create not called");
-//     zassert_equal(bt_hci_cmd_send_sync_fake.call_count, 0, "bt_hci_cmd_send_sync called more times than expected!");
-// }
+    // Assertions
+    zassert_equal(ret, -EFAULT, "Function failed");
+    zassert_equal(bt_hci_cmd_create_fake.call_count, 1, "bt_hci_cmd_create not called");
+    zassert_equal(bt_hci_cmd_send_sync_fake.call_count, 0, "bt_hci_cmd_send_sync called more times than expected!");
+}
 
 ZTEST(channel_sounding_tests_error_handling, test_read_remote_fae_table_send_sync_failed)
 {

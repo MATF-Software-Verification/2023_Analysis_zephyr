@@ -206,7 +206,7 @@ void *net_buf_simple_pull_mem_mock(struct net_buf_simple *buf, size_t len)
 	return data;            // Return the original data pointer
 }
 
-ZTEST(channel_sounding_tests, test_successful_read)
+ZTEST(channel_sounding_tests, test_bt_hci_le_cs_read_remote_fae_table_complete_success)
 {
 	struct bt_conn *test_conn = &test_conn_mock;
 

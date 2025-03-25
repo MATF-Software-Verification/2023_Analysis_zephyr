@@ -1,0 +1,52 @@
+diff --git a/subsys/bluetooth/host/cs.c b/subsys/bluetooth/host/cs.c
+index da2480739d1..8a87be8bfef 100644
+--- a/subsys/bluetooth/host/cs.c
++++ b/subsys/bluetooth/host/cs.c
+@@ -297,6 +297,11 @@ void bt_hci_le_cs_read_remote_supported_capabilities_complete(struct net_buf *bu
+ 	struct bt_conn_le_cs_capabilities remote_cs_capabilities;
+ 	struct bt_hci_evt_le_cs_read_remote_supported_capabilities_complete *evt;
+ 
++	if (!buf) {
++		LOG_ERR("Input buffer is NULL");
++		return;
++	}
++
+ 	if (buf->len < sizeof(*evt)) {
+ 		LOG_ERR("Unexpected end of buffer");
+ 		return;
+@@ -446,6 +451,11 @@ int bt_le_cs_read_remote_fae_table(struct bt_conn *conn)
+ 	}
+ 
+ 	cp = net_buf_add(buf, sizeof(*cp));
++
++	if (!cp) {
++		return -EFAULT;
++	}
++
+ 	cp->handle = sys_cpu_to_le16(conn->handle);
+ 
+ 	return bt_hci_cmd_send_sync(BT_HCI_OP_LE_CS_READ_REMOTE_FAE_TABLE, buf, NULL);
+@@ -463,6 +473,12 @@ void bt_hci_le_cs_read_remote_fae_table_complete(struct net_buf *buf)
+ 	}
+ 
+ 	evt = net_buf_pull_mem(buf, sizeof(*evt));
++
++	if(!evt) {
++		LOG_ERR("Could not pull memory for evt");
++		return;
++	}
++
+ 	if (evt->status) {
+ 		LOG_WRN("Read Remote FAE Table failed with status 0x%02X", evt->status);
+ 		return;
+@@ -900,6 +916,10 @@ int bt_le_cs_security_enable(struct bt_conn *conn)
+ 	struct bt_hci_cp_le_security_enable *cp;
+ 	struct net_buf *buf;
+ 
++	if (!conn) {
++		return -ENOBUFS;
++	}
++
+ 	buf = bt_hci_cmd_create(BT_HCI_OP_LE_CS_SECURITY_ENABLE, sizeof(*cp));
+ 	if (!buf) {
+ 		return -ENOBUFS;
