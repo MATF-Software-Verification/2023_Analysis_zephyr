@@ -6,6 +6,14 @@
 
 ### Dynamic analysis
 
+Dinamička analiza podrazumeva ispitivanje programa tokom njegovog izvršavanja. Za razliku od statičke analize koja radi sa izvornim kodom, dinamička analiza nam omogućava da:
+
+* Proverimo stvarno ponašanje sistema u različitim scenarijima
+* Identifikujemo greške koje se manifestuju samo tokom izvršavanja
+* Izmerimo pokrivenost koda testovima
+
+U kontekstu Zephyr projekta, fokusiramo se na jedinično testiranje modula za Bluetooth Channel Sounding funkcionalnost.
+
 #### Unit tests
 
 Jedinicno testiranje je jedan od nacina dinamickog testiranja koji se fokusira na ispitivanje ispravnosti najjednostavnijih celina koda. Kad govorimo o testiranju ispravnosti, bitno je napomenuti da se testiranjem mogu pronaci greske u implementaciji, ali uspesno izvrsavanje testova ne garantuje ispravnost jedinice u celini. Naravno, cilj je da imamo sto vecu moc otkrivanja gresaka, i jedan od alata koji nam u tome moze pomoci jeste i pracenje pokrivenosti koda testovima. Alat za pokrivenost koda bice podrobnije opisan u narednim odeljcima. Jedna od razlika u odnosu na integracione testove u kontekstu ZephyrOS projekta je cinjenica da se za testiranje jedne funkcije ne ukljucuje citav projekat, odnosno samo jedan modul se kompajlira sto znacajno ubrzava proces testiranja.
@@ -189,84 +197,7 @@ Dakle, ima smisla udubiti se u kod i razmisljati na drugi nacin, odnosno ne samo
 
 #### Pisanje testova - otkrivanje gresaka
 
-Kao sto smo vec spomenuli, mozemo se fokusirati na nekoliko funkcija za koje smo vec napisali testove. Za ovo cemo napraviti novi folder channel_sounding_behavior u koji cemo smestiti spomenuta prosirenja. Pogledajmo prvo `bt_le_cs_security_enable` funkciju i njeno ocekivano ponasanje. Funkcija pravi bafer HCI komande, popunjava ga sa pokazivacem na konekciju i salje komandu sinhrono. Vec smo pokrili tzv. happy path, odnosno slucaj u kome je sve kao sto ocekujemo. Uz to, testirali smo i slucaj u kome `bt_hci_cmd_create` funkcija vrati nepravilan bafer (NULL). Slucajevi koje bismo jos mogli pokriti jesu kada se kao pokazivac na konekciju prosledi NULL vrednost kao i slucaj kada `bt_hci_cmd_send_sync` funkcija pukne. Ova dva slucaja su pokrivena testovima `test_sec_enable_hci_cmd_fail_null_conn` i `test_sec_enable_cmd_send_fail`. Na slican nacun su dodati i sledeci testovi:
-
-### Testovi za `bt_le_cs_security_enable`
-
-1. **`test_sec_enable_hci_cmd_fail`**  
-   * Provera ponašanja kada `bt_hci_cmd_create` ne uspe (vrati NULL)  
-   * Očekivano: Vraća `-ENOBUFS`  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-2. **`test_sec_enable_hci_cmd_fail_null_conn`**  
-   * Provera ponašanja sa NULL parametrom za konekciju  
-   * Očekivano: Vraća `-ENOBUFS`  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-3. **`test_sec_enable_cmd_send_fail`**  
-   * Provera ponašanja kada `bt_hci_cmd_send_sync` ne uspe  
-   * Očekivano: Vraća grešku sa sinhronizacije  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-### Testovi za `bt_hci_le_cs_read_remote_supported_capabilities_complete`
-
-4. **`test_read_remote_supported_capabilities_complete_null_buf`**  
-   * Provera ponašanja sa NULL baferom  
-   * Očekivano: Prekid bez operacija  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-5. **`test_read_remote_supported_capabilities_complete_invalid_buf_len`**  
-   * Provera ponašanja sa nevalidnom dužinom bafera  
-   * Očekivano: Prekid izvršavanja  
-   * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala je provera dužine)
-
-6. **`test_read_remote_supported_capabilities_complete_evt_status_fail`**  
-   * Provera ponašanja kada status događaja pokazuje grešku  
-   * Očekivano: Prekid izvršavanja  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-7. **`test_read_remote_supported_capabilities_complete_conn_lookup_handle_fail`**  
-   * Provera ponašanja kada pretraga konekcije ne uspe  
-   * Očekivano: Prekid izvršavanja  
-   * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala je provera za NULL)
-
-### Testovi za `bt_le_cs_read_remote_fae_table`
-
-8. **`test_read_remote_fae_table_hci_cmd_fail`**  
-   * Provera ponašanja kada kreiranje HCI komande ne uspe  
-   * Očekivano: Vraća `-ENOBUFS`  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-9. **`test_read_remote_fae_table_null_conn`**  
-   * Provera ponašanja sa NULL parametrom za konekciju  
-   * Očekivano: Vraća `-EFAULT`  
-   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-10. **`test_read_remote_fae_table_send_sync_failed`**  
-    * Provera ponašanja kada sinhronizacija komande ne uspe  
-    * Očekivano: Vraća grešku sa sinhronizacije  
-    * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-### Testovi za `bt_hci_le_cs_read_remote_fae_table_complete`
-
-11. **`test_bt_hci_le_cs_read_remote_fae_table_complete_invalid_buf_size_fail`**  
-    * Provera ponašanja sa nevalidnom veličinom bafera  
-    * Očekivano: Prekid izvršavanja  
-    * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala provera dužine)
-
-12. **`test_bt_hci_le_cs_read_remote_fae_table_complete_evt_status_fail`**  
-    * Provera ponašanja kada status događaja pokazuje grešku  
-    * Očekivano: Prekid izvršavanja  
-    * ✅ **NAPOMENA**: Test je prolazio i pre izmena
-
-13. **`test_bt_hci_le_cs_read_remote_fae_table_complete_conn_lookup_fail`**  
-    * Provera ponašanja kada pretraga konekcije ne uspe  
-    * Očekivano: Prekid izvršavanja  
-    * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala provera za NULL)
-
-_Napomena_: kod funkcija koje se zavrsavaju ranije ocekujemo da neke podfunkcije nikada nece biti pozvane. Ovaj uslov eksplicitno ukljucujemo u ocekivanja testa pomocu `zasser_` funkcija.
-
-Navedeni testovi su implementirani u novom izvornom fajlu `error_handling.c`.
+Kao sto smo vec spomenuli, mozemo se fokusirati na nekoliko funkcija za koje smo vec napisali testove. Za ovo cemo napraviti novi folder channel_sounding_behavior u koji cemo smestiti spomenuta prosirenja. Pogledajmo prvo `bt_le_cs_security_enable` funkciju i njeno ocekivano ponasanje. Funkcija pravi bafer HCI komande, popunjava ga sa pokazivacem na konekciju i salje komandu sinhrono. Vec smo pokrili tzv. happy path, odnosno slucaj u kome je sve kao sto ocekujemo. Uz to, testirali smo i slucaj u kome `bt_hci_cmd_create` funkcija vrati nepravilan bafer (NULL). Slucajevi koje bismo jos mogli pokriti jesu kada se kao pokazivac na konekciju prosledi NULL vrednost kao i slucaj kada `bt_hci_cmd_send_sync` funkcija pukne. Ova dva slucaja su pokrivena testovima `test_sec_enable_hci_cmd_fail_null_conn` i `test_sec_enable_cmd_send_fail`. Kompletna lista testova moze se videti u sekciji [implementirani testovi](#implementirani-testovi)
 
 Pokrenimo najpre skriptu sa opcijom no-coverage posto ocekujemo da ovog puta nece svi testovi proci:
 
@@ -393,6 +324,86 @@ Ovog puta nismo dobili veliki broj palih testova, ali dobijamo indikaciju da moz
 Vidimo da nije svuda rigorozno proveravano da li se prosledjuju ispravne vrednosti, tako da cemo tu proveru dodati u izvorni kod i ponovo pokrenuti testove. Izmene koje su dodate ticu se uglavnom provere ulaznih argumenata funkcija i mogu se pogledati u `cs_error_handling.patch`. Nakon primene izmena, ponovo je pokrenuta skripta i vidimo da sada svi testovi prolaze. Mozemo nastaviti sa generisanjem izvestaja pokrivenosti za ispravljene testove. Krajnji rezultati pokrivenosti su prikazani na slici ispod:
 
 ![Final unit test coverage](images/final_ut_coverage.png)
+
+## Implementirani testovi
+
+### Testovi za `bt_le_cs_security_enable`
+
+1. **`test_sec_enable_hci_cmd_fail`**  
+   * Provera ponašanja kada `bt_hci_cmd_create` ne uspe (vrati NULL)  
+   * Očekivano: Vraća `-ENOBUFS`  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+2. **`test_sec_enable_hci_cmd_fail_null_conn`**  
+   * Provera ponašanja sa NULL parametrom za konekciju  
+   * Očekivano: Vraća `-ENOBUFS`  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+3. **`test_sec_enable_cmd_send_fail`**  
+   * Provera ponašanja kada `bt_hci_cmd_send_sync` ne uspe  
+   * Očekivano: Vraća grešku sa sinhronizacije  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+### Testovi za `bt_hci_le_cs_read_remote_supported_capabilities_complete`
+
+4. **`test_read_remote_supported_capabilities_complete_null_buf`**  
+   * Provera ponašanja sa NULL baferom  
+   * Očekivano: Prekid bez operacija  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+5. **`test_read_remote_supported_capabilities_complete_invalid_buf_len`**  
+   * Provera ponašanja sa nevalidnom dužinom bafera  
+   * Očekivano: Prekid izvršavanja  
+   * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala je provera dužine)
+
+6. **`test_read_remote_supported_capabilities_complete_evt_status_fail`**  
+   * Provera ponašanja kada status događaja pokazuje grešku  
+   * Očekivano: Prekid izvršavanja  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+7. **`test_read_remote_supported_capabilities_complete_conn_lookup_handle_fail`**  
+   * Provera ponašanja kada pretraga konekcije ne uspe  
+   * Očekivano: Prekid izvršavanja  
+   * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala je provera za NULL)
+
+### Testovi za `bt_le_cs_read_remote_fae_table`
+
+8. **`test_read_remote_fae_table_hci_cmd_fail`**  
+   * Provera ponašanja kada kreiranje HCI komande ne uspe  
+   * Očekivano: Vraća `-ENOBUFS`  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+9. **`test_read_remote_fae_table_null_conn`**  
+   * Provera ponašanja sa NULL parametrom za konekciju  
+   * Očekivano: Vraća `-EFAULT`  
+   * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+10. **`test_read_remote_fae_table_send_sync_failed`**  
+    * Provera ponašanja kada sinhronizacija komande ne uspe  
+    * Očekivano: Vraća grešku sa sinhronizacije  
+    * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+### Testovi za `bt_hci_le_cs_read_remote_fae_table_complete`
+
+11. **`test_bt_hci_le_cs_read_remote_fae_table_complete_invalid_buf_size_fail`**  
+    * Provera ponašanja sa nevalidnom veličinom bafera  
+    * Očekivano: Prekid izvršavanja  
+    * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala provera dužine)
+
+12. **`test_bt_hci_le_cs_read_remote_fae_table_complete_evt_status_fail`**  
+    * Provera ponašanja kada status događaja pokazuje grešku  
+    * Očekivano: Prekid izvršavanja  
+    * ✅ **NAPOMENA**: Test je prolazio i pre izmena
+
+13. **`test_bt_hci_le_cs_read_remote_fae_table_complete_conn_lookup_fail`**  
+    * Provera ponašanja kada pretraga konekcije ne uspe  
+    * Očekivano: Prekid izvršavanja  
+    * :warning: **NAPOMENA**: Test nije prolazio pre izmena (nedostajala provera za NULL)
+
+_Napomena_: kod funkcija koje se zavrsavaju ranije ocekujemo da neke podfunkcije nikada nece biti pozvane. Ovaj uslov eksplicitno ukljucujemo u ocekivanja testa pomocu `zassert_` funkcija.
+
+Navedeni testovi su implementirani u novom izvornom fajlu `error_handling.c`.
+
 
 #### Integration tests
 
