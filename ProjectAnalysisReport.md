@@ -408,14 +408,32 @@ Navedeni testovi su implementirani u novom izvornom fajlu `error_handling.c`.
 #### Integration tests
 
 Limitations
+Za razliku od testova jedinica koda, integracioni testovi testiraju ponasanje vise komponenti odjednom (ne nuzno jedinica koda). Dakle, za integraciono testiranje oslanjamo se na citave komponente (koje mogu biti unit testirane) i koriscenje mock i stub implementacija je manje, odnosno koriste se prave implementacije.
+
+Primer implementiranog jednostavnog integracionog testa dat je u `samples/subsys/testsuite/integration` folderu (pogledati [Zephyr dokumentaciju](psa_set_key_usage_flags) za vise detalja). U implementaciji samog testa (u `main.c`) ne vidimo nista drasticno drugacije u odnosu na unit testove, tj. koriste se slicne funkcije za pretpostavke `zasser_`. Vecu razliku mozemo primetiti u okviru `testcase.yaml` fajla, gde se eksplicitno navode platforme za koje je dozvoljeno izvrsavanje testa:
+
+```bash
+platform_allow:
+    - native_posix
+    - native_sim
+```
+
+Ovo sledi iz cinjenice da koristimo prave implementacije modula, i da, ukoliko oni zavise od nekih hardverskih komponenti, moramo uzeti to u obzir i ograniciti izvrsavanje samo na one platforme koje hardverski podrzavaju module koje testiramo. Jos jedna napomena je da vidimo `build_only: true` direktivu. Ovo znaci da primer testa nije podoban za ispitivanje funkcionalnosti koda, vec da jedino proverava da li se kod prevodi. Jasno je da cemo ovu liniju izbaciti iz nase implementacije. Takodje nam je zanimljiva i sledeca konfiguracija:
+
+```bash
+integration_platforms:
+    - native_sim
+```
+
+koja u ovom slucaju znaci da se, prilikom pokretanja `twister` alata sa opcijom `--integration`, testovi izvrsavaju samo na `native_sim` platformi. Naravno, moguce je dodati listu platformi na kojima ce se testovi izvrsavati.
+
+
 
 #### Valgrind
 
 Valgrind description.
 
 Limitations in context of ZephyrOS and running natively on POSIX platform.
-
-Valgrind setup and dir structure
 
 U ovom projektu bice korisceni sledeci valgrind alati:
 
