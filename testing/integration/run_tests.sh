@@ -76,10 +76,32 @@ cd ${ROOT_DIR} || {
 log "Running twister..."
 if [ "$COVERAGE" = true ]; then
     log "with full coverage"
-    twister --coverage -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v || {
+    twister --integration --coverage -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v --build-only || {
         log "Error: Twister failed to run."
         exit 1
     }
+
+    # Still in ${ROOT_DIR}
+    TEST_BINARY=$(find twister-out -name "zephyr.exe")
+
+    sudo $TEST_BINARY --bt-dev=hci0
+
+    lcov --capture --directory twister-out/ --output-file coverage.info
+
+    # '*/zephyr/kernel/*' \
+    #  '*/zephyr/scripts/*' \
+    #  '*/modules/*' \
+    #  '*/zephyr/lib/*' \
+    #  '*/zephyr/boards/*' \
+    #  '*/zephyr/drivers/*' \
+
+    lcov --remove coverage.info \
+     '*/zephyr/include/*' \
+     '*/twister-out/*' \
+     '*/zephyr/tests/*' \
+     -o coverage.filtered.info
+
+    genhtml coverage.filtered.info --output-directory coverage_report
 else
     #TODO:  - 'Focused' option - run exactly what was selected
     #       - 'Full' option - run all of the tests in 'base' dir (e.g. <full_path>/host)
@@ -87,9 +109,13 @@ else
     log "CMD: twister --integration -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v --device-testing" # --device-testing
     # twister --integration -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v -- -bt-dev=hci2
     # twister --build-only -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v || { # --device-testing
-    twister --integration -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v || {
+    twister --integration -p native_sim -T ${ZEPHYR_TARGET_TEST_DIR} -v --build-only || {
         log "Error: Twister failed to run."
         exit 1
     }
-    # sudo /home/aleksandar/2023_Analysis_zephyr/twister-out/native_sim_native/tests/integration_tests/rpa_psa_integration/rpa_psa_integration/sample.testing.rpa/zephyr/zephyr.exe --bt-dev=hci2
+    
+    # Still in ${ROOT_DIR}
+    TEST_BINARY=$(find twister-out -name "zephyr.exe")
+
+    sudo $TEST_BINARY --bt-dev=hci0
 fi

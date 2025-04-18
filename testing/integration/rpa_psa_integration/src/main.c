@@ -281,6 +281,7 @@ ZTEST(bt_psa_integration, test_different_irks_yield_different_rpas)
 	        adv_info1.addr->a.val[2], adv_info1.addr->a.val[1], adv_info1.addr->a.val[0],
 	        adv_info1.addr->type == BT_ADDR_LE_RANDOM ? "RANDOM" : "PUBLIC");
 
+	// Copy the address in order to preserve it
 	bt_addr_le_copy(&addr1, adv_info1.addr);
 
 	bt_le_ext_adv_delete(adv1);
@@ -296,6 +297,7 @@ ZTEST(bt_psa_integration, test_different_irks_yield_different_rpas)
 	        adv_info2.addr->a.val[2], adv_info2.addr->a.val[1], adv_info2.addr->a.val[0],
 	        adv_info2.addr->type == BT_ADDR_LE_RANDOM ? "RANDOM" : "PUBLIC");
 
+	// Copy the address in order to preserve it
 	bt_addr_le_copy(&addr2, adv_info2.addr);			
 
     bt_le_ext_adv_delete(adv2);
@@ -311,9 +313,27 @@ ZTEST(bt_psa_integration, test_null_irk_generates_random_irk)
 	int id = bt_id_create(NULL, NULL); // Null IRK
 	zassert_true(id >= 0, "ID creation with null IRK failed");
 
-	struct bt_le_oob oob;
-	err = bt_le_oob_get_local(id, &oob);
-	zassert_equal(err, 0, "Failed to get OOB info");
+	struct bt_le_ext_adv *adv;
+	struct bt_le_adv_param adv_params = {
+		.id = id,
+		.options = BT_LE_ADV_OPT_CONN,
+		.interval_min = BT_GAP_ADV_FAST_INT_MIN_2,
+		.interval_max = BT_GAP_ADV_FAST_INT_MAX_2,
+	};
 
-	zassert_true(BT_ADDR_IS_RPA(&oob.addr.a), "Generated address is not RPA");
+	struct bt_le_ext_adv_info adv_info;
+
+	err = bt_le_ext_adv_create(&adv_params, NULL, &adv);
+    zassert_equal(err, 0, "Failed to create advertising set: %d", err);
+
+	err = bt_le_ext_adv_get_info(adv, &adv_info);
+    zassert_equal(err, 0, "Failed to get advertising info: %d", err);
+
+	// struct bt_le_oob oob;
+	// err = bt_le_oob_get_local(id, &oob);
+	// zassert_equal(err, 0, "Failed to get OOB info");
+	bt_le_ext_adv_stop(adv);
+	bt_le_ext_adv_delete(adv);
+
+	zassert_true(BT_ADDR_IS_RPA(&adv_info.addr->a), "Generated address is not RPA");
 }
