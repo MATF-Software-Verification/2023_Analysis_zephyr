@@ -329,9 +329,6 @@ ZTEST(bt_psa_integration, test_null_irk_generates_random_irk)
 	err = bt_le_ext_adv_get_info(adv, &adv_info);
     zassert_equal(err, 0, "Failed to get advertising info: %d", err);
 
-	// struct bt_le_oob oob;
-	// err = bt_le_oob_get_local(id, &oob);
-	// zassert_equal(err, 0, "Failed to get OOB info");
 	bt_le_ext_adv_stop(adv);
 	bt_le_ext_adv_delete(adv);
 

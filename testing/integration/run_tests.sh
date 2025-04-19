@@ -10,7 +10,7 @@ TEST_DIRS=("psa_hci_integration" "rpa_psa_integration")
 
 # Function to display usage
 usage() {
-    echo "Usage: $0 <test_folder> [--no-coverage]"
+    echo "Usage: $0 <test_folder> [--no-coverage] hcideviceN"
     echo "Available test folders:"
     for dir in "${TEST_DIRS[@]}"; do
         echo "  - ${dir}"
@@ -32,11 +32,27 @@ if [[ ! " ${TEST_DIRS[@]} " =~ " ${TEST_FOLDER} " ]]; then
     usage
 fi
 
-# Check for the --no-coverage option
+# Process arguments
 COVERAGE=true
-if [ $# -ge 2 ] && [ "$2" == "--no-coverage" ]; then
-    COVERAGE=false
-fi
+BT_DEV="hci0"  # Default value
+
+shift  # Remove test_folder from arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --no-coverage)
+            COVERAGE=false
+            shift
+            ;;
+        hci*)
+            BT_DEV="$1"
+            shift
+            ;;
+        *)
+            echo "Error: Unknown argument '$1'"
+            usage
+            ;;
+    esac
+done
 
 # Set the full path to the test directory
 TEST_DIR=${TEST_BASE_DIR}/${TEST_FOLDER}
@@ -84,16 +100,9 @@ if [ "$COVERAGE" = true ]; then
     # Still in ${ROOT_DIR}
     TEST_BINARY=$(find twister-out -name "zephyr.exe")
 
-    sudo $TEST_BINARY --bt-dev=hci0
+    sudo $TEST_BINARY --bt-dev=hci0 | tee "${TEST_FOLDER}".log
 
     lcov --capture --directory twister-out/ --output-file coverage.info
-
-    # '*/zephyr/kernel/*' \
-    #  '*/zephyr/scripts/*' \
-    #  '*/modules/*' \
-    #  '*/zephyr/lib/*' \
-    #  '*/zephyr/boards/*' \
-    #  '*/zephyr/drivers/*' \
 
     lcov --remove coverage.info \
      '*/zephyr/include/*' \
