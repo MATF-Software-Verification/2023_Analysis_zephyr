@@ -435,10 +435,7 @@ Valgrind description.
 
 Limitations in context of ZephyrOS and running natively on POSIX platform.
 
-U ovom projektu bice korisceni sledeci valgrind alati:
-
-* `memcheck`
-* `callgrind`
+U ovom projektu bice korisceni `memcheck` valgrind alat.
 
 ##### valgrind memcheck
 
@@ -920,23 +917,40 @@ Isto ponasanje je primeceno i kod heartrate aplikacije:
 
 Nisu pronadjene greske u okviru samog primera nad kojim smo vrsili testiranje, vec samo ocekivane greske koje su suppressed. U heartrate aplikaciji, rucnom analizom vidimo da nema puno mesta na kojima se koristi dinamicka alokacija memorije. Jedan pokazivac koji se koristi jeste pokazivac na strukturu `bt_le_ext_adv` koja se pri podrazumevanoj konfiguraciji ni ne koristi. Da bismo pokrili i slucaj prosirenog oglasavanja (`BT_EXT_ADV`), ukljucicemo `CONFIG_BT_EXT_ADV` flag tako sto cemo `west build` komandi proslediti overlay fajl koji prosiruje konfiguraciju pomenutim flag-om (`-- -DOVERLAY_CONFIG=$ZEPHYR_BASE/samples/bluetooth/peripheral_hr/overlay-extended.conf`). Krajnji izvestaj je identican prethodnom, tako da zakljucujemo da je primer bezbedno implementiran.
 
-##### valgrind callgrind
 
---- ;
-
-### Static analysis
+### Profajliranje alatom perf
 
 
+Kako bi se uveliko smanjio sum proizveden od strane raznih zephyr podsistema, razvijene su `standalone` aplikacije koje testiraju performanse odabrane funkcije. Na ovaj nacin dobijeni su fokusirani izvestaji usko vezani za same kriptografske funkcije. 
+
+Pokretanje testova vrsi se pozivom `run_profiling.sh` skripte iz `profiling/` direktorijuma. Skripta obavlja neophodne pripreme (npr. u slucaju `psa_key_persistence` testa, pravi se kljuc) i pokrece implementirane testove. Ujedno se iterira kroz razlicite duzine kljuceva i algoritme.
+U okviru svakog testa, pokrece se alat perf i rezultati se cuvaju u `results/` poddirektorijumu svakog testa.
+
+Izgled direktorijuma dat je ispod:
+
+TODO(avra): add tree output
+
+#### Testiranje performansi enkripcije
+
+U okviru poddirektorijuma `psa_encrypt_test` implementirana je aplikacija koja kreira kljuc za enkripciju duzine 128 ili 256 bita, u zavisnosti od promenljive prosledjene od strane glavne skripte, i nakon toga `NUM_REPETITIONS` (definisan u `main.c`) puta pokrece funkciju enkripcije.
+
+Rezultati su dati u okviru poddirektorijuma `results/` i imenovani su prema koriscenom algoritmu i prema broju bitova kljuca.
+
+##### Analiza rezultata
+
+TODO(avra): Slike perf report-a
+TODO(avra): FlameGraph slike
+Analiza kripto funkcija (flamegraph + perf report)
+
+-> Najvise vremena u generisanju pseudoslucajnih brojeva
+-> mozda nije znacajno jer se izvrsava na native_sim i sam generator nije siguran
+-> u svakom slucaju, poznato je da se drbg-ovi izvrsavaju relativno dugo
 
 
+#### Testiranje performansi dekripcije 
 
+#### Testiranje performansi generisanja kljuca
 
+#### Testiranje performansi ucitavanja kljuca
 
-
-
-
-
-
-
-
-#### Code styler
+#### Testiranje performansi funkcija za hesiranje
