@@ -1,20 +1,6 @@
 #!/bin/bash
 set -e
 
-ROOT_DIR=~/2023_Analysis_zephyr
-ZEPHYR_DIR=${ROOT_DIR}/zephyr
-
-TEST_DIRS=("psa_keygen_perf_test" "psa_encrypt_test")
-KEY_SIZES=("128" "256")
-ALGO_FLAVORS=("CTR" "GCM")
-
-BUILD_ENABLED=true
-
-if [[ "$1" == "--run-only" ]]; then
-	BUILD_ENABLED=false
-	echo "Skipping build step. Using existing executables."
-fi
-
 run_profile_test() {
 	local test_dir="$1"
 	local key_size="$2"
@@ -30,66 +16,52 @@ run_profile_test() {
 	echo "  - Algo ${algo_flavor}"
 
 	if [[ "$BUILD_ENABLED" == true ]]; then
-	       echo "  -> Building in ${build_dir}"
-
-	       west build -p -b native_sim -d "${build_dir}" "${test_dir}" #> /dev/null 2>&1
-	       if [[ $? -ne 0 ]]; then
-		       echo "Build failed!"
-		       exit 1
-	       fi
+		if [[ ! -v BUILT_DIRS[$test_name] ]]; then
+			echo "  -> Building in ${build_dir}"
+			west build -p -b native_sim -d "${build_dir}" "${test_dir}" #> /dev/null 2>&1
+	       		if [[ $? -ne 0 ]]; then
+		       		echo "Build failed!"
+		       		exit 1
+			else
+				echo "Build succeeded."
+				BUILT_DIRS[$test_name]=1
+			fi
+		else
+			echo "  Already built, skipping."
+		fi
 	fi
 
 	echo "  -> Running perf..."
 	export KEY_SIZE=${key_size}
 	export ALGO_FLAVOR=${algo_flavor}
-	sudo -E perf record -g -- "${exe_path}"
+	if [[ ! -d "${test_dir}/results"  ]]; then
+		mkdir -p "${test_dir}/results"
+	fi
+	sudo -E perf record -g -o "${result_file}" -- "${exe_path}"
 }
+
+ROOT_DIR=~/2023_Analysis_zephyr
+ZEPHYR_DIR=${ROOT_DIR}/zephyr
+
+KEY_SIZES=("128" "256")
+ALGO_FLAVORS=("CTR" "GCM")
 
 # Source the zephyr environment
 source ${ZEPHYR_DIR}/zephyr-env.sh
 
-: <<'END_COMMENT'
-for K_SIZE in "${KEY_SIZES[@]}"; do
+BUILD_ENABLED=true
 
-	echo "Starting encryption performance test"
-	echo " - KEY SIZE ${K_SIZE}"
-	# TODO(avra): Add algo flavors
+if [[ "$1" == "--run-only" ]]; then
+	BUILD_ENABLED=false
+	echo "Skipping build step. Using existing executables."
+fi
 
-	for DIR in "${TEST_DIRS[@]}"; do
-		TEST_NAME=$(basename "$DIR")
-		BUILD_DIR="${DIR}/build/"
-		LOG_FILE="${DIR}/build_${TEST_NAME}_${K_SIZE}.log"
+for algo in "${ALGO_FLAVORS[@]}"; do
+	for size in "${KEY_SIZES[@]}"; do
+		run_profile_test "psa_keygen_perf_test" "${size}"  "${algo}"
 
-		if [ "$BUILD_ENABLED" = true ]; then
-			echo "  Building ${TEST_NAME}..."
-			west build -p -b native_sim -d "${BUILD_DIR}" "./${DIR}" > "${LOG_FILE}" 2>&1
-			if [ $? -ne 0 ]; then
-				echo "  -> Build failed! Logs from build:"
-				cat "${LOG_FILE}"
-			else
-				echo "  -> Build successful. Log saved to ${LOG_FILE}"
-			fi
-		fi
-
-		echo "  Running performance test..."
-		export KEY_SIZE=${K_SIZE}
-
-		sudo -E perf record -g -- "${BUILD_DIR}/zephyr/zephyr.exe"
-
-		RESULT_FILE="results/${TEST_NAME}_${K_SIZE}"
-
-		sudo -E perf report > ${RESULT_FILE}_report.rpt
-
-		#perf script | ${ZEPHYR_DIR}/scripts/profiling/
-	done
-done
-END_COMMENT
-
-for test_name in "${TEST_DIRS[@]}"; do
-	for algo in "${ALGO_FLAVORS[@]}"; do
-		for size in "${KEY_SIZES[@]}"; do
-			run_profile_test "${test_name}" "${algo}" "${size}"
-		done
+		run_profile_test "psa_encrypt_test" "${size}" "${algo}"
+		run_profile_test "psa_decrypt_test" "${size}" "${algo}"
 	done
 done
 
