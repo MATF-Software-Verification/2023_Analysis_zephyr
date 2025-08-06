@@ -1,0 +1,301 @@
+-- west build: generating a build system
+Loading Zephyr default modules (Zephyr base).
+-- Application: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test
+-- CMake version: 3.22.1
+-- Found Python3: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: /home/aleksandar/.cache/zephyr
+-- Zephyr version: 4.0.99 (/home/aleksandar/2023_Analysis_zephyr/zephyr)
+-- Found west (found suitable version "1.0.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native
+-- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
+-- Found host-tools: zephyr 0.16.8 (/home/aleksandar/zephyr-sdk-0.16.8)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/aleksandar/zephyr-sdk-0.16.8/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.6.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/aleksandar/2023_Analysis_zephyr/zephyr/boards/native/native_sim/native_sim.dts
+-- Generated zephyr.dts: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/zephyr.dts
+-- Generated pickled edt: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/edt.pickle
+-- Generated zephyr.dts: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/zephyr.dts
+-- Generated devicetree_generated.h: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/include/generated/zephyr/devicetree_generated.h
+-- Including generated dts.cmake file: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/dts.cmake
+Parsing /home/aleksandar/2023_Analysis_zephyr/zephyr/Kconfig
+Loaded configuration '/home/aleksandar/2023_Analysis_zephyr/zephyr/boards/native/native_sim/native_sim_defconfig'
+Merged configuration '/home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/prj.conf'
+Configuration saved to '/home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/.config'
+Kconfig header saved to '/home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.38") 
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+CMake Warning at /home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/random/CMakeLists.txt:12 (message):
+  
+
+      Warning: CONFIG_TIMER_RANDOM_GENERATOR and CONFIG_TEST_CSPRNG_GENERATOR are
+      not truly random generators. This capability is not secure and it is
+      provided for testing purposes only. Use it carefully.
+
+
+CMake Warning at /home/aleksandar/2023_Analysis_zephyr/zephyr/subsys/secure_storage/src/its/CMakeLists.txt:19 (message):
+  
+
+        The PSA ITS encryption key provider in use is not secure.
+        It's only intended for functional support.
+        This means that the data and keys stored via the PSA APIs will not be secure at rest.
+        Use a secure key provider if possible.
+
+
+CMake Warning at /home/aleksandar/2023_Analysis_zephyr/zephyr/modules/mbedtls/CMakeLists.txt:17 (message):
+  
+
+            Non cryptographycally secure sources are enabled for psa_generate_random().
+            This is meant to be used only for tests, not in production!
+
+
+-- Using ccache: /usr/bin/ccache
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128
+-- west build: building application
+[1/240] Preparing syscall dependency handling
+
+[2/240] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.0.99 (/home/aleksandar/2023_Analysis_zephyr/zephyr), build: v4.0.0-2878-g6f240ef18c11
+[3/240] Generating misc/generated/syscalls_subdirs.trigger
+[4/240] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/240] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/240] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/240] Generating include/generated/zephyr/driver-validation.h
+[8/240] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/240] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[10/240] Generating include/generated/zephyr/offsets.h
+[11/240] Building C object CMakeFiles/app.dir/src/post_reboot_psa_test.c.obj
+[12/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc24_sw.c.obj
+[13/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc32_sw.c.obj
+[14/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc32c_sw.c.obj
+[15/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc16_sw.c.obj
+[16/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc8_sw.c.obj
+[17/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc7_sw.c.obj
+[18/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc4_sw.c.obj
+[19/240] Building C object CMakeFiles/app.dir/src/main.c.obj
+[20/240] Linking C static library app/libapp.a
+[21/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[22/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[23/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[25/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[27/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[28/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[29/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[30/240] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[31/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[32/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[33/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[34/240] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[35/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[36/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[39/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/nvs/nvs.c.obj
+[40/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[41/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[43/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[44/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[45/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[46/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[47/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_store.c.obj
+[48/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_line.c.obj
+[49/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_init.c.obj
+[50/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings.c.obj
+[51/240] Generating linker_zephyr_pre0.cmd
+[52/240] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[53/240] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[54/240] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[55/240] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[56/240] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[57/240] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_nvs.c.obj
+[58/240] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[59/240] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[60/240] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[61/240] Linking C static library zephyr/libzephyr.a
+[62/240] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[63/240] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[64/240] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[65/240] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[66/240] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[67/240] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[68/240] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[69/240] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[70/240] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[71/240] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[72/240] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[73/240] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[74/240] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_entropy_device.c.obj
+[75/240] Building C object zephyr/subsys/secure_storage/CMakeFiles/subsys__secure_storage.dir/src/log.c.obj
+[76/240] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_timer.c.obj
+[77/240] Building C object zephyr/subsys/secure_storage/CMakeFiles/subsys__secure_storage.dir/src/its/transform/aead.c.obj
+[78/240] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[79/240] Building C object zephyr/subsys/secure_storage/CMakeFiles/subsys__secure_storage.dir/src/its/implementation.c.obj
+[80/240] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[81/240] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[82/240] Building C object zephyr/subsys/secure_storage/CMakeFiles/subsys__secure_storage.dir/src/its/store/settings.c.obj
+[83/240] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[84/240] Building C object zephyr/drivers/entropy/CMakeFiles/drivers__entropy.dir/fake_entropy_native_posix.c.obj
+[85/240] Linking C static library zephyr/drivers/entropy/libdrivers__entropy.a
+[86/240] Building C object zephyr/subsys/secure_storage/CMakeFiles/subsys__secure_storage.dir/src/its/transform/aead_get.c.obj
+[87/240] Linking C static library zephyr/subsys/secure_storage/libsubsys__secure_storage.a
+[88/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/aesni.c.obj
+[89/240] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_weak_impl.c.obj
+[90/240] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[91/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/aria.c.obj
+[92/240] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_posix_timer.c.obj
+[93/240] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[94/240] Linking C static library zephyr/drivers/hwinfo/libdrivers__hwinfo.a
+[95/240] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[96/240] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[97/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/asn1parse.c.obj
+[98/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/asn1write.c.obj
+[99/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/base64.c.obj
+[100/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/bignum_core.c.obj
+[101/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/bignum_mod_raw.c.obj
+[102/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/bignum.c.obj
+[103/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/bignum_mod.c.obj
+[104/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/block_cipher.c.obj
+[105/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/camellia.c.obj
+[106/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ccm.c.obj
+[107/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/chacha20.c.obj
+[108/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/aes.c.obj
+[109/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/chachapoly.c.obj
+[110/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/cmac.c.obj
+[111/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/cipher_wrap.c.obj
+[112/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/debug.c.obj
+[113/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/constant_time.c.obj
+[114/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/des.c.obj
+[115/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/dhm.c.obj
+[116/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ecdh.c.obj
+[117/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ecjpake.c.obj
+[118/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ecdsa.c.obj
+[119/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ecp_curves_new.c.obj
+[120/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ecp_curves.c.obj
+[121/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ctr_drbg.c.obj
+[122/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/entropy_poll.c.obj
+[123/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ecp.c.obj
+[124/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/error.c.obj
+[125/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/entropy.c.obj
+[126/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/cipher.c.obj
+[127/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/hkdf.c.obj
+[128/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/hmac_drbg.c.obj
+[129/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/lmots.c.obj
+[130/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/lms.c.obj
+[131/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/md.c.obj
+[132/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/md5.c.obj
+[133/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/mps_reader.c.obj
+[134/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/mps_trace.c.obj
+[135/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/oid.c.obj
+[136/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/nist_kw.c.obj
+[137/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/padlock.c.obj
+[138/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/memory_buffer_alloc.c.obj
+[139/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/poly1305.c.obj
+[140/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/platform_util.c.obj
+[141/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/platform.c.obj
+[142/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ripemd160.c.obj
+[143/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/gcm.c.obj
+[144/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/rsa_alt_helpers.c.obj
+[145/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_util.c.obj
+[146/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/rsa.c.obj
+[147/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/sha1.c.obj
+[148/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/sha512.c.obj
+[149/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/timing.c.obj
+[150/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/sha3.c.obj
+[151/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/threading.c.obj
+[152/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/version_features.c.obj
+[153/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/version.c.obj
+[154/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/sha256.c.obj
+[155/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_ecp.c.obj
+[156/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_driver_wrappers_no_static.c.obj
+[157/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_cipher.c.obj
+[158/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_aead.c.obj
+[159/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/zephyr_init.c.obj
+[160/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_ffdh.c.obj
+[161/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSBase.dir/zephyr_entropy.c.obj
+[162/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_mac.c.obj
+[163/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_hash.c.obj
+[164/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_se.c.obj
+[165/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_pake.c.obj
+[166/240] Linking C static library modules/mbedtls/libmbedTLSBase.a
+[167/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_rsa.c.obj
+[168/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_its_file.c.obj
+[169/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_client.c.obj
+[170/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pem.c.obj
+[171/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pkcs12.c.obj
+[172/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_storage.c.obj
+[173/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pkcs5.c.obj
+[174/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pkwrite.c.obj
+[175/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pkparse.c.obj
+[176/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto_slot_management.c.obj
+[177/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pk.c.obj
+[178/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509.c.obj
+[179/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pk_wrap.c.obj
+[180/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/pk_ecc.c.obj
+[181/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509_create.c.obj
+[182/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509_crt.c.obj
+[183/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509_crl.c.obj
+[184/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509write_crt.c.obj
+[185/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509_csr.c.obj
+[186/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509write_csr.c.obj
+[187/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_cache.c.obj
+[188/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/net_sockets.c.obj
+[189/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSX509.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/x509write.c.obj
+[190/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_ciphersuites.c.obj
+[191/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_client.c.obj
+[192/240] Linking C static library modules/mbedtls/libmbedTLSX509.a
+[193/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_cookie.c.obj
+[194/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_debug_helpers_generated.c.obj
+[195/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_msg.c.obj
+[196/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_ticket.c.obj
+[197/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls12_client.c.obj
+[198/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls12_server.c.obj
+[199/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls13_generic.c.obj
+[200/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls13_client.c.obj
+[201/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls13_keys.c.obj
+[202/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls13_server.c.obj
+[203/240] Building C object modules/mbedtls/CMakeFiles/modules__mbedtls.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/ssl_tls.c.obj
+[204/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[205/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[206/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[207/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[208/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init_static.c.obj
+[209/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[210/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[211/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[212/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[213/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[214/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[215/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[216/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[217/240] Building C object modules/mbedtls/CMakeFiles/mbedTLSCrypto.dir/home/aleksandar/2023_Analysis_zephyr/modules/crypto/mbedtls/library/psa_crypto.c.obj
+[218/240] Linking C static library modules/mbedtls/libmbedTLSCrypto.a
+[219/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[220/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[221/240] Linking C static library modules/mbedtls/libmodules__mbedtls.a
+[222/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[223/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[224/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[225/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[226/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[227/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[228/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/priority_queues.c.obj
+[229/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[230/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[231/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[232/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[233/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[234/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[235/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[236/240] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[237/240] Linking C static library zephyr/kernel/libkernel.a
+[238/240] Linking C executable zephyr/zephyr.elf
+Generating files from /home/aleksandar/2023_Analysis_zephyr/profiling/psa_encrypt_test/build/psa_encrypt_test_128/zephyr/zephyr.elf for board: native_sim
+[239/240] Building native simulator runner, and linking final executable
+[240/240] Running utility command for native_runner_executable
