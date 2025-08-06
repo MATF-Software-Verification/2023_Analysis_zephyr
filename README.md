@@ -4,9 +4,9 @@ This repository "Software Verification" course at the Faculty of Mathematics in 
 
 Techniques and tools used:
 - Unit testing via [twister](https://docs.zephyrproject.org/3.1.0/develop/test/twister.html) tool
+- Integration testing via [twister](https://docs.zephyrproject.org/3.1.0/develop/test/twister.html) tool
 - Valgrind memcheck
-- Static analysis
-- Adress sanitizer
+- perf profiling
 
 Repo organization:
 
@@ -23,10 +23,7 @@ Repo organization:
 │       └── run_unit_tests.sh
 ├── valgrind
 |       ├── memcheck
-|       ├── callgrind
-|       ├── helgrind
-├── address_sanitizer
-├── code_style
+├── profiling
 └── zephyr @ 419dda3ed72
     .
     .
