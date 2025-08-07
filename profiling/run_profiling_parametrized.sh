@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+FLAMEG_BASE=~/FlameGraph
+
 run_profile_test() {
 	local test_dir="$1"
 	local key_size="$2"
@@ -37,7 +39,27 @@ run_profile_test() {
 	if [[ ! -d "${test_dir}/results"  ]]; then
 		mkdir -p "${test_dir}/results"
 	fi
+	echo "  [record]"
 	sudo -E perf record -g -o "${result_file}" -- "${exe_path}"
+	echo "  [stat]"
+	sudo -E perf stat -d -o "${result_file}_stat" -- "${exe_path}"
+	echo "  -> Generating flame graph..."
+	sudo -E perf script -i "${result_file}" | "${FLAMEG_BASE}/stackcollapse-perf.pl" | "${FLAMEG_BASE}/flamegraph.pl" > "${result_file}_flame.svg"
+}
+
+setup_helper() {
+	local test_dir="$1"
+
+	if [[ -d ${test_dir}/setup ]]; then
+		if [[ "${BUILD_ENABLED}" == true ]]; then
+			west build -p always -b native_sim -d ${test_dir}/setup/build ${test_dir}/setup
+
+			mv ${test_dir}/setup/build/zephyr/zephyr.exe ${test_dir}/setup.exe
+			rm -rf ${test_dir}/setup/build
+
+			sudo -E ${test_dir}/setup.exe
+		fi
+	fi
 }
 
 ROOT_DIR=~/2023_Analysis_zephyr
@@ -62,6 +84,9 @@ for algo in "${ALGO_FLAVORS[@]}"; do
 
 		run_profile_test "psa_encrypt_test" "${size}" "${algo}"
 		run_profile_test "psa_decrypt_test" "${size}" "${algo}"
+
+		setup_helper "psa_key_persistence_test"
+		run_profile_test "psa_key_persistence_test" "${size}" "${algo}"
 	done
 done
 
