@@ -1,0 +1,27 @@
+# started on Thu Aug  7 20:47:58 2025
+
+
+ Performance counter stats for 'psa_key_persistence_test/build/zephyr/zephyr.exe':
+
+             33,14 msec task-clock                       #    0,989 CPUs utilized             
+                 3      context-switches                 #   90,524 /sec                      
+                 2      cpu-migrations                   #   60,349 /sec                      
+                95      page-faults                      #    2,867 K/sec                     
+          75503622      cycles                           #    2,278 GHz                         (40,79%)
+          38922072      stalled-cycles-frontend          #   51,55% frontend cycles idle        (43,70%)
+          17845219      stalled-cycles-backend           #   23,63% backend cycles idle         (45,66%)
+         103351857      instructions                     #    1,37  insn per cycle            
+                                                  #    0,38  stalled cycles per insn     (54,71%)
+          13353224      branches                         #  402,927 M/sec                       (54,65%)
+             97172      branch-misses                    #    0,73% of all branches             (53,56%)
+          34168377      L1-dcache-loads                  #    1,031 G/sec                       (49,45%)
+             59741      L1-dcache-load-misses            #    0,17% of all L1-dcache accesses   (46,21%)
+             16289      LLC-loads                        #  491,513 K/sec                       (37,09%)
+              1079      LLC-load-misses                  #    6,62% of all LL-cache accesses    (40,93%)
+
+       0,033519279 seconds time elapsed
+
+       0,031190000 seconds user
+       0,003018000 seconds sys
+
+
