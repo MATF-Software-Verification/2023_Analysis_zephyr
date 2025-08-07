@@ -920,32 +920,156 @@ Nisu pronadjene greske u okviru samog primera nad kojim smo vrsili testiranje, v
 
 ### Profajliranje alatom perf
 
+Alat `perf` je alat za analizu performansi u okviru Linux kernela. Omogucava detaljno pracenje i merenje razlicitih hardverskih i softverskih dogadjaja, kao sto su, na primer, ciklusi procesora, promasaji kes memorije, sistemski pozivi i drugo. Ove funkcionalnosti pruzaju znacajan uvid u ponasanje aplikacije u kontekstu performansi.
 
-Kako bi se uveliko smanjio sum proizveden od strane raznih zephyr podsistema, razvijene su `standalone` aplikacije koje testiraju performanse odabrane funkcije. Na ovaj nacin dobijeni su fokusirani izvestaji usko vezani za same kriptografske funkcije. 
+Kako bi se uveliko smanjio sum proizveden od strane raznih Zephyr podsistema, razvijene su `standalone` aplikacije koje testiraju performanse odabrane funkcije. Na ovaj nacin dobijeni su fokusirani izvestaji usko vezani za same kriptografske funkcije.
 
-Pokretanje testova vrsi se pozivom `run_profiling.sh` skripte iz `profiling/` direktorijuma. Skripta obavlja neophodne pripreme (npr. u slucaju `psa_key_persistence` testa, pravi se kljuc) i pokrece implementirane testove. Ujedno se iterira kroz razlicite duzine kljuceva i algoritme.
-U okviru svakog testa, pokrece se alat perf i rezultati se cuvaju u `results/` poddirektorijumu svakog testa.
+Pokretanje testova vrsi se pozivom `run_profiling.sh` skripte iz `profiling/` direktorijuma. Skripta obavlja neophodne pripreme (npr. u slucaju `psa_key_persistence` testa, kreira se kljuc) i pokrece implementirane testove. Ujedno se iterira kroz razlicite duzine kljuceva i algoritme. U okviru svakog testa, pokrece se alat `perf` i rezultati se cuvaju u `results/` poddirektorijumu svakog testa.
 
 Izgled direktorijuma dat je ispod:
 
-TODO(avra): add tree output
+```bash
+profiling/
+├── psa_encrypt_test/
+│   ├── prj.conf
+│   ├── CMakeLists.txt
+│   ├── src/
+│   │   └── main.c
+│   └── results/
+│       ├── psa_encrypt_test_128bit_CTR_flame.svg
+│       ├── psa_encrypt_test_128bit_CTR_perf.data
+│       ├── psa_encrypt_test_128bit_CTR_stat
+│       ├── psa_encrypt_test_128bit_GCM_flame.svg
+│       ├── psa_encrypt_test_128bit_GCM_perf.data
+│       └── psa_encrypt_test_128bit_GCM_stat
+├── psa_key_persistence/
+│   └── ... (slična struktura)
+└── run_profiling.sh
+```
+
+Dodatno, korišćen je i alat `FlameGraph` za vizuelizaciju rezultata. Grafik se može tumačiti na sledeći način (preporucljivo je interaktivnu SVG verziju otvoriti u veb-pretrazivacu):
+
+- Svaka funkcija ima odgovarajući pravougaonik.
+- Širina svakog od pravougaonika odgovara udelu vremena izvrsavanja te funkcije u ukupnom vremenu.
+- Y osa predstavlja dubinu poziva steka (eng. call stack). Funkcije na dnu pozivaju funkcije iznaad njih.
+- Boja pravougaonika je nasumicna i nije značajna za analizu.
+
+Napomena: X osa ne predstavlja protok vremena. Funkcije su sortirane alfabetski, a ne po redosledu pozivanja.
+
+Ukoliko SVG fajl otvori u programu koji može da radi sa SVG formatom, omogućena je i dinamička analiza, odnosno klikom na pravougaonike moguće je zumirati, nadnošenjem miša nad pravougaonik moguće je isčitati dodatne podatke o funkciji.
 
 #### Testiranje performansi enkripcije
 
-U okviru poddirektorijuma `psa_encrypt_test` implementirana je aplikacija koja kreira kljuc za enkripciju duzine 128 ili 256 bita, u zavisnosti od promenljive prosledjene od strane glavne skripte, i nakon toga `NUM_REPETITIONS` (definisan u `main.c`) puta pokrece funkciju enkripcije.
+U okviru poddirektorijuma `psa_encrypt_test` implementirana je aplikacija koja kreira kljuc za enkripciju duzine 128 ili 256 bita, u zavisnosti od parametara prosleđenih od strane `run_profiling.sh` skripte. Nakon kreiranja ključa, aplikacija `NUM_REPETITIONS` puta pokreće funkciju enkripcije nad predefinisanim blokom podataka. Analiza je fokusirana na poređenje performansi AES-128 i AES-256 enkripcije između CTR i GCM režima rada.
 
 Rezultati su dati u okviru poddirektorijuma `results/` i imenovani su prema koriscenom algoritmu i prema broju bitova kljuca.
 
 ##### Analiza rezultata
 
-TODO(avra): Slike perf report-a
-TODO(avra): FlameGraph slike
-Analiza kripto funkcija (flamegraph + perf report)
+**AES-128-CTR** rezultati
 
--> Najvise vremena u generisanju pseudoslucajnih brojeva
--> mozda nije znacajno jer se izvrsava na native_sim i sam generator nije siguran
--> u svakom slucaju, poznato je da se drbg-ovi izvrsavaju relativno dugo
+U fajlu `profiling/psa_encrypt_test/results/psa_encrypt_test_128bit_CTR_stat` sacuvan je izlaz komande `perf stat`.
+Naime, vidimo da izvrsavanje traje 4.77 milisekundi, i da je ukupan broj instrukcija oko 5,15 miliona.
 
+```bash
+              4,77 msec task-clock                       #    0,947 CPUs utilized             
+                 5      context-switches                 #    1,048 K/sec                     
+                 1      cpu-migrations                   #  209,588 /sec                      
+                98      page-faults                      #   20,540 K/sec                     
+           2020219      cycles                           #    0,423 GHz                         (13,51%)
+           1665623      stalled-cycles-frontend          #   82,45% frontend cycles idle        (71,40%)
+           2104487      stalled-cycles-backend           #  104,17% backend cycles idle       
+           5152151      instructions                     #    2,55  insn per cycle            
+                                                  #    0,41  stalled cycles per insn   
+           1184667      branches                         #  248,292 M/sec                     
+             30770      branch-misses                    #    2,60% of all branches             (95,12%)
+           2430405      L1-dcache-loads                  #  509,383 M/sec                       (74,21%)
+             18885      L1-dcache-load-misses            #    0,78% of all L1-dcache accesses   (36,58%)
+     <not counted>      LLC-loads                                                               (0,00%)
+     <not counted>      LLC-load-misses                                                         (0,00%)
+
+       0,005038445 seconds time elapsed
+
+       0,002373000 seconds user
+       0,003559000 seconds sys
+```
+
+Na slici ispod, dati su rezultati konverzije u `FlameGraph`.
+
+![AES-128-CTR-FG](/home/akilosaurus/2023_Analysis_zephyr/profiling/psa_encrypt_test/results/psa_encrypt_test_128bit_CTR_flame.svg)
+
+Ukoliko se fokusiramo na `main` funkciju, vidimo graf poziva koji se sastoji iz dve primarne faze: generisanje kljuca i petlja za enkripciju. Jasno je da main funkcija (što već znamo i iz implementacije), poziva `generate_key_helper` funkciju (leva strana grafika). S obzirom na činjenicu da ćemo se posvetiti i analizi generisanja ključeva zasebno, dalji fokus nas vodi ka `psa_cipher_encrypt` funkciji, odnosno glavnoj 'meti' ovog testa.
+
+![AES-128-CTR-FG-zoom](/home/akilosaurus/2023_Analysis_zephyr/images/AES-128-CTR-FG-zoomed.png)
+
+Prilikom prevlačenja miša preko pojedinačnih pravougaonika, dobijaju se informacije o broju uzoraka koje je perf alat uzeo u toku date funkcije, kao i procenat tih uzoraka u okviru celokupnog izvršavanja programa. Konkretno, funkcija `mbedtls_psa_cipher_encrypt` zauzima četvrtinu (25.74%) celokupnog izvršavanja testa, dok generisanje ključa zauzima oko 6%. Kao što je već rečeno, generisanje ključa biće zasebno analizirano. Znacajno usko grlo u okviru `_cipher_encrypt` je `aes_crypt_ctr`, sto je i ocekivano jer se u okviru nje vrsi osnovna operacija AES sifrovanja. U okviru glavne funkcije za enkripciju, `mbedtls_psa_cipher_update`, `_finish`, `_abort` i `psa_cipher_setup.constprop.0` zauzimaju priblizno po 6%. Jos jedna znacajna funkcija u kontekstu vremena izvrsavanja je i `psa_generate_random_internal` i zauzima gotovo petinu celog izvrsavanja. Napomena je da je prilikom prevodjenja koriscena oznaka za koriscenje simuliranog generatora pseudoslucajnih brojeva sto se vidi i u grafiku poziva - `entropy_native_posix_get_entropy`. U realnim scenarijima, cesto je dostupan hardverski acelerator za kriptografske operacije, pa je izvrsavanje ove funkcije u tim slucajevima verovatno manje.
+
+**AES-128-GCM** rezultati
+
+Izlaz `perf stat` komande govori nam da se izvrsavanje zavrsilo za 4.56 milisekundi kao i da je broj instrukcija znacajno veci, odnosno 6.7 miliona.
+
+```bash
+              4,56 msec task-clock                       #    0,959 CPUs utilized             
+                 7      context-switches                 #    1,534 K/sec                     
+                 2      cpu-migrations                   #  438,291 /sec                      
+                95      page-faults                      #   20,819 K/sec                     
+           2292220      cycles                           #    0,502 GHz                         (57,56%)
+           2744400      stalled-cycles-frontend          #  119,73% frontend cycles idle      
+           2612215      stalled-cycles-backend           #  113,96% backend cycles idle       
+           6725302      instructions                     #    2,93  insn per cycle            
+                                                  #    0,41  stalled cycles per insn   
+           1219110      branches                         #  267,162 M/sec                     
+             28509      branch-misses                    #    2,34% of all branches             (85,05%)
+           3020163      L1-dcache-loads                  #  661,854 M/sec                       (55,69%)
+             24492      L1-dcache-load-misses            #    0,81% of all L1-dcache accesses   (32,41%)
+     <not counted>      LLC-loads                                                               (0,00%)
+     <not counted>      LLC-load-misses                                                         (0,00%)
+
+       0,004759373 seconds time elapsed
+
+       0,000925000 seconds user
+       0,004627000 seconds sys
+```
+
+Iako je struktura grafika slicna, glavni posao se sada obavlja u okviru `mbedtls_gcm_crypt_and_tag` funkcije. Ocekivano je videti razliku s obzirom na to da je GCM algoritam autentifikovane enkripcije (eng. AEAD). Istovremeno se izvrsavaju dva zadatka: sifrovanje i autentikacija. Ovo se primecuje i na grafiku - funkcije poput `psa_aead_encrypt` i 'glavne' AES funkcije dele posao.
+
+Zumirana `FlameGraph` slika data je ispod:
+
+![AES-128-GCM-FG-zoom](/home/akilosaurus/2023_Analysis_zephyr/images/AES-128-GCM-FG-zoomed.png)
+
+Glavna razlika izmedju ova dva moda izvrsavanja je u broju instrukcija. U slucaju GCM enkripcije, bilo je potrebno preko 1.5 miliona instrukcija vise (blizu 30% razlike) u odnosu na CTR enkripciju. Ovo je ocekivano
+Funkcije poput `mbedtls_gcm_mult`, odnosno mnozenje u Galoa poljima imaju znacajan udeo u celokupnom izvrsavanju. Iako je GCM slucaj zavrsio malo brze, uzrok je najverovatnije razlika u implementaciji samog procesora i verovatno je broj instrukcija po ciklusu (eng. Instructions per Cycle) (2.93 nasuprot 2.55). Oslonicemo se na broj instrukcija kao stabilniju metriku poredjenja efikasnosti.
+
+**AES-256-CTR** rezultati
+
+Izlaz perf stat za AES-256-CTR pokazuje izvršavanje od 3.87 milisekundi i ukupan broj od približno 7.04 miliona instrukcija.
+
+```bash
+              3,87 msec task-clock                       #    0,978 CPUs utilized             
+           7039283      instructions                     #    2,76  insn per cycle
+```
+
+U poređenju sa AES-128-CTR (5.15M instrukcija), AES-256-CTR zahteva oko 1.9 miliona dodatnih instrukcija, što predstavlja povećanje od oko 37%. Zanimljivo je da je, uprkos većem broju instrukcija, ukupno vreme izvršavanja kraće (3.87ms naspram 4.77ms). Ovo je ponovo posledica varijacija u izvršavanju i višeg IPC-a (2.76 naspram 2.55), što naglašava važnost broja instrukcija kao primarne metrike za procenu opterećenja.
+
+**AES-256-GCM** rezultati
+
+Za AES-256-GCM, perf stat beleži vreme izvršavanja od 4.46 milisekundi i ukupan broj od oko 7.53 miliona instrukcija.
+
+```bash
+              4,46 msec task-clock                       #    0,934 CPUs utilized             
+           7525571      instructions                     #    3,14  insn per cycle
+```
+
+Kao i u 128-bitnom slučaju, GCM režim je i sa 256-bitnim ključem zahtevniji od CTR režima, sa oko 500 hiljada instrukcija više. U poređenju sa AES-128-GCM (6.73M instrukcija), prelazak na 256-bitni ključ je dodao oko 800 hiljada instrukcija, što je povećanje od oko 12%. Visok IPC od 3.14 ponovo čini da ukupno vreme izvršavanja bude varljivo slično ostalim testovima.
+
+Zaključak poređenja
+Analiza broja instrukcija daje jasnu sliku o performansama:
+
+GCM vs CTR: GCM je konzistentno skuplji od CTR režima, zahtevajući 7-30% više instrukcija zbog dodatnih operacija autentikacije.
+
+256-bit vs 128-bit: Korišćenje 256-bitnih ključeva povećava broj instrukcija za 12-37% u odnosu na 128-bitne ključeve, što je očekivana cena za viši nivo sigurnosti.
+
+Ukupno vreme izvršavanja (task-clock) može biti varljivo zbog faktora kao što su IPC i stanje sistema, te je broj izvršenih instrukcija pouzdanija metrika za poređenje računarske složenosti ovih kriptografskih operacija.
 
 #### Testiranje performansi dekripcije 
 
