@@ -1,6 +1,0 @@
-*** Booting Zephyr OS build v4.0.0-2878-g6f240ef18c11 ***
-WARNING: Using an insecure PSA ITS encryption key provider.
-[00:00:00.000,000] [1;33m<wrn> secure_storage: Using an insecure PSA ITS encryption key provider.[0m
-[00:00:00.000,000] [0m<inf> fs_nvs: 4 Sectors of 4096 bytes[0m
-[00:00:00.000,000] [0m<inf> fs_nvs: alloc wra: 2, ed0[0m
-[00:00:00.000,000] [0m<inf> fs_nvs: data wra: 2, 286[0m

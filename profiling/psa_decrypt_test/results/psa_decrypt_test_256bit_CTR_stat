@@ -1,0 +1,31 @@
+# started on Thu Aug  7 20:29:46 2025
+
+
+ Performance counter stats for 'psa_decrypt_test/build/zephyr/zephyr.exe':
+
+              5,93 msec task-clock                       #    0,919 CPUs utilized             
+                 3      context-switches                 #  505,783 /sec                      
+                 1      cpu-migrations                   #  168,594 /sec                      
+                98      page-faults                      #   16,522 K/sec                     
+           2102557      cycles                           #    0,354 GHz                         (45,27%)
+           1676263      stalled-cycles-frontend          #   79,72% frontend cycles idle      
+           2379814      stalled-cycles-backend           #  113,19% backend cycles idle       
+           5289077      instructions                     #    2,52  insn per cycle            
+                                                  #    0,45  stalled cycles per insn   
+           1083047      branches                         #  182,595 M/sec                     
+             27146      branch-misses                    #    2,51% of all branches             (88,60%)
+           2700870      L1-dcache-loads                  #  455,351 M/sec                       (70,83%)
+              3658      L1-dcache-load-misses            #    0,14% of all L1-dcache accesses   (50,49%)
+              5957      LLC-loads                        #    1,004 M/sec                       (12,07%)
+     <not counted>      LLC-load-misses                                                         (0,00%)
+
+       0,006451748 seconds time elapsed
+
+       0,003587000 seconds user
+       0,003587000 seconds sys
+
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog
