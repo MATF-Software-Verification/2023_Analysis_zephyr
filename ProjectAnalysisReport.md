@@ -996,11 +996,11 @@ Naime, vidimo da izvrsavanje traje 4.77 milisekundi, i da je ukupan broj instruk
 
 Na slici ispod, dati su rezultati konverzije u `FlameGraph`.
 
-![AES-128-CTR-FG](/home/akilosaurus/2023_Analysis_zephyr/profiling/psa_encrypt_test/results/psa_encrypt_test_128bit_CTR_flame.svg)
+![AES-128-CTR-FG](profiling/psa_encrypt_test/results/psa_encrypt_test_128bit_CTR_flame.svg)
 
 Ukoliko se fokusiramo na `main` funkciju, vidimo graf poziva koji se sastoji iz dve primarne faze: generisanje kljuca i petlja za enkripciju. Jasno je da main funkcija (što već znamo i iz implementacije), poziva `generate_key_helper` funkciju (leva strana grafika). S obzirom na činjenicu da ćemo se posvetiti i analizi generisanja ključeva zasebno, dalji fokus nas vodi ka `psa_cipher_encrypt` funkciji, odnosno glavnoj 'meti' ovog testa.
 
-![AES-128-CTR-FG-zoom](/home/akilosaurus/2023_Analysis_zephyr/images/AES-128-CTR-FG-zoomed.png)
+![AES-128-CTR-FG-zoom](images/AES-128-CTR-FG-zoomed.png)
 
 Prilikom prevlačenja miša preko pojedinačnih pravougaonika, dobijaju se informacije o broju uzoraka koje je perf alat uzeo u toku date funkcije, kao i procenat tih uzoraka u okviru celokupnog izvršavanja programa. Konkretno, funkcija `mbedtls_psa_cipher_encrypt` zauzima četvrtinu (25.74%) celokupnog izvršavanja testa, dok generisanje ključa zauzima oko 6%. Kao što je već rečeno, generisanje ključa biće zasebno analizirano. Znacajno usko grlo u okviru `_cipher_encrypt` je `aes_crypt_ctr`, sto je i ocekivano jer se u okviru nje vrsi osnovna operacija AES sifrovanja. U okviru glavne funkcije za enkripciju, `mbedtls_psa_cipher_update`, `_finish`, `_abort` i `psa_cipher_setup.constprop.0` zauzimaju priblizno po 6%. Jos jedna znacajna funkcija u kontekstu vremena izvrsavanja je i `psa_generate_random_internal` i zauzima gotovo petinu celog izvrsavanja. Napomena je da je prilikom prevodjenja koriscena oznaka za koriscenje simuliranog generatora pseudoslucajnih brojeva sto se vidi i u grafiku poziva - `entropy_native_posix_get_entropy`. U realnim scenarijima, cesto je dostupan hardverski acelerator za kriptografske operacije, pa je izvrsavanje ove funkcije u tim slucajevima verovatno manje.
 
@@ -1035,7 +1035,7 @@ Iako je struktura grafika slicna, glavni posao se sada obavlja u okviru `mbedtls
 
 Zumirana `FlameGraph` slika data je ispod:
 
-![AES-128-GCM-FG-zoom](/home/akilosaurus/2023_Analysis_zephyr/images/AES-128-GCM-FG-zoomed.png)
+![AES-128-GCM-FG-zoom](images/AES-128-GCM-FG-zoomed.png)
 
 Glavna razlika izmedju ova dva moda izvrsavanja je u broju instrukcija. U slucaju GCM enkripcije, bilo je potrebno preko 1.5 miliona instrukcija vise (blizu 30% razlike) u odnosu na CTR enkripciju. Ovo je ocekivano
 Funkcije poput `mbedtls_gcm_mult`, odnosno mnozenje u Galoa poljima imaju znacajan udeo u celokupnom izvrsavanju. Iako je GCM slucaj zavrsio malo brze, uzrok je najverovatnije razlika u implementaciji samog procesora i verovatno je broj instrukcija po ciklusu (eng. Instructions per Cycle) (2.93 nasuprot 2.55). Oslonicemo se na broj instrukcija kao stabilniju metriku poredjenja efikasnosti.
@@ -1071,10 +1071,51 @@ GCM vs CTR: GCM je konzistentno skuplji od CTR režima, zahtevajući 7-30% više
 
 Ukupno vreme izvršavanja (task-clock) može biti varljivo zbog faktora kao što su IPC i stanje sistema, te je broj izvršenih instrukcija pouzdanija metrika za poređenje računarske složenosti ovih kriptografskih operacija.
 
-#### Testiranje performansi dekripcije 
+#### Testiranje performansi dekripcije
+
+Analogno testovima enkripcije, implementirana je i standalone aplikacija za testiranje performansi dekripcije. Aplikacija prvo prolazi kroz identičan proces generisanja i čuvanja ključa, a zatim `NUM_REPETITIONS` puta poziva funkciju dekripcije nad unapred pripremljenim šifratom. Analiza je fokusirana na funkciju `psa_cipher_decrypt` i njene podvarijante za AES algoritme sa 128 i 256-bitnim ključevima u CTR i GCM režimima rada.
+
+**AES-128-CTR** rezultati
+
+Izlaz perf stat za dekripciju u CTR režimu pokazuje izvršavanje od 4.80 milisekundi i ukupan broj od oko 7.25 miliona instrukcija.
+
+```bash
+             4,80 msec task-clock                #    0,918 CPUs utilized
+          7245691      instructions              #    3,31  insn per cycle
+```
+
+**AES-128-GCM** rezultati
+
+Za GCM dekripciju, zabeleženo je vreme od 4.23 milisekunde i oko 7.16 miliona instrukcija.
+
+```bash
+             4,23 msec task-clock                #    0,888 CPUs utilized
+          7160751      instructions              #    3,41  insn per cycle
+```
+
+Broj instrukcija je vrlo sličan između CTR i GCM režima za 128-bitnu dekripciju. Ovo je pomalo neočekivano jer GCM dekripcija, pored same dekripcije (koja je u osnovi CTR), podrazumeva i verifikaciju autentikacionog taga, što je računski zahtevno. Iz tog razloga, manji broj instrukcija u GCM slučaju predstavlja iznenađenje. Razlog ovome nije očigledan iz perf stat izlaza.
+
+**AES-256-CTR** rezultati
+
+Dekripcija sa 256-bitnim ključem u CTR režimu zahtevala je 5.93 milisekunde i oko 5.29 miliona instrukcija.
+
+```bash
+             5,93 msec task-clock                #    0,919 CPUs utilized
+          5289077      instructions              #    2,52  insn per cycle
+```
+
+**AES-256-GCM** rezultati
+
+Konačno, za AES-256-GCM dekripciju, perf stat beleži 4.54 milisekunde i 5.51 milion instrukcija.
+
+```bash
+             4,54 msec task-clock                #    0,917 CPUs utilized
+          5513989      instructions              #    7,91  insn per cycle
+```
+
+I u ovom slučaju, dobijeni su neintuitivni rezultati, odnosno GCM izvršavanje deluje bolje optimizovano. Izuzetno visok IPC od 7.91 u GCM testu ukazuje na specifično stanje procesora i keša tokom ovog merenja, što čini direktno poređenje ukupnog vremena izvršavanja nepouzdanim.
 
 #### Testiranje performansi generisanja kljuca
 
 #### Testiranje performansi ucitavanja kljuca
 
-#### Testiranje performansi funkcija za hesiranje
