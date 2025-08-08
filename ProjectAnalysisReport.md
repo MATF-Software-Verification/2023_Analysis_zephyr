@@ -16,11 +16,11 @@ U kontekstu Zephyr projekta, fokusiramo se na jedinično testiranje modula za Bl
 
 #### Unit tests
 
-Jedinicno testiranje je jedan od nacina dinamickog testiranja koji se fokusira na ispitivanje ispravnosti najjednostavnijih celina koda. Kad govorimo o testiranju ispravnosti, bitno je napomenuti da se testiranjem mogu pronaci greske u implementaciji, ali uspesno izvrsavanje testova ne garantuje ispravnost jedinice u celini. Naravno, cilj je da imamo sto vecu moc otkrivanja gresaka, i jedan od alata koji nam u tome moze pomoci jeste i pracenje pokrivenosti koda testovima. Alat za pokrivenost koda bice podrobnije opisan u narednim odeljcima. Jedna od razlika u odnosu na integracione testove u kontekstu ZephyrOS projekta je cinjenica da se za testiranje jedne funkcije ne ukljucuje citav projekat, odnosno samo jedan modul se kompajlira sto znacajno ubrzava proces testiranja.
+Jedinično testiranje je jedan od načina dinamičkog testiranja koji se fokusira na ispitivanje ispravnosti najjednostavnijih celina koda. Kad govorimo o testiranju ispravnosti, bitno je napomenuti da se testiranjem mogu pronaći greške u implementaciji, ali uspešno izvršavanje testova ne garantuje ispravnost jedinice u celini. Naravno, cilj je da imamo što veću moć otkrivanja grešaka, i jedan od alata koji nam u tome može pomoći jeste i praćenje pokrivenosti koda testovima. Alat za pokrivenost koda biće podrobnije opisan u narednim odeljcima. Jedna od razlika u odnosu na integracione testove u kontekstu ZephyrOS projekta je činjenica da se za testiranje jedne funkcije ne uključuje čitav projekat, odnosno samo jedan modul se kompajlira što značajno ubrzava proces testiranja.
 
 ##### Twister
 
-ZephyrOS pruza sopsveni alat za pokretanje jedinicnih testova - [twister](https://docs.zephyrproject.org/latest/develop/test/twister.html). Kako bi twister prepoznao testove, potrebno je organizovati kod testa na sledeci nacin:
+ZephyrOS pruža sopsveni alat za pokretanje jediničnih testova - [twister](https://docs.zephyrproject.org/latest/develop/test/twister.html). Kako bi twister prepoznao testove, potrebno je organizovati kod testa na sledeći način:
 
 
 ```shell
@@ -36,20 +36,19 @@ ZephyrOS pruza sopsveni alat za pokretanje jedinicnih testova - [twister](https:
 └── testcase.yaml
 ```
 
-`testcase.yaml` je zapravo fajl koji govori alatu `twister` da se u okviru tog foldera nalaze testovi. U okviru tog fajla navodi se tip testa, platforma na kojoj treba da se izvrsava, i mnoge dodatne opcije za konfiguraciju testova o kojima nece biti reci ovde, vec su podrobno opisane u dokumentaciji. 
+`testcase.yaml` je zapravo fajl koji govori alatu `twister` da se u okviru tog foldera nalaze testovi. U okviru tog fajla navodi se tip testa, platforma na kojoj treba da se izvršava, i mnoge dodatne opcije za konfiguraciju testova o kojima neće biti reči ovde, već su podrobno opisane u dokumentaciji.
 
 `CMakeLists.txt` 
 
-`prj.conf` ukljucuje potrebne flag-ove (posebno kod integracionih testova) koji su potrebni za ukljucivanje raznih elemenata ZephyrOS operativnog sistema.
+`prj.conf` uključuje potrebne flag-ove (posebno kod integracionih testova) koji su potrebni za uključivanje raznih elemenata ZephyrOS operativnog sistema.
 
-`src` folder sadrzi jedan ili vise fajlova u kojima su implementirani testovi.
-
+`src` folder sadrzi jedan ili više fajlova u kojima su implementirani testovi.
 
 ![twister test architecture diagram](images/twister_tests.png)
 
 ##### Gcov
 
-Jedna tehnika bez koje nema puno smisla pisanje jedinicnih testova jeste pracenje pokrivenosti koda testovima. U ovu svrhu koristi se alat gcovr koji generise graficki prikaz pokrivenosti izvornog koda, i to procentualno pokrivenost linija, funkcija i grananja. Pri odlucivanju da li je pokrivenost dovoljna, ne postoje jasno definisana pravila, s time sto je, naravno, veca pokrivenost pozeljnija. Jos jednom valja napomenuti da cak ni savrsena pokrivenost ne garantuje ispravnost programa, vec samo daje vecu pouzdanost (cak i ovde treba biti oprezan jer se velika pokrivenost moze postici i lose napisanim testovima) da se program ponasa ispravno u onim scenarijima za koje smo se setili napisati testove.
+Jedna tehnika bez koje nema puno smisla pisanje jediničnih testova jeste praćenje pokrivenosti koda testovima. U ovu svrhu koristi se alat gcovr koji generiše grafički prikaz pokrivenosti izvornog koda, i to procentualno pokrivenost linija, funkcija i grananja. Pri odlučivanju da li je pokrivenost dovoljna, ne postoje jasno definisana pravila, s time što je, naravno, veća pokrivenost poželjnija. Još jednom valja napomenuti da čak ni savršena pokrivenost ne garantuje ispravnost programa, već samo daje veću pouzdanost (čak i ovde treba biti oprezan jer se velika pokrivenost može postići i loše napisanim testovima) da se program ponaša ispravno u onim scenarijima za koje smo se setili napisati testove.
 
 --- ;
 
@@ -1115,7 +1114,197 @@ Konačno, za AES-256-GCM dekripciju, perf stat beleži 4.54 milisekunde i 5.51 m
 
 I u ovom slučaju, dobijeni su neintuitivni rezultati, odnosno GCM izvršavanje deluje bolje optimizovano. Izuzetno visok IPC od 7.91 u GCM testu ukazuje na specifično stanje procesora i keša tokom ovog merenja, što čini direktno poređenje ukupnog vremena izvršavanja nepouzdanim.
 
-#### Testiranje performansi generisanja kljuca
+#### Testiranje performansi rukovanja kljucevima
+
+Ovaj deo fokusira se na analizu operacija vezanih za zivotni vek kljuca, odnosno njegovo generisanje i cuvanje u trajnoj memoriji, kao i ucitavanje kljuca iz trajne memorije. Ovi testovi takodje testiraju operacije u petlji i ocekivalo bi se da operacije traju nominalno duze od enkripcije ili dekripcije.
+
+##### Rezultati generisanja i cuvanja kljuca
+
+`psa_keygen_perf_test` implementiran je da bi se izmerio ukupan trosak poziva funkcija `psa_generate_key`. Osim generisanja, kljuc se cuva u trajnoj memoriji zbog podesenog parametra `lifetime`. Osim sto je trajna, memorija u koju se kljucevi upisuju je i sigurna (eng. Internal Trusted Storage - ITS) i podrazumeva kriptografske operacije nad samim kljucevima pre pohranjivanja u memoriju. Ovaj dodatan korak bi trebalo da ima znacajan uticaj na performanse.
+
+**AES-128-CTR** rezultati:
+
+Izlaz `perf stat` pokazuje da generisanje i cuvanje 128-bitnog kljuca zahteva oko 530 miliona instrukcija i traje 170 milisekundi. Znacajna je razlika u broju instrukcija po ciklusu - 0.99 u ovom slucaju u odnosu na xx za enkripciju i dekripciju.
+
+```bash
+            171,17 msec task-clock                       #    0,994 CPUs utilized             
+                19      context-switches                 #  111,001 /sec                      
+                 2      cpu-migrations                   #   11,684 /sec                      
+               102      page-faults                      #  595,901 /sec                      
+         537447397      cycles                           #    3,140 GHz                         (39,69%)
+         210936818      stalled-cycles-frontend          #   39,25% frontend cycles idle        (39,70%)
+         111234882      stalled-cycles-backend           #   20,70% backend cycles idle         (40,42%)
+         533808702      instructions                     #    0,99  insn per cycle            
+                                                  #    0,40  stalled cycles per insn     (50,46%)
+          78944541      branches                         #  461,207 M/sec                       (50,71%)
+            263440      branch-misses                    #    0,33% of all branches             (50,81%)
+         181068884      L1-dcache-loads                  #    1,058 G/sec                       (51,80%)
+            137318      L1-dcache-load-misses            #    0,08% of all L1-dcache accesses   (50,54%)
+             33297      LLC-loads                        #  194,527 K/sec                       (40,10%)
+               828      LLC-load-misses                  #    2,49% of all LL-cache accesses    (39,85%)
+
+       0,172212793 seconds time elapsed
+
+       0,168335000 seconds user
+       0,003984000 seconds sys
+```
+
+Na slici ispod je uvelican proces generisanja kljuca. Ocigledno je da najveci udeo zauzima samo generisanje kljuca, ali i cuvanje kljuca (funkcije `secure_storage_its_get_info`, `secure_storage_its_set`) traju znacajno dugo.
+
+![keygen-AES-128-CTR](images/keygen-AES-128-CTR.png)
+
+Sa druge strane, i brisanje kljuca zauzima znacajan deo izvrsavanja:
+
+![keydel-AES-CTR-128](images/keydel-AES-CTR-128.png)
+
+U obe instance, deluje da je prikupljanje informacija sigurnoj memoriji znacajno sporo (`secure_storage_its_get_info`). Sa jedne strane, ovo ima smisla iz sigurnosnih perspektiva, ali mozda je moguca optimizacija dobavljanja informacija na ustrb sigurnosti u nekim slucajevima. `mbedtls` biblioteka je opsteprihvacena i prosla je analizu s obzirom da je otvorenog koda, te se njena sigurnost i performantnost ne dovode cesto u pitanje. U svakom slucaju, moguce je da hardverski implementirana sigurna skladista imaju bolje performanse i resavaju pomenute probleme, ali to bi predstavljalo drugi projekat. Takodje, `nvs_` funkcije zauzimaju dosta vremena u svojim odgovarajucim stekovima poziva.
+
+**AES-128-GCM** rezultati:
+
+U slucaju GCM rezima rada, iskoriscenost ciklusa je bolja - 1.33 instrukcije po ciklusu, a cak je i ukupan broj instrukcija manji - oko 160 miliona. Zanimljivo je da je broj kao i procenat promasaja kes memorije znatno veci u ovom slucaju. Iako je proces enkripcije u GCM rezimu teoretski sporiji od CTR rezima, generisanje kljuceva ne prati nuzno istu analogiju.
+
+```bash
+             70,59 msec task-clock                       #    0,998 CPUs utilized             
+                 7      context-switches                 #   99,168 /sec                      
+                 2      cpu-migrations                   #   28,334 /sec                      
+               100      page-faults                      #    1,417 K/sec                     
+         121804497      cycles                           #    1,726 GHz                         (39,83%)
+          58260621      stalled-cycles-frontend          #   47,83% frontend cycles idle        (40,08%)
+          24485577      stalled-cycles-backend           #   20,10% backend cycles idle         (40,54%)
+         161698308      instructions                     #    1,33  insn per cycle            
+                                                  #    0,36  stalled cycles per insn     (50,45%)
+          22518271      branches                         #  319,013 M/sec                       (50,47%)
+            168071      branch-misses                    #    0,75% of all branches             (51,18%)
+          50811117      L1-dcache-loads                  #  719,834 M/sec                       (53,03%)
+             72175      L1-dcache-load-misses            #    0,14% of all L1-dcache accesses   (51,88%)
+             13269      LLC-loads                        #  187,980 K/sec                       (41,09%)
+              1920      LLC-load-misses                  #   14,47% of all LL-cache accesses    (40,46%)
+
+       0,070711990 seconds time elapsed
+
+       0,066384000 seconds user
+       0,004881000 seconds sys
+```
+
+Sto se `FlameGraph`-a tice, postoje neznatne razlike izmedju CTR i GCM rezima, kao sto su ...
+
+**AES-256-CTR** rezultati:
+
+Ono sto je ovde zanimljivo jeste da je broj ciklusa pa i vreme izvrsavanja znatno manje u odnosu na manji, 128-bitni kluc.
+
+```bash
+             43,90 msec task-clock                       #    0,985 CPUs utilized             
+                 8      context-switches                 #  182,253 /sec                      
+                 1      cpu-migrations                   #   22,782 /sec                      
+                98      page-faults                      #    2,233 K/sec                     
+         128148619      cycles                           #    2,919 GHz                         (40,16%)
+          58286039      stalled-cycles-frontend          #   45,48% frontend cycles idle        (41,91%)
+          25180208      stalled-cycles-backend           #   19,65% backend cycles idle         (43,42%)
+         157537612      instructions                     #    1,23  insn per cycle            
+                                                  #    0,37  stalled cycles per insn     (54,58%)
+          20831825      branches                         #  474,582 M/sec                       (54,56%)
+            167050      branch-misses                    #    0,80% of all branches             (54,00%)
+          47209147      L1-dcache-loads                  #    1,075 G/sec                       (51,51%)
+             68484      L1-dcache-load-misses            #    0,15% of all L1-dcache accesses   (49,16%)
+             11994      LLC-loads                        #  273,242 K/sec                       (37,70%)
+              2049      LLC-load-misses                  #   17,08% of all LL-cache accesses    (40,59%)
+
+       0,044564810 seconds time elapsed
+
+       0,039073000 seconds user
+       0,006011000 seconds sys
+```
+
+**AES-256-GCM** rezultati:
+
+Kao i u prethodnom primeru, deluje da GCM rezim efikasnije izvrsava operaciju generisanja kljuca. Ovog puta, razlika izmedju broja instrukcija je znatno manja. Dodatno, broj kes promasaja je znatno manji procentualno, pa je moguce rezonovati o tome da je prethodno izvrsavanje uticalo na ovo. Jos jedno zapazanje je da je sada izvrsavanje trajalo neznatno duze (49.7 milisekundi u odnosu na 43.9).
+
+```bash
+              49,70 msec task-clock                       #    0,990 CPUs utilized             
+                 9      context-switches                 #  181,086 /sec                      
+                 4      cpu-migrations                   #   80,483 /sec                      
+                96      page-faults                      #    1,932 K/sec                     
+         118008130      cycles                           #    2,374 GHz                         (38,61%)
+          49899273      stalled-cycles-frontend          #   42,28% frontend cycles idle        (38,66%)
+          23537354      stalled-cycles-backend           #   19,95% backend cycles idle         (39,67%)
+         148431390      instructions                     #    1,26  insn per cycle            
+                                                  #    0,34  stalled cycles per insn     (49,75%)
+          21111912      branches                         #  424,786 M/sec                       (51,38%)
+            150015      branch-misses                    #    0,71% of all branches             (55,94%)
+          50612089      L1-dcache-loads                  #    1,018 G/sec                       (54,68%)
+             46697      L1-dcache-load-misses            #    0,09% of all L1-dcache accesses   (51,80%)
+             13189      LLC-loads                        #  265,372 K/sec                       (40,67%)
+              3331      LLC-load-misses                  #   25,26% of all LL-cache accesses    (39,78%)
+
+       0,050190652 seconds time elapsed
+
+       0,045987000 seconds user
+       0,004892000 seconds sys
+```
+
+`FlameGraph` ilustracije su u ovom slucaju jos bliskije izmedju dva rezima:
+
+![keygen-AES-CTR-256](images/keygen-AES-CTR-256.png)
+
+![keygen-AES-CTR-256](images/keygen-AES-GCM-256.png)
+
 
 #### Testiranje performansi ucitavanja kljuca
 
+Aplikacija `psa_key_persistence_test` je implementirana tako da pokrece operacije `psa_open_key` i `psa_close_key` u petlji `NUM_ITERATIONS` puta. Testu prethodi jednokratno pokretanje `setup` aplikacije koja generiše i čuva trajni ključ, da bi test učitavanja merio isključivo performanse otvaranja već postojećeg ključa.
+
+`perf stat` izlaz meri ukupan broj instrukcija za 1000 ponavljanja ovog ciklusa. Ovo nam omogućava da izračunamo prosečnu cenu jedne operacije otvaranja i zatvaranja ključa.
+
+**Rezultati učitavanja AES-128 ključa**
+
+Ukupan test (1000 iteracija) zahteva oko 88.5 miliona instrukcija.
+
+```bash
+             25,87 msec task-clock                #    0,989 CPUs utilized
+          88534656      instructions              #    1,42  insn per cycle
+```
+
+Prosečna cena po operaciji: 88,534,656 / 1000 ≈ 88,500 instrukcija.
+
+**Rezultati učitavanja AES-128-GCM ključa**
+
+Ukupan test zahteva oko 103.5 miliona instrukcija.
+
+```bash
+             33,39 msec task-clock                #    0,989 CPUs utilized
+         103490527      instructions              #    1,41  insn per cycle
+```
+
+Prosečna cena po operaciji: 103,490,527 / 1000 ≈ 103,500 instrukcija.
+
+**Rezultati učitavanja AES-256 ključa**
+
+Ukupan test zahteva oko 103.4 miliona instrukcija.
+
+```bash
+             33,14 msec task-clock                #    0,989 CPUs utilized
+         103351857      instructions              #    1,37  insn per cycle
+```
+
+Prosečna cena po operaciji: 103,351,857 / 1000 ≈ 103,400 instrukcija.
+
+**Rezultati učitavanja AES-256-GCM ključa**
+
+Ukupan test zahteva oko 100 miliona instrukcija.
+
+```bash
+             29,79 msec task-clock                #    0,989 CPUs utilized
+         100100767      instructions              #    1,26  insn per cycle
+```
+
+Prosečna cena po operaciji: 100,100,767 / 1000 ≈ 100,100 instrukcija.
+
+Operacija učitavanja ključa iz trajne memorije je računski veoma zahtevna. Prosečna cena jedne `psa_open_key`/`psa_close_key` operacije je reda veličine 100,000 instrukcija.
+
+Ovaj trošak potiče od neophodnih sigurnosnih provera, interakcije sa drajverom za trajnu memoriju (`nvs_` funkcije), i potencijalne dekripcije ključa ukoliko je pohranjen u enkriptovanom stanju.
+
+Rezultati jasno pokazuju da je u sistemima gde su performanse kritične, ključeve potrebno učitavati što ređe. Idealna praksa je učitati sve potrebne ključeve jednom, pri inicijalizaciji sistema, i držati ih u memoriji (predstavljene njihovim handle-om) tokom rada aplikacije, umesto ponovnog otvaranja pre svake upotrebe.
+
+Na `FlameGraph`-ovima za ove operacije se takodje uocavaju skupe operacije poput `secure_storage_its_get_info` i `secure_storage_its_get`. Takodje, grafici se ne razlikuju previse izmedju izvrsavanja pa nece biti prikazani u izvestaju. U svakom slucaju, nalaze se u folderu `profiling/psa_key_persistence_test/results`.
+
+_Svi testovi sprovedeni su na Intel Core i7 procesoru sa 4 jezgra i 2.67 GHz._
