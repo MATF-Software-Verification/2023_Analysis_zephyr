@@ -1,5 +1,5 @@
 diff --git a/drivers/bluetooth/hci/userchan.c b/drivers/bluetooth/hci/userchan.c
-index 50c3165809d..4ad0e8a3c16 100644
+index 50c3165809d..d0ac1e6d3c7 100644
 --- a/drivers/bluetooth/hci/userchan.c
 +++ b/drivers/bluetooth/hci/userchan.c
 @@ -58,7 +58,7 @@ static K_KERNEL_STACK_DEFINE(rx_thread_stack,
@@ -11,45 +11,26 @@ index 50c3165809d..4ad0e8a3c16 100644
  
  #define TCP_ADDR_BUFF_SIZE 16
  static bool hci_socket;
-@@ -328,7 +328,9 @@ static int user_chan_open(void)
+@@ -328,7 +328,8 @@ static int user_chan_open(void)
  	int fd;
  
  	if (hci_socket) {
 -		struct sockaddr_hci addr;
-+		// struct sockaddr_hci addr = {0};
 +		struct sockaddr addr;
 +		struct sockaddr_hci *hci_addr = (struct sockaddr_hci *)&addr;
  
  		fd = socket(PF_BLUETOOTH, SOCK_RAW | SOCK_CLOEXEC | SOCK_NONBLOCK,
  			    BTPROTO_HCI);
-@@ -337,9 +339,19 @@ static int user_chan_open(void)
+@@ -337,9 +338,9 @@ static int user_chan_open(void)
  		}
  
  		(void)memset(&addr, 0, sizeof(addr));
 -		addr.hci_family = AF_BLUETOOTH;
 -		addr.hci_dev = bt_dev_index;
 -		addr.hci_channel = HCI_CHANNEL_USER;
-+		// addr.hci_family = AF_BLUETOOTH;
-+		// addr.hci_dev = bt_dev_index;
-+		// addr.hci_channel = HCI_CHANNEL_USER;
 +		hci_addr->hci_family = AF_BLUETOOTH;
 +		hci_addr->hci_dev = bt_dev_index;
 +		hci_addr->hci_channel = HCI_CHANNEL_USER;
-+
-+		LOG_ERR("sizeof(sockaddr_hci) = %zu\n", sizeof(struct sockaddr_hci));
-+		LOG_ERR("sizeof(sockaddr_rc) = %zu\n", sizeof(struct sockaddr));
-+
-+
-+		LOG_ERR("before BIND -------------- %d", bt_dev_index);
-+		LOG_ERR("before BIND -------------- %d", HCI_CHANNEL_USER);
  
  		if (bind(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
  			int err = -errno;
-@@ -380,6 +392,7 @@ static int uc_open(const struct device *dev, bt_hci_recv_t recv)
- 	struct uc_data *uc = dev->data;
- 
- 	if (hci_socket) {
-+		LOG_ERR("TESTSSSSSSSSSSSS________________________%d", bt_dev_index);
- 		LOG_DBG("hci%d", bt_dev_index);
- 	} else {
- 		LOG_DBG("hci %s:%d", ip_addr, port);

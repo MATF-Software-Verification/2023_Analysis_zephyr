@@ -1,5 +1,5 @@
 diff --git a/drivers/bluetooth/hci/userchan.c b/drivers/bluetooth/hci/userchan.c
-index 50c3165809d..0c9553b655b 100644
+index 50c3165809d..d0ac1e6d3c7 100644
 --- a/drivers/bluetooth/hci/userchan.c
 +++ b/drivers/bluetooth/hci/userchan.c
 @@ -58,7 +58,7 @@ static K_KERNEL_STACK_DEFINE(rx_thread_stack,
@@ -21,7 +21,7 @@ index 50c3165809d..0c9553b655b 100644
  
  		fd = socket(PF_BLUETOOTH, SOCK_RAW | SOCK_CLOEXEC | SOCK_NONBLOCK,
  			    BTPROTO_HCI);
-@@ -337,9 +338,12 @@ static int user_chan_open(void)
+@@ -337,9 +338,9 @@ static int user_chan_open(void)
  		}
  
  		(void)memset(&addr, 0, sizeof(addr));
@@ -31,9 +31,6 @@ index 50c3165809d..0c9553b655b 100644
 +		hci_addr->hci_family = AF_BLUETOOTH;
 +		hci_addr->hci_dev = bt_dev_index;
 +		hci_addr->hci_channel = HCI_CHANNEL_USER;
-+
-+		// LOG_ERR("sizeof(sockaddr_hci) = %zu\n", sizeof(struct sockaddr_hci));
-+		// LOG_ERR("sizeof(sockaddr_rc) = %zu\n", sizeof(struct sockaddr));
  
  		if (bind(fd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
  			int err = -errno;

@@ -26,7 +26,7 @@ index 66cdb6cee8f..accc93a19a5 100644
  	}
  
 -	while (true) {
-+	// Try to terminate gracefully after 100 disconnects
++	// Try to terminate gracefully after 10 disconnects
 +	int max_disconnects = 10;
 +	while (max_disconnects > 0) {
  		k_poll(&poll_evt, 1, K_FOREVER);
