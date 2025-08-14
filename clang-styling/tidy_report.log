@@ -1,0 +1,668 @@
+Error while processing /home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c.
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:47:48: error: use of undeclared identifier 'CONFIG_BT_CHANNEL_SOUNDING_REASSEMBLY_BUFFER_CNT' [clang-diagnostic-error]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:48:6: error: use of undeclared identifier 'CONFIG_BT_CHANNEL_SOUNDING_REASSEMBLY_BUFFER_SIZE' [clang-diagnostic-error]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:64:24: warning: function 'alloc_reassembly_buf' has cognitive complexity of 60 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:68:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:69:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:79:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:89:13: warning: function 'free_reassembly_buf' has cognitive complexity of 130 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:91:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:92:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:96:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:97:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:104:2: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:105:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:106:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:143:13: warning: function 'add_reassembly_data' has cognitive complexity of 35 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:146:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:147:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:165:24: warning: function 'start_reassembly' has cognitive complexity of 71 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:170:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:171:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:175:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:176:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:183:17: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:193:24: warning: function 'continue_reassembly' has cognitive complexity of 72 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:198:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:199:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:204:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:205:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:209:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:215:17: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:268:58: warning: 12 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:271:10: warning: variable name 'i' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:271:14: warning: narrowing conversion from 'unsigned long' to signed type 'int16_t' (aka 'short') is implementation-defined [bugprone-narrowing-conversions]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:272:10: warning: variable name 'q' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:272:14: warning: narrowing conversion from 'unsigned long' to signed type 'int16_t' (aka 'short') is implementation-defined [bugprone-narrowing-conversions]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:277:56: warning: 10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:279:22: warning: 0xFF is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:279:28: warning: 10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:296:58: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:310:6: warning: function 'bt_hci_le_cs_read_remote_supported_capabilities_complete' has cognitive complexity of 128 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:316:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:317:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:322:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:323:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:327:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:328:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:332:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:351:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:352:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:355:6: note: +1, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:359:5: note: +1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:364:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:365:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:368:6: note: +1, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:372:5: note: +1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:377:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:378:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:381:6: note: +1, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:385:5: note: +1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:429:4: note: +1, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:439:47: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:466:45: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:480:6: warning: function 'bt_hci_le_cs_read_remote_fae_table_complete' has cognitive complexity of 107 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:486:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:487:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:492:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:493:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:497:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:498:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:502:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:506:4: note: +1, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:628:6: warning: function 'bt_hci_le_cs_subevent_result' has cognitive complexity of 177 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:637:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:638:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:655:3: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:656:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:661:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:663:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:667:4: note: +1, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:668:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:669:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:671:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:674:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:675:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:676:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:680:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:681:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:698:74: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:702:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:708:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:712:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:716:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:719:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:727:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:733:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:694:43: warning: narrowing conversion from 'uint8_t' (aka 'unsigned char') to signed type 'int8_t' (aka 'signed char') is implementation-defined [bugprone-narrowing-conversions]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:698:80: warning: 255 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:738:6: warning: function 'bt_hci_le_cs_subevent_result_continue' has cognitive complexity of 161 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:745:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:746:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:763:3: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:764:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:769:51: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:772:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:773:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:781:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:782:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:787:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:787:77: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:794:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:800:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:801:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:802:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:804:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:810:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:818:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:823:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:828:6: warning: function 'bt_hci_le_cs_config_complete_event' has cognitive complexity of 109 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:834:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:835:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:840:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:841:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:845:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:846:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:850:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:851:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:878:4: note: +1, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:888:40: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:921:40: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:938:39: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:955:40: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:974:48: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1001:72: warning: 10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1003:11: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1006:70: warning: 10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1011:24: warning: 10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1012:37: warning: 10 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1019:57: warning: variable name 'rp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1115:66: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1212:90: warning: 72 is a magic number; consider replacing it with a named constant [readability-magic-numbers]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1214:53: warning: variable name 'cp' is too short, expected at least 3 characters [readability-identifier-length]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1230:6: warning: function 'bt_hci_le_cs_security_enable_complete' has cognitive complexity of 105 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1236:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1237:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1242:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1243:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1247:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1248:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1257:6: warning: function 'bt_hci_le_cs_procedure_enable_complete' has cognitive complexity of 153 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1264:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1265:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1270:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1271:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1275:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1276:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1280:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1283:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1284:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1289:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1303:4: note: +1, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1293:30: warning: narrowing conversion from 'uint8_t' (aka 'unsigned char') to signed type 'int8_t' (aka 'signed char') is implementation-defined [bugprone-narrowing-conversions]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1351:6: warning: function 'bt_le_cs_step_data_parse' has cognitive complexity of 128 (threshold 25) [readability-function-cognitive-complexity]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1355:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1356:3: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1360:2: note: +1, including nesting penalty of 0, nesting level increased to 1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1367:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1368:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1374:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +3, including nesting penalty of 2, nesting level increased to 3
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +1
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +5, including nesting penalty of 4, nesting level increased to 5
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1375:4: note: +4, including nesting penalty of 3, nesting level increased to 4
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1379:3: note: +2, including nesting penalty of 1, nesting level increased to 2
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1437:31: warning: 2 adjacent parameters of 'bt_le_cs_get_antenna_path' of similar type ('uint8_t') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1437:39: note: the first parameter in the range is 'n_ap'
+/home/akilosaurus/zephyrproject/zephyr/subsys/bluetooth/host/cs.c:1438:18: note: the last parameter in the range is 'antenna_path_permutation_index'

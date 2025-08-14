@@ -38,9 +38,9 @@ ZephyrOS pruža sopsveni alat za pokretanje jediničnih testova - [twister](http
 
 `testcase.yaml` je zapravo fajl koji govori alatu `twister` da se u okviru tog foldera nalaze testovi. U okviru tog fajla navodi se tip testa, platforma na kojoj treba da se izvršava, i mnoge dodatne opcije za konfiguraciju testova o kojima neće biti reči ovde, već su podrobno opisane u dokumentaciji.
 
-`CMakeLists.txt` 
+`CMakeLists.txt` definiše pravila za prevođenje testa, povezivanje sa izvornim kodom koji se testira i lažnim (eng. mock) bibliotekama.
 
-`prj.conf` uključuje potrebne flag-ove (posebno kod integracionih testova) koji su potrebni za uključivanje raznih elemenata ZephyrOS operativnog sistema.
+`prj.conf` služi za konfiguraciju Zephyr kernela za potrebe testa, npr `CONFIG_BT_HOST=y` za ukljucivanje bluetooth podsistema.
 
 `src` folder sadrzi jedan ili više fajlova u kojima su implementirani testovi.
 
@@ -153,7 +153,7 @@ Vidimo da su testovi organizovani u zasebne foldere u zavisnosti od toga koju fu
 
 #### Povecanje pokrivenosti - implementacija
 
-Pogledajmo najpre javni interfejs (`include/zephyr/bluetooth/cs.h`) da bismo locirali zanimljive funkcije za testiranje. Staticke funkcije necemo testirati ... TODO(avra): zasto. Pokusajmo najpre da dodamo testove za funkciju `bt_le_cs_security_enable` koja nije pokrivena u osnovnom slucaju. Prateci strukturu vec implementiranih testova, dodajemo folder sa testom za pomenutu funkciju na sledeci nacin:
+Pogledajmo najpre javni interfejs (`include/zephyr/bluetooth/cs.h`) da bismo locirali zanimljive funkcije za testiranje. Statičke funkcije nećemo testirati jer nisu vidljive izvan fajla u kom su definisane, pa im se ne može direktno pristupiti iz testnog koda. Iako je moguće uključiti sam c kod u testove, to predstavlja lošu praksu, i najčešće se testira samo javni API koji interno može pozivati i statičke funkcije. Pokušajmo najpre da dodamo testove za funkciju `bt_le_cs_security_enable` koja nije pokrivena u osnovnom slučaju. Prateći strukturu već implementiranih testova, dodajemo folder sa testom za pomenutu funkciju na sledeći način:
 
 ```bash
 zephyr/tests/bluetooth/host/cs/bt_le_cs_security_enable/
@@ -409,7 +409,7 @@ Navedeni testovi su implementirani u novom izvornom fajlu `error_handling.c`.
 Limitations
 Za razliku od testova jedinica koda, integracioni testovi testiraju ponasanje vise komponenti odjednom (ne nuzno jedinica koda). Dakle, za integraciono testiranje oslanjamo se na citave komponente (koje mogu biti unit testirane) i koriscenje mock i stub implementacija je manje, odnosno koriste se prave implementacije.
 
-Primer implementiranog jednostavnog integracionog testa dat je u `samples/subsys/testsuite/integration` folderu (pogledati [Zephyr dokumentaciju](psa_set_key_usage_flags) za vise detalja). U implementaciji samog testa (u `main.c`) ne vidimo nista drasticno drugacije u odnosu na unit testove, tj. koriste se slicne funkcije za pretpostavke `zasser_`. Vecu razliku mozemo primetiti u okviru `testcase.yaml` fajla, gde se eksplicitno navode platforme za koje je dozvoljeno izvrsavanje testa:
+Primer implementiranog jednostavnog integracionog testa dat je u `samples/subsys/testsuite/integration` folderu (pogledati [Zephyr dokumentaciju](https://docs.zephyrproject.org/latest/develop/test/ztest.html#quick-start-integration-testing) za vise detalja). U implementaciji samog testa (u `main.c`) ne vidimo nista drasticno drugacije u odnosu na unit testove, tj. koriste se slicne funkcije za pretpostavke `zasser_`. Vecu razliku mozemo primetiti u okviru `testcase.yaml` fajla, gde se eksplicitno navode platforme za koje je dozvoljeno izvrsavanje testa:
 
 ```bash
 platform_allow:
@@ -426,15 +426,97 @@ integration_platforms:
 
 koja u ovom slucaju znaci da se, prilikom pokretanja `twister` alata sa opcijom `--integration`, testovi izvrsavaju samo na `native_sim` platformi. Naravno, moguce je dodati listu platformi na kojima ce se testovi izvrsavati.
 
+##### PSA-HCI integracioni test
 
+U ovom slučaju, analiziramo `psa_hci_integration` test, koji proverava funkcionalnost vezane za sigurnosni sistem: sposobnost da se kriptografski ključevi sačuvaju trajno i prežive restartovanje uređaja.
+
+Ovaj test integriše sledeće Zephyr podsisteme:
+
+* PSA Cryptography API: Za generisanje, korišćenje i upravljanje ključevima.
+* Secure Storage (ITS): Osnovni sloj za sigurno skladištenje podataka.
+* NVS (Non-Volatile Storage): Sistem za skladištenje podataka koje koristi ITS.
+
+**Struktura testa**
+Test je podeljen u dve celine koje simuliraju rad pre i posle restarta uređaja.
+
+1. Testovi pre restarta (psa_hci_integration_tests)
+Ova celina sadrži tri testa koji proveravaju životni ciklus ključa u jednoj sesiji izvršavanja.
+
+`test_psa_persistence_encrypt_decrypt`: Ovo je centralni test. On potvrđuje da se trajni ključ može:
+
+* Uspešno generisati
+* Koristiti za enkripciju
+* Obrisati iz radne memorije (`psa_purge_key`)
+* Ponovo učitati iz trajne memorije (`psa_open_key`)
+* Korisiti za dekripciju (uz proveru poklapanja desifrovanog rezultata sa originalom)
+
+`test_psa_key_deletion_and_regeneration`: Ovaj test proverava ispravnost uništavanja i ponovnog kreiranja ključa. Ključni deo testa je provera da se podaci enkriptovani starim ključem ne mogu dekriptovati novim ključem (koji ima isti ID), što potvrđuje da je `psa_destroy_key` zaista obrisao stari kriptografski materijal.
+
+`test_psa_invalid_key_usage`: Ovo je negativni test koji osigurava otpornost sistema na neispravno koriscenje. Proverava da li PSA API ispravno vraća grešku `PSA_ERROR_INVALID_HANDLE` kada se pokuša korišćenje ključa koji nikada nije generisan ili ključa koji je već uništen.
+
+2. Testovi posle restarta (`psa_hci_reboot_integration_tests`)
+
+Ova celina sadrži samo jedan, ali najvažniji test za proveru ocuvanja trajnosti kljuca.
+
+`test_psa_persistence_after_reboot`: Ovaj test se izvršava u novoj sesiji, simulirajući stanje sistema nakon restarta. On pokušava da otvori ključ (`psa_open_key`) sa istim ID-jem koji je korišćen u prethodnoj celini. Uspešno otvaranje i korišćenje ključa za enkripciju i dekripciju je konačna potvrda da je NVS podsistem ispravno sačuvao ključ u trajnu memoriju i da je on preživeo restart.
+
+`prj.conf`: Konfiguracione opcije koje omogućavaju ovaj test su `CONFIG_SECURE_STORAGE=y`, `CONFIG_NVS=y`, `CONFIG_SETTINGS_NVS=y` i `CONFIG_REBOOT=y`.
+
+`runner.sh`: Skripta automatizuje ceo proces: kopira testove u Zephyr stablo, pokreće twister sa odgovarajućim parametrima, izvršava prevedeni binarni fajl i na kraju prikuplja izveštaje o pokrivenosti koda.
+
+Ovaj test ne proverava samo da li pojedinačne funkcije rade, već da li i ukljuceni podsistemi funkcionišu kako je predviđeno. Uspešno izvršavanje trebalo bi da pruzi garanciju da mehanizam za čuvanje ključeva u Zephyr-u nema ociglednih gresaka ili propusta u implementaciji ili konfiguraciji.
+
+**Rezultati**
+
+Ukoliko se `run_tests.sh` skripta pokrene bez argumenta `--no-coverage`, generisan izvestaj pokrivenosti koda nalazi se u `coverage_report` folderu. S druge strane, logovi samog izvrsenja testa nalaze se u `<ime_testa>.log` fajlu.
+
+Izvrsavanje ovog testa je uspesno, odnosno nisu pronadjene greske.
+
+##### RPA-PSA integracioni test
+
+Ovaj test integriše sledeće Zephyr podsisteme:
+
+* Bluetooth Host Stack: Konkretno, `BT_PRIVACY` funkcionalnost, koja uključuje generisanje i rotaciju RPA adresa, kao i `BT_EXT_ADV` za napredno oglašavanje.
+* PSA Cryptography API: Funkcija `bt_rpa_create` interno poziva `bt_encrypt_le`, koja se oslanja na PSA API za izvršavanje AES enkripcije.
+
+**Struktura testa**
+Testna celina je dizajnirana da pokrije ponašanje RPA mehanizma. Pre pokretanja bilo kog testa, `bt_suite_setup` funkcija inicijalizuje Bluetooth podsistem.
+
+`test_rpa_creation_and_resolution`: Osnovni test. Proverava da li se RPA adresa može uspešno generisati iz poznatog ključa (Identity Resolving Key - IRK) i, što je još važnije, da li se ista ta adresa može uspešno razrešiti (povezati nazad sa originalnim IRK-om). Takođe, vrši negativnu proveru da adresa ne može biti razrešena sa pogrešnim IRK-om.
+
+`test_advertising_address_is_rpa`: Ovaj test proverava da li Bluetooth stek, kada mu se dodeli identitet sa IRK-om, zaista koristi RPA kao svoju adresu za oglašavanje. Ovo je ključna provera za privatnost, jer osigurava da se statička adresa uređaja ne emituje javno.
+
+`test_rpa_rotation`: Verifikuje dinamičku prirodu RPA. Test postavlja kratak vremenski interval za rotaciju adrese, čeka da taj interval istekne, a zatim proverava da li je nova adresa za oglašavanje zaista drugačija od stare.
+
+`test_rpa_is_stable_before_timeout`: Komplementaran prethodnom testu, ovaj test proverava da li RPA adresa ostaje ista pre isteka vremenskog intervala za rotaciju. Ovo osigurava predvidljivost i stabilnost adrese u definisanom vremenskom prozoru.
+
+`test_different_irks_yield_different_rpas`: Proverava da li dva različita IRK-a garantovano generišu dve različite RPA adrese. Ovo potvrđuje da je bt_rpa_create funkcija ispravno implementirana i da ne proizvodi kolizije.
+
+`test_null_irk_generates_random_irk`: Testira granični slučaj gde se identitet kreira bez specifičnog IRK-a. Očekivano ponašanje je da sistem automatski generiše nasumični IRK i koristi ga za kreiranje RPA, osiguravajući da privatnost ostane podrazumevano uključena.
+
+_Napomena_: Pre pokretanja testa, potrebno je utvrditi pogodan hci uredjaj koji ce se proslediti testu. Dodatno, potrebno ga je rucno onemoguciti, uz pomoc komande `sudo hciconfig <hciN> down`.
+
+**Rezultati**
+
+Nakon uspesnog pokretanja `run_tests.sh` skripte, zakljucujemo da ni ovaj integracioni test nije uspeo da nadje nedostatke u delu podsistema koji je testiran.
+
+Pokretanjem skripte `output_parser.sh`, dodatno se pregledaju debag logovi (ukljuceni u `prj.conf` fajlu bas iz ovog razloga) kako bi se za svaki testni slucaj proverilo da li se izlazi poklapaju sa ocekivanim.
 
 #### Valgrind
 
-Valgrind description.
+Valgrind je programski paket otvorenog koda koji služi kao radni okvir (eng. framework) za kreiranje alata za dinamičku analizu. Iako se sastoji od više različitih alata (Cachegrind, Helgrind, Massif, itd.), najpoznatiji i najčešće korišćen je Memcheck, alat za detekciju grešaka u radu sa memorijom. U ovom projektu biće korišćen upravo `memcheck` alat iz Valgrind paketa.
 
-Limitations in context of ZephyrOS and running natively on POSIX platform.
+##### Ograničenja u kontekstu ZephyrOS-a i native_sim platforme
 
-U ovom projektu bice korisceni `memcheck` valgrind alat.
+Zbog cinjenice da Zephyr na `native_sim` platformi ne radi kao samostalan operativni sistem, već kao korisnička aplikacija na host sistemu, mogu se javiti prepreke prilikom koriscenja valgrind alata. Naime, emulacioni sloj koji omogućava izvrsavanje zephyr programa na posix platformi ima sopstveni model za upravljanje nitima i memorijom, koji je u interakciji sa bibliotekama host sistema.
+
+Ova arhitektura može dovesti do toga da Valgrind prijavljuje greške koje ne potiču iz aplikativnog koda, već iz samog emulacionog sloja. Najčešći primeri su:
+
+Lažno pozitivna curenja memorije: Emulacioni sloj namerno ne oslobađa svu memoriju pre gašenja, oslanjajući se na host operativni sistem da to uradi. Valgrind ovo detektuje kao curenje memorije (still reachable ili possibly lost), iako je takvo ponašanje očekivano i namerno.
+
+Greške u sistemskim pozivima: Interakcija između emuliranog Zephyr okruženja i stvarnog kernela host sistema može dovesti do prijavljivanja grešaka, kao što je korišćenje neinicijalizovanih podataka u sistemskim pozivima, iako je sa stanovišta Zephyr aplikacije sve ispravno.
+
+Zbog ovih razloga, za efikasnu analizu je neophodno koristiti supresione fajlove (eng. suppression files). Ovi fajlovi sadrže pravila koja nalažu Valgrind-u da ignoriše poznate i očekivane greške iz emulacionog sloja, čime se omogućava fokus na stvarne probleme u aplikativnom kodu.
 
 ##### valgrind memcheck
 
@@ -445,7 +527,7 @@ Alat memcheck pruza mogucnost analize koda u kontekstu bezbednog upravljanja mem
 3) possibly lost - Memorijski blok je alociran, ali Valgrind ne moze da zakljuci da li je izgubljen.
 4) still reachable - Memorjski blok je alociran i neoslobodjen, ali i dalje postoji pokazivac na njega.
 
-TODO: opisati osnovne komande - odnosno skriptu
+Skripta `run_beacon_valgrind.sh` automatizuje proces analize. Prvo se prevodi Zephyr aplikaciju za `native_posix` platformu, a zatim pokreće izvršni fajl unutar Valgrind-a sa odgovarajućim opcijama, kao što su `--leak-check=full` i `--show-leak-kinds=all`.
 
 Nakon pokretanja memcheck alata nad jednostavnim primerom (`samples/bluetooth/beacon` pokrenut uz pomoc skripte `run_beacon_valgrind.sh`), vidimo da se greske vecinski ticu POSIX podsistema i funkcija koje nisu nuzno deo Zephyr OS-a. Naime, sve funkcije se zavrsavaju pozivom deljene biblioteke kojoj nemamo pristup u izvornom obliku.
 
@@ -1116,15 +1198,15 @@ I u ovom slučaju, dobijeni su neintuitivni rezultati, odnosno GCM izvršavanje 
 
 #### Testiranje performansi rukovanja kljucevima
 
-Ovaj deo fokusira se na analizu operacija vezanih za zivotni vek kljuca, odnosno njegovo generisanje i cuvanje u trajnoj memoriji, kao i ucitavanje kljuca iz trajne memorije. Ovi testovi takodje testiraju operacije u petlji i ocekivalo bi se da operacije traju nominalno duze od enkripcije ili dekripcije.
+Ovaj deo fokusira se na analizu operacija vezanih za životni vek ključa, odnosno njegovo generisanje i čuvanje u trajnoj memoriji, kao i učitavanje ključa iz trajne memorije. Ovi testovi takođe testiraju operacije u petlji i očekivalo bi se da operacije traju nominalno duže od enkripcije ili dekripcije.
 
 ##### Rezultati generisanja i cuvanja kljuca
 
-`psa_keygen_perf_test` implementiran je da bi se izmerio ukupan trosak poziva funkcija `psa_generate_key`. Osim generisanja, kljuc se cuva u trajnoj memoriji zbog podesenog parametra `lifetime`. Osim sto je trajna, memorija u koju se kljucevi upisuju je i sigurna (eng. Internal Trusted Storage - ITS) i podrazumeva kriptografske operacije nad samim kljucevima pre pohranjivanja u memoriju. Ovaj dodatan korak bi trebalo da ima znacajan uticaj na performanse.
+`psa_keygen_perf_test` implementiran je da bi se izmerio ukupan trošak poziva funkcija `psa_generate_key`. Osim generisanja, ključ se čuva u trajnoj memoriji zbog podešenog parametra `lifetime`. Osim što je trajna, memorija u koju se ključevi upisuju je i sigurna (eng. Internal Trusted Storage - ITS) i podrazumeva kriptografske operacije nad samim ključevima pre pohranjivanja u memoriju. Ovaj dodatan korak bi trebalo da ima značajan uticaj na performanse.
 
 **AES-128-CTR** rezultati:
 
-Izlaz `perf stat` pokazuje da generisanje i cuvanje 128-bitnog kljuca zahteva oko 530 miliona instrukcija i traje 170 milisekundi. Znacajna je razlika u broju instrukcija po ciklusu - 0.99 u ovom slucaju u odnosu na xx za enkripciju i dekripciju.
+Izlaz `perf stat` pokazuje da generisanje i čuvanje 128-bitnog ključa zahteva oko 530 miliona instrukcija i traje 170 milisekundi. Značajna je razlika u broju instrukcija po ciklusu - 0.99 u ovom slučaju u odnosu na xx za enkripciju i dekripciju.
 
 ```bash
             171,17 msec task-clock                       #    0,994 CPUs utilized             
@@ -1149,19 +1231,19 @@ Izlaz `perf stat` pokazuje da generisanje i cuvanje 128-bitnog kljuca zahteva ok
        0,003984000 seconds sys
 ```
 
-Na slici ispod je uvelican proces generisanja kljuca. Ocigledno je da najveci udeo zauzima samo generisanje kljuca, ali i cuvanje kljuca (funkcije `secure_storage_its_get_info`, `secure_storage_its_set`) traju znacajno dugo.
+Na slici ispod je uveličan proces generisanja ključa. Očigledno je da najveći udeo zauzima samo generisanje ključa, ali i čuvanje ključa (funkcije `secure_storage_its_get_info`, `secure_storage_its_set`) traju značajno dugo.
 
 ![keygen-AES-128-CTR](images/keygen-AES-128-CTR.png)
 
-Sa druge strane, i brisanje kljuca zauzima znacajan deo izvrsavanja:
+Sa druge strane, i brisanje ključa zauzima značajan deo izvršavanja:
 
 ![keydel-AES-CTR-128](images/keydel-AES-CTR-128.png)
 
-U obe instance, deluje da je prikupljanje informacija sigurnoj memoriji znacajno sporo (`secure_storage_its_get_info`). Sa jedne strane, ovo ima smisla iz sigurnosnih perspektiva, ali mozda je moguca optimizacija dobavljanja informacija na ustrb sigurnosti u nekim slucajevima. `mbedtls` biblioteka je opsteprihvacena i prosla je analizu s obzirom da je otvorenog koda, te se njena sigurnost i performantnost ne dovode cesto u pitanje. U svakom slucaju, moguce je da hardverski implementirana sigurna skladista imaju bolje performanse i resavaju pomenute probleme, ali to bi predstavljalo drugi projekat. Takodje, `nvs_` funkcije zauzimaju dosta vremena u svojim odgovarajucim stekovima poziva.
+U obe instance, deluje da je prikupljanje informacija sigurnoj memoriji značajno sporo (`secure_storage_its_get_info`). Sa jedne strane, ovo ima smisla iz sigurnosnih perspektiva, ali možda je moguća optimizacija dobavljanja informacija na uštrb sigurnosti u nekim slučajevima. `mbedtls` biblioteka je opšteprihvaćena i prošla je analizu s obzirom da je otvorenog koda, te se njena sigurnost i performantnost ne dovode često u pitanje. U svakom slučaju, moguće je da hardverski implementirana sigurna skladišta imaju bolje performanse i rešavaju pomenute probleme, ali to bi predstavljalo drugi projekat. Takođe, `nvs_` funkcije zauzimaju dosta vremena u svojim odgovarajućim stekovima poziva.
 
 **AES-128-GCM** rezultati:
 
-U slucaju GCM rezima rada, iskoriscenost ciklusa je bolja - 1.33 instrukcije po ciklusu, a cak je i ukupan broj instrukcija manji - oko 160 miliona. Zanimljivo je da je broj kao i procenat promasaja kes memorije znatno veci u ovom slucaju. Iako je proces enkripcije u GCM rezimu teoretski sporiji od CTR rezima, generisanje kljuceva ne prati nuzno istu analogiju.
+U slučaju GCM režima rada, iskorišćenost ciklusa je bolja - 1.33 instrukcije po ciklusu, a čak je i ukupan broj instrukcija manji - oko 160 miliona. Zanimljivo je da je broj kao i procenat promašaja keš memorije znatno veći u ovom slučaju. Iako je proces enkripcije u GCM režimu teoretski sporiji od CTR režima, generisanje ključeva ne prati nužno istu analogiju.
 
 ```bash
              70,59 msec task-clock                       #    0,998 CPUs utilized             
@@ -1190,7 +1272,7 @@ Sto se `FlameGraph`-a tice, postoje neznatne razlike izmedju CTR i GCM rezima, k
 
 **AES-256-CTR** rezultati:
 
-Ono sto je ovde zanimljivo jeste da je broj ciklusa pa i vreme izvrsavanja znatno manje u odnosu na manji, 128-bitni kluc.
+Ono što je ovde zanimljivo jeste da je broj ciklusa pa i vreme izvršavanja znatno manje u odnosu na manji, 128-bitni ključ.
 
 ```bash
              43,90 msec task-clock                       #    0,985 CPUs utilized             
@@ -1217,7 +1299,7 @@ Ono sto je ovde zanimljivo jeste da je broj ciklusa pa i vreme izvrsavanja znatn
 
 **AES-256-GCM** rezultati:
 
-Kao i u prethodnom primeru, deluje da GCM rezim efikasnije izvrsava operaciju generisanja kljuca. Ovog puta, razlika izmedju broja instrukcija je znatno manja. Dodatno, broj kes promasaja je znatno manji procentualno, pa je moguce rezonovati o tome da je prethodno izvrsavanje uticalo na ovo. Jos jedno zapazanje je da je sada izvrsavanje trajalo neznatno duze (49.7 milisekundi u odnosu na 43.9).
+Kao i u prethodnom primeru, deluje da GCM režim efikasnije izvršava operaciju generisanja ključa. Ovog puta, razlika između broja instrukcija je znatno manja. Dodatno, broj keš promašaja je znatno manji procentualno, pa je moguće rezonovati o tome da je prethodno izvršavanje uticalo na ovo. Još jedno zapažanje je da je sada izvršavanje trajalo neznatno duže (49.7 milisekundi u odnosu na 43.9).
 
 ```bash
               49,70 msec task-clock                       #    0,990 CPUs utilized             
@@ -1251,7 +1333,7 @@ Kao i u prethodnom primeru, deluje da GCM rezim efikasnije izvrsava operaciju ge
 
 #### Testiranje performansi ucitavanja kljuca
 
-Aplikacija `psa_key_persistence_test` je implementirana tako da pokrece operacije `psa_open_key` i `psa_close_key` u petlji `NUM_ITERATIONS` puta. Testu prethodi jednokratno pokretanje `setup` aplikacije koja generiše i čuva trajni ključ, da bi test učitavanja merio isključivo performanse otvaranja već postojećeg ključa.
+Aplikacija `psa_key_persistence_test` je implementirana tako da pokreće operacije `psa_open_key` i `psa_close_key` u petlji `NUM_ITERATIONS` puta. Testu prethodi jednokratno pokretanje `setup` aplikacije koja generiše i čuva trajni ključ, da bi test učitavanja merio isključivo performanse otvaranja već postojećeg ključa.
 
 `perf stat` izlaz meri ukupan broj instrukcija za 1000 ponavljanja ovog ciklusa. Ovo nam omogućava da izračunamo prosečnu cenu jedne operacije otvaranja i zatvaranja ključa.
 
@@ -1308,3 +1390,17 @@ Rezultati jasno pokazuju da je u sistemima gde su performanse kritične, ključe
 Na `FlameGraph`-ovima za ove operacije se takodje uocavaju skupe operacije poput `secure_storage_its_get_info` i `secure_storage_its_get`. Takodje, grafici se ne razlikuju previse izmedju izvrsavanja pa nece biti prikazani u izvestaju. U svakom slucaju, nalaze se u folderu `profiling/psa_key_persistence_test/results`.
 
 _Svi testovi sprovedeni su na Intel Core i7 procesoru sa 4 jezgra i 2.67 GHz._
+
+## Zakljucak
+
+U okviru rada, sprovedena je dinamička analiza Zephyr operativnog sistema, sa fokusom na Bluetooth podsistem i kriptografske operacije. Koriscena su tri ključna alata: twister/gcov (za unit testove, kao i za integracione testove), Valgrind i perf.
+
+Ključni rezultati analize
+
+Korišćenjem jediničnog testiranja i alata za praćenje pokrivenosti, uspešno je povećana pokrivenost koda za `cs` modul Bluetooth podsistema. Takodje, testovima je otkriveno i ispravljano nekoliko grešaka vezanih za rukovanje `NULL` pokazivačima i neispravnim dužinama bafera.
+
+Integracioni nisu pokazali nedostatke Zephyr podsistema za rukovanje kljucevima i nasumicnim razresivim adresama (RPA). Svakako, implementacija testova pruzila je uvid u kompleksnost razvoja aplikacija na `native_sim` platformi, za koju se retko vezuje operativni sistem za rad u realnom vremenu.
+
+Analizom memorije pomoću Valgrind-a otkriveno je par suptilnih grešaka. Iako je rad sa `native_posix` i `nrf52_bsim` platformama zahtevao korišćenje fajlova za filtriranje očekivanih "curenja" memorije u emulacionom sloju, alat je uspešno identifikovao grešku korišćenja neinicijalizovane memorije u `userchan.c` drajveru, koja je potom ispravljena.
+
+Profilisanje performansi alatom perf pružilo je kvantitativne podatke o ceni kriptografskih operacija. Potvrđeno je da je GCM režim rada računski zahtevniji od CTR režima zbog dodatne autentikacije. Međutim, najznačajniji uvid je da su operacije upravljanja ključevima, posebno generisanje i upis u persistentnu memoriju, za redove veličine skuplje od samih operacija enkripcije i dekripcije. Jedna operacija generisanja ključa meri se u stotinama miliona instrukcija, dok se učitavanje meri u desetinama hiljada, što je i dalje značajno skuplje od same enkripcije.
